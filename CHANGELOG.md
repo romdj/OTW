@@ -1,3 +1,15 @@
+## 1.0.0 (2025-07-23)
+
+### Features
+
+* add CI/CD pipeline and Git automation ([6b5348d](https://github.com/romdj/otw/commit/6b5348d9d5acc2f05ad85a2e358e9c05b1d1cf7f))
+* add development tools and debugging utilities ([f27aff4](https://github.com/romdj/otw/commit/f27aff49b26dcc61da8fbce470f671e4dd1a4f46))
+* add Docker containerization and orchestration ([2fff823](https://github.com/romdj/otw/commit/2fff82372b6f3ffc79fa846867fbce7d3287cebf))
+* add shared domain constants and utilities ([ceaa8b6](https://github.com/romdj/otw/commit/ceaa8b687ef56113a37d8eb8f3e314fdad19530e))
+* implement GraphQL server with NHL standings API ([b524344](https://github.com/romdj/otw/commit/b5243442bdb3484d3667a00fe45cc5b85dea2351))
+* implement SvelteKit frontend with NHL standings visualization ([170b9ed](https://github.com/romdj/otw/commit/170b9edf71653a414f17896ac53dad19f0e036ba))
+* initialize project infrastructure and workspace configuration ([f78b7c8](https://github.com/romdj/otw/commit/f78b7c80dd139ad448c196c5c871890a3b6af3f1))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
