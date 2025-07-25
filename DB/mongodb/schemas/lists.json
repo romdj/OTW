@@ -1,0 +1,145 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "title": "Curated Event Lists Schema",
+    "required": ["title", "creatorId", "events", "createdAt"],
+    "properties": {
+      "_id": {
+        "bsonType": "objectId"
+      },
+      "title": {
+        "bsonType": "string",
+        "description": "List title",
+        "minLength": 3,
+        "maxLength": 100
+      },
+      "description": {
+        "bsonType": "string",
+        "description": "List description",
+        "maxLength": 1000
+      },
+      "creatorId": {
+        "bsonType": "objectId",
+        "description": "User who created the list"
+      },
+      "category": {
+        "bsonType": "string",
+        "enum": ["greatest-moments", "upsets", "rivalries", "comebacks", "finals", "records", "emotional", "technical", "personal", "other"]
+      },
+      "sport": {
+        "bsonType": "string",
+        "description": "Primary sport focus (null for mixed)"
+      },
+      "events": {
+        "bsonType": "array",
+        "description": "Ordered list of events",
+        "minItems": 1,
+        "items": {
+          "bsonType": "object",
+          "properties": {
+            "eventId": { "bsonType": "objectId" },
+            "position": { "bsonType": "int", "minimum": 1 },
+            "note": { "bsonType": "string", "maxLength": 500 },
+            "addedAt": { "bsonType": "date" }
+          }
+        }
+      },
+      "isPublic": {
+        "bsonType": "bool",
+        "description": "Whether the list is publicly visible"
+      },
+      "isCollaborative": {
+        "bsonType": "bool",
+        "description": "Whether others can contribute to this list"
+      },
+      "collaborators": {
+        "bsonType": "array",
+        "description": "Users who can edit this list",
+        "items": {
+          "bsonType": "object",
+          "properties": {
+            "userId": { "bsonType": "objectId" },
+            "role": { "bsonType": "string", "enum": ["editor", "contributor", "viewer"] },
+            "addedAt": { "bsonType": "date" }
+          }
+        }
+      },
+      "tags": {
+        "bsonType": "array",
+        "description": "Descriptive tags for the list",
+        "items": { "bsonType": "string" }
+      },
+      "stats": {
+        "bsonType": "object",
+        "properties": {
+          "viewCount": { "bsonType": "int", "minimum": 0 },
+          "likeCount": { "bsonType": "int", "minimum": 0 },
+          "shareCount": { "bsonType": "int", "minimum": 0 },
+          "copyCount": { "bsonType": "int", "minimum": 0 },
+          "averageEventRating": { "bsonType": "double", "minimum": 0, "maximum": 10 }
+        }
+      },
+      "interactions": {
+        "bsonType": "object",
+        "properties": {
+          "likes": {
+            "bsonType": "array",
+            "items": {
+              "bsonType": "object",
+              "properties": {
+                "userId": { "bsonType": "objectId" },
+                "likedAt": { "bsonType": "date" }
+              }
+            }
+          },
+          "comments": {
+            "bsonType": "array",
+            "items": {
+              "bsonType": "object",
+              "properties": {
+                "userId": { "bsonType": "objectId" },
+                "content": { "bsonType": "string", "maxLength": 1000 },
+                "createdAt": { "bsonType": "date" },
+                "replies": {
+                  "bsonType": "array",
+                  "items": {
+                    "bsonType": "object",
+                    "properties": {
+                      "userId": { "bsonType": "objectId" },
+                      "content": { "bsonType": "string", "maxLength": 1000 },
+                      "createdAt": { "bsonType": "date" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "featured": {
+        "bsonType": "object",
+        "properties": {
+          "isFeatured": { "bsonType": "bool" },
+          "featuredAt": { "bsonType": "date" },
+          "featuredBy": { "bsonType": "objectId" },
+          "featuredUntil": { "bsonType": "date" }
+        }
+      },
+      "createdAt": {
+        "bsonType": "date"
+      },
+      "updatedAt": {
+        "bsonType": "date"
+      }
+    },
+    "indexes": [
+      { "keys": { "creatorId": 1, "createdAt": -1 } },
+      { "keys": { "category": 1, "isPublic": 1 } },
+      { "keys": { "sport": 1, "isPublic": 1 } },
+      { "keys": { "tags": 1 } },
+      { "keys": { "stats.likeCount": -1 } },
+      { "keys": { "featured.isFeatured": 1, "featured.featuredAt": -1 } },
+      { "keys": { "isPublic": 1, "updatedAt": -1 } }
+    ]
+  }
+}

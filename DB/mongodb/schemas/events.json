@@ -1,0 +1,162 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "title": "Sporting Event Schema",
+    "required": ["title", "sport", "date", "participants", "status"],
+    "properties": {
+      "_id": {
+        "bsonType": "objectId"
+      },
+      "title": {
+        "bsonType": "string",
+        "description": "Event title/name",
+        "minLength": 3,
+        "maxLength": 200
+      },
+      "sport": {
+        "bsonType": "string",
+        "description": "Sport category",
+        "enum": ["hockey", "football", "basketball", "baseball", "soccer", "tennis", "golf", "boxing", "mma", "olympics", "other"]
+      },
+      "date": {
+        "bsonType": "date",
+        "description": "Event date and time"
+      },
+      "participants": {
+        "bsonType": "array",
+        "description": "Teams, players, or participants",
+        "minItems": 1,
+        "items": {
+          "bsonType": "object",
+          "properties": {
+            "name": { "bsonType": "string" },
+            "type": { "bsonType": "string", "enum": ["team", "player", "organization"] },
+            "logo": { "bsonType": "string" },
+            "metadata": { "bsonType": "object" }
+          }
+        }
+      },
+      "venue": {
+        "bsonType": "object",
+        "properties": {
+          "name": { "bsonType": "string" },
+          "city": { "bsonType": "string" },
+          "country": { "bsonType": "string" },
+          "coordinates": {
+            "bsonType": "object",
+            "properties": {
+              "lat": { "bsonType": "double" },
+              "lng": { "bsonType": "double" }
+            }
+          }
+        }
+      },
+      "status": {
+        "bsonType": "string",
+        "enum": ["upcoming", "live", "completed", "cancelled", "postponed"]
+      },
+      "result": {
+        "bsonType": "object",
+        "description": "Event outcome/score",
+        "properties": {
+          "winner": { "bsonType": "string" },
+          "score": { "bsonType": "object" },
+          "summary": { "bsonType": "string" }
+        }
+      },
+      "ratings": {
+        "bsonType": "object",
+        "properties": {
+          "average": { "bsonType": "double", "minimum": 0, "maximum": 10 },
+          "count": { "bsonType": "int", "minimum": 0 },
+          "distribution": {
+            "bsonType": "object",
+            "properties": {
+              "1": { "bsonType": "int" },
+              "2": { "bsonType": "int" },
+              "3": { "bsonType": "int" },
+              "4": { "bsonType": "int" },
+              "5": { "bsonType": "int" },
+              "6": { "bsonType": "int" },
+              "7": { "bsonType": "int" },
+              "8": { "bsonType": "int" },
+              "9": { "bsonType": "int" },
+              "10": { "bsonType": "int" }
+            }
+          }
+        }
+      },
+      "tags": {
+        "bsonType": "array",
+        "description": "Emotional and descriptive tags",
+        "items": {
+          "bsonType": "object",
+          "properties": {
+            "name": { "bsonType": "string" },
+            "category": { "bsonType": "string", "enum": ["emotion", "style", "outcome", "significance", "technical"] },
+            "count": { "bsonType": "int", "minimum": 0 },
+            "weight": { "bsonType": "double", "minimum": 0, "maximum": 1 }
+          }
+        }
+      },
+      "mediaAssets": {
+        "bsonType": "array",
+        "items": {
+          "bsonType": "object",
+          "properties": {
+            "type": { "bsonType": "string", "enum": ["video", "image", "audio", "article"] },
+            "url": { "bsonType": "string" },
+            "thumbnail": { "bsonType": "string" },
+            "title": { "bsonType": "string" },
+            "source": { "bsonType": "string" },
+            "timestamp": { "bsonType": "date" }
+          }
+        }
+      },
+      "statistics": {
+        "bsonType": "object",
+        "description": "Sport-specific statistics",
+        "additionalProperties": true
+      },
+      "significance": {
+        "bsonType": "object",
+        "properties": {
+          "historical": { "bsonType": "bool" },
+          "recordBreaking": { "bsonType": "bool" },
+          "upsetVictory": { "bsonType": "bool" },
+          "rivalryGame": { "bsonType": "bool" },
+          "playoffImportance": { "bsonType": "string", "enum": ["regular", "playoffs", "finals", "championship"] }
+        }
+      },
+      "reviewCount": {
+        "bsonType": "int",
+        "minimum": 0
+      },
+      "watchabilityScore": {
+        "bsonType": "double",
+        "description": "Algorithmic score for recommendability",
+        "minimum": 0,
+        "maximum": 100
+      },
+      "createdAt": {
+        "bsonType": "date"
+      },
+      "updatedAt": {
+        "bsonType": "date"
+      },
+      "createdBy": {
+        "bsonType": "objectId",
+        "description": "User who created this event entry"
+      }
+    },
+    "indexes": [
+      { "keys": { "sport": 1, "date": -1 } },
+      { "keys": { "date": -1 } },
+      { "keys": { "ratings.average": -1 } },
+      { "keys": { "watchabilityScore": -1 } },
+      { "keys": { "tags.name": 1 } },
+      { "keys": { "participants.name": 1 } },
+      { "keys": { "createdAt": -1 } }
+    ]
+  }
+}

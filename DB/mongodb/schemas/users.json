@@ -1,0 +1,129 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "title": "User Profile Schema",
+    "required": ["username", "email", "createdAt"],
+    "properties": {
+      "_id": {
+        "bsonType": "objectId"
+      },
+      "username": {
+        "bsonType": "string",
+        "description": "Unique username",
+        "minLength": 3,
+        "maxLength": 30,
+        "pattern": "^[a-zA-Z0-9_-]+$"
+      },
+      "email": {
+        "bsonType": "string",
+        "description": "User email address",
+        "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+      },
+      "displayName": {
+        "bsonType": "string",
+        "maxLength": 50
+      },
+      "avatar": {
+        "bsonType": "string",
+        "description": "Avatar image URL"
+      },
+      "bio": {
+        "bsonType": "string",
+        "maxLength": 500
+      },
+      "preferences": {
+        "bsonType": "object",
+        "properties": {
+          "favoriteSports": {
+            "bsonType": "array",
+            "items": { "bsonType": "string" }
+          },
+          "favoriteTeams": {
+            "bsonType": "array",
+            "items": {
+              "bsonType": "object",
+              "properties": {
+                "sport": { "bsonType": "string" },
+                "team": { "bsonType": "string" },
+                "league": { "bsonType": "string" }
+              }
+            }
+          },
+          "watchingPreferences": {
+            "bsonType": "object",
+            "properties": {
+              "preferredTags": { "bsonType": "array", "items": { "bsonType": "string" } },
+              "ratingThreshold": { "bsonType": "double", "minimum": 0, "maximum": 10 },
+              "excludedSports": { "bsonType": "array", "items": { "bsonType": "string" } }
+            }
+          },
+          "notifications": {
+            "bsonType": "object",
+            "properties": {
+              "newEvents": { "bsonType": "bool" },
+              "friendReviews": { "bsonType": "bool" },
+              "listUpdates": { "bsonType": "bool" },
+              "recommendations": { "bsonType": "bool" }
+            }
+          }
+        }
+      },
+      "stats": {
+        "bsonType": "object",
+        "properties": {
+          "reviewsCount": { "bsonType": "int", "minimum": 0 },
+          "listsCount": { "bsonType": "int", "minimum": 0 },
+          "followersCount": { "bsonType": "int", "minimum": 0 },
+          "followingCount": { "bsonType": "int", "minimum": 0 },
+          "averageRating": { "bsonType": "double", "minimum": 0, "maximum": 10 },
+          "totalEventsRated": { "bsonType": "int", "minimum": 0 }
+        }
+      },
+      "reputation": {
+        "bsonType": "object",
+        "properties": {
+          "score": { "bsonType": "int", "minimum": 0 },
+          "level": { "bsonType": "string", "enum": ["newcomer", "fan", "enthusiast", "expert", "legend"] },
+          "badges": {
+            "bsonType": "array",
+            "items": {
+              "bsonType": "object",
+              "properties": {
+                "name": { "bsonType": "string" },
+                "earnedAt": { "bsonType": "date" },
+                "category": { "bsonType": "string" }
+              }
+            }
+          }
+        }
+      },
+      "privacy": {
+        "bsonType": "object",
+        "properties": {
+          "profileVisibility": { "bsonType": "string", "enum": ["public", "friends", "private"] },
+          "showRealName": { "bsonType": "bool" },
+          "allowMessages": { "bsonType": "bool" },
+          "showWatchHistory": { "bsonType": "bool" }
+        }
+      },
+      "createdAt": {
+        "bsonType": "date"
+      },
+      "lastActiveAt": {
+        "bsonType": "date"
+      },
+      "status": {
+        "bsonType": "string",
+        "enum": ["active", "inactive", "suspended", "deleted"],
+        "default": "active"
+      }
+    },
+    "indexes": [
+      { "keys": { "username": 1 }, "unique": true },
+      { "keys": { "email": 1 }, "unique": true },
+      { "keys": { "createdAt": -1 } },
+      { "keys": { "reputation.score": -1 } },
+      { "keys": { "preferences.favoriteSports": 1 } }
+    ]
+  }
+}

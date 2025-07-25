@@ -1,0 +1,121 @@
+{
+  "$jsonSchema": {
+    "bsonType": "object",
+    "title": "Event Review Schema",
+    "required": ["eventId", "userId", "rating", "createdAt"],
+    "properties": {
+      "_id": {
+        "bsonType": "objectId"
+      },
+      "eventId": {
+        "bsonType": "objectId",
+        "description": "Reference to the event being reviewed"
+      },
+      "userId": {
+        "bsonType": "objectId",
+        "description": "Reference to the user who wrote the review"
+      },
+      "rating": {
+        "bsonType": "double",
+        "description": "Numerical rating out of 10",
+        "minimum": 0,
+        "maximum": 10
+      },
+      "title": {
+        "bsonType": "string",
+        "description": "Review title/headline",
+        "maxLength": 100
+      },
+      "content": {
+        "bsonType": "string",
+        "description": "Full review text",
+        "maxLength": 5000
+      },
+      "tags": {
+        "bsonType": "array",
+        "description": "Emotional tags applied by the reviewer",
+        "items": {
+          "bsonType": "string",
+          "enum": [
+            "nail-biter", "explosive-finish", "historic-moment", "underdog-victory",
+            "dominant-performance", "comeback", "rivalry", "record-breaking",
+            "controversial", "emotional", "technical-masterpiece", "boring",
+            "predictable", "thrilling", "disappointing", "legendary"
+          ]
+        }
+      },
+      "watchContext": {
+        "bsonType": "object",
+        "description": "Context of how the user watched the event",
+        "properties": {
+          "liveViewing": { "bsonType": "bool" },
+          "watchedWith": { "bsonType": "string", "enum": ["alone", "friends", "family", "public"] },
+          "viewingMedium": { "bsonType": "string", "enum": ["tv", "streaming", "stadium", "bar", "mobile"] },
+          "spoilerFree": { "bsonType": "bool" }
+        }
+      },
+      "keyMoments": {
+        "bsonType": "array",
+        "description": "Specific moments that stood out",
+        "items": {
+          "bsonType": "object",
+          "properties": {
+            "timestamp": { "bsonType": "string" },
+            "description": { "bsonType": "string" },
+            "impact": { "bsonType": "string", "enum": ["game-changing", "emotional", "technical", "controversial"] }
+          }
+        }
+      },
+      "wouldRecommend": {
+        "bsonType": "bool",
+        "description": "Whether the reviewer would recommend watching this event"
+      },
+      "spoilerWarning": {
+        "bsonType": "bool",
+        "description": "Whether the review contains spoilers"
+      },
+      "helpfulVotes": {
+        "bsonType": "object",
+        "properties": {
+          "helpful": { "bsonType": "int", "minimum": 0 },
+          "notHelpful": { "bsonType": "int", "minimum": 0 }
+        }
+      },
+      "moderation": {
+        "bsonType": "object",
+        "properties": {
+          "status": { "bsonType": "string", "enum": ["active", "flagged", "hidden", "deleted"] },
+          "flagCount": { "bsonType": "int", "minimum": 0 },
+          "moderatorNotes": { "bsonType": "string" }
+        }
+      },
+      "editHistory": {
+        "bsonType": "array",
+        "description": "Track review edits",
+        "items": {
+          "bsonType": "object",
+          "properties": {
+            "editedAt": { "bsonType": "date" },
+            "reason": { "bsonType": "string" },
+            "changes": { "bsonType": "object" }
+          }
+        }
+      },
+      "createdAt": {
+        "bsonType": "date"
+      },
+      "updatedAt": {
+        "bsonType": "date"
+      }
+    },
+    "indexes": [
+      { "keys": { "eventId": 1, "userId": 1 }, "unique": true },
+      { "keys": { "eventId": 1, "rating": -1 } },
+      { "keys": { "userId": 1, "createdAt": -1 } },
+      { "keys": { "rating": -1 } },
+      { "keys": { "tags": 1 } },
+      { "keys": { "createdAt": -1 } },
+      { "keys": { "wouldRecommend": 1 } }
+    ]
+  }
+}
