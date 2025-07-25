@@ -8,11 +8,14 @@ Visit us at **otw.sport** - The IMDb of Sporting Events.
 
 ## 🚀 Project Structure
 
-The repository is organized into three main components:
+The repository is organized into these main components:
 
-* **frontend/** → Web interface for browsing, rating, and discovering events
-* **flutter-app/** → Mobile app (iOS & Android) for on-the-go access
-* **graphql-server/** → GraphQL API powering both the web and mobile clients
+* **frontend/** → SvelteKit web interface for browsing, rating, and discovering events
+* **app/** → Flutter mobile app (iOS & Android) for on-the-go access and notifications
+* **graphql-server/** → Multi-sport GraphQL API with modular architecture
+* **DB/** → Hybrid database architecture (MongoDB + Neo4j) for events and relationships
+* **dev-tools/** → Development utilities and debugging tools
+* **shared/** → Common constants and utilities across all modules
 
 ---
 
@@ -135,7 +138,12 @@ otw.sport/
 │   │   └── utils/              # Backend utilities
 │   ├── tests/                  # Backend tests
 │   └── Configuration files
-├── flutter-app/                # Flutter mobile app (planned)
+├── app/                        # Flutter mobile application
+├── DB/                         # Database architecture
+│   ├── mongodb/              # Document storage schemas
+│   ├── neo4j/                # Graph relationships
+│   └── shared/               # Common database utilities
+├── dev-tools/                  # Development and debugging tools
 ├── shared/                     # Shared constants and utilities
 ├── doc/                        # API documentation
 ├── .github/workflows/          # CI/CD configuration
@@ -195,11 +203,12 @@ type Query {
 - Ratings breakdown and user-generated tags  
 - Responsive layout and accessibility  
 
-### `/flutter-app`
-> Cross-platform mobile application (planned)
-- Event alerts and notifications  
+### `/app`
+> Cross-platform Flutter mobile application
+- Real-time event alerts and notifications  
 - Offline viewing & caching  
-- Biometric login (planned)  
+- Social features and friend activity
+- Biometric authentication  
 
 ### `/graphql-server`
 > API layer exposing all event data  

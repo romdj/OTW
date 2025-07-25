@@ -104,10 +104,11 @@ The platform is designed to become the definitive destination for:
 - Building a rich, emotional archive of sports history
 - Community-driven discovery of worth-watching events
 
-## Flutter App Development
+## Mobile App Development
 
-The `flutter-app/` directory is planned for future mobile development. When implementing:
-- Focus on event alerts and notifications
-- Implement offline viewing & caching
-- Consider biometric login integration
-- Follow Flutter best practices for cross-platform development
+The `app/` directory contains the Flutter mobile application. Key features include:
+- Real-time event alerts and push notifications
+- Offline viewing capabilities with local caching
+- Social features and friend activity feeds
+- Biometric authentication for secure access
+- Cross-platform development following Flutter best practices
