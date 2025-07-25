@@ -1,0 +1,46 @@
+{
+  "name": "otw-database",
+  "version": "0.1.0",
+  "description": "Database schemas and validation for otw.sport platform",
+  "type": "module",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "validate": "npm test",
+    "validate:mongodb": "jest __tests__/mongodb",
+    "validate:neo4j": "jest __tests__/neo4j"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "@babel/preset-env": "^7.23.0",
+    "babel-jest": "^29.7.0"
+  },
+  "jest": {
+    "preset": "es2022",
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "testMatch": [
+      "**/__tests__/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/node_modules/**",
+      "!**/__tests__/**"
+    ]
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": "18"
+          }
+        }
+      ]
+    ]
+  }
+}
