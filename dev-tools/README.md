@@ -1,6 +1,6 @@
 # Development Tools
 
-This directory contains utilities and scripts for development, debugging, and testing the NHL standings application.
+This directory contains utilities and scripts for development, debugging, and testing the otw.sport multi-sport discovery platform.
 
 ## Structure
 
@@ -9,7 +9,7 @@ dev-tools/
 ├── README.md                    # This file
 ├── api/                         # API testing and debugging tools
 │   ├── graphql-tester.ts       # GraphQL connection testing
-│   └── nhl-api-explorer.ts     # NHL API data exploration
+│   └── sports-api-explorer.ts  # Multi-sport API data exploration
 ├── debugging/                   # Debug utilities
 │   ├── frontend-debugger.ts    # Frontend state debugging
 │   └── data-flow-tracer.ts     # Data flow analysis
@@ -28,7 +28,7 @@ dev-tools/
 # Test GraphQL connection
 npm run dev:test-graphql
 
-# Explore NHL API data
+# Explore multi-sport API integrations
 npm run dev:explore-api
 ```
 

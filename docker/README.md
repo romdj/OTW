@@ -1,12 +1,14 @@
-# Docker Setup for NHL Standings Application
+# Docker Setup for otw.sport Platform
 
-This directory contains Docker configuration for the NHL Standings application, supporting both development and production environments.
+This directory contains Docker configuration for otw.sport - "The IMDb of Sporting Events", supporting both development and production environments.
 
 ## Architecture
 
-The application uses a multi-service architecture:
-- **GraphQL Server**: Node.js/Fastify backend serving GraphQL API
-- **Frontend**: SvelteKit application served via Nginx in production
+The platform uses a multi-service architecture:
+- **GraphQL Server**: Multi-sport Node.js/Fastify backend serving GraphQL API
+- **Frontend**: SvelteKit web application for event discovery and rating
+- **Mobile App**: Flutter application for cross-platform mobile access
+- **Database**: Hybrid MongoDB (documents) + Neo4j (relationships) architecture
 
 ## Quick Start
 
