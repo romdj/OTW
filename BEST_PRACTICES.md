@@ -1,24 +1,27 @@
-# 🏗️ Best Practices Summary for 3-Point NHL Standings Project
+# 🏗️ Best Practices Summary for otw.sport Platform
 
-This repository demonstrates excellent modern development practices that make it ideal as a greenfield project template.
+This repository demonstrates excellent modern development practices for building "The IMDb of Sporting Events" - a comprehensive multi-sport discovery platform.
 
 ## 📁 **Project Structure & Architecture**
 
 ### **Monorepo Structure**
 ```
-3point-game-nhl-standing/
-├── frontend/           # SvelteKit app
-├── graphql-server/     # Node.js GraphQL API
+otw.sport/
+├── frontend/           # SvelteKit web interface
+├── app/               # Flutter mobile app
+├── graphql-server/     # Multi-sport GraphQL API
+├── DB/                # Hybrid database architecture (MongoDB + Neo4j)
 ├── shared/            # Shared types/utilities
 ├── dev-tools/         # Development utilities
 └── .github/           # CI/CD workflows
 ```
 
 ### **Clean Architecture Layers**
-- **Domain Layer**: Pure business entities (`Standing.ts`)
-- **Business Layer**: Services, use cases, business logic
-- **API Layer**: GraphQL resolvers and external integrations
-- **UI Layer**: Svelte components with clear separation of concerns
+- **Domain Layer**: Pure business entities (events, users, reviews)
+- **Business Layer**: Multi-sport services, use cases, and business logic
+- **API Layer**: Sport-agnostic GraphQL resolvers and integrations
+- **UI Layer**: Cross-platform components with clear separation of concerns
+- **Database Layer**: Hybrid MongoDB (documents) + Neo4j (relationships)
 
 ## 🛠️ **Development Workflow**
 

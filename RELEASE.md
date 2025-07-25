@@ -1,6 +1,6 @@
 # Release Guide
 
-This guide outlines the release process for the NHL 3-Point Standings application, a monorepo containing a GraphQL server and SvelteKit frontend.
+This guide outlines the release process for otw.sport - "The IMDb of Sporting Events", a comprehensive multi-sport discovery platform with GraphQL API, SvelteKit frontend, and Flutter mobile app.
 
 ## 📋 Quick Reference
 

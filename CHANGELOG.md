@@ -20,14 +20,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2025-07-17
 
 ### Added
-- Initial release of NHL 3-Point System project
-- GraphQL server with Fastify + Mercurius
-- SvelteKit frontend with TypeScript
-- NHL API integration for standings data
-- 3-point scoring system implementation (Win=3pts, OT/SO Loss=1pt, Loss=0pts)
-- Multiple view types (divisions, conferences, league-wide)
+- Initial release of otw.sport - "The IMDb of Sporting Events"
+- Multi-sport GraphQL server with Fastify + Mercurius
+- SvelteKit frontend with TypeScript for event discovery
+- NHL integration as first sport (with traditional vs 3-point scoring comparison)
+- Sport-agnostic architecture supporting multiple leagues and competitions
+- Hybrid database architecture (MongoDB for documents + Neo4j for relationships)
+- Multiple view types (divisions, conferences, league-wide) with emotional tagging
 - Responsive design with TailwindCSS + DaisyUI
-- Real-time data fetching and visualization
+- Real-time data fetching and event recommendation system
+- Flutter mobile app foundation for cross-platform access
 - Comprehensive test suite with Jest
 - Automated CI/CD pipeline with GitHub Actions
 - Semantic-release configuration with 0.x.x versioning
