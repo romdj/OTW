@@ -10,44 +10,51 @@ Thank you for your interest in contributing to **otw** - The IMDb of Sporting Ev
 4. **Run local validation** before pushing
 5. **Create a Pull Request** to `main`
 
-## 🌳 Branching Strategy
+## 🌳 Trunk-Based Development Strategy
 
-We use a **Feature Branch Workflow** with optional **Release Branches** for controlled deployments.
+We use **trunk-based development** with short-lived feature branches and continuous integration to `main`.
 
 ### Branch Types
 
-| Branch Type | Purpose | Naming Convention | Example |
-|-------------|---------|-------------------|---------|
-| `main` | Production-ready code | `main` | `main` |
-| Feature | New features or enhancements | `feat/description` | `feat/event-rating-system` |
-| Bugfix | Bug fixes | `fix/description` | `fix/search-filters` |
-| Hotfix | Critical production fixes | `hotfix/description` | `hotfix/security-patch` |
-| Release | Release preparation | `release/vX.X.X` | `release/v0.3.0` |
+| Branch Type | Purpose | Naming Convention | Lifespan | Example |
+|-------------|---------|-------------------|----------|---------|
+| `main` | Production-ready code, always deployable | `main` | Permanent | `main` |
+| Feature | New features or enhancements | `feat/description` | < 1 day | `feat/event-rating-system` |
+| Bugfix | Bug fixes | `fix/description` | < 1 day | `fix/search-filters` |
+| Hotfix | Critical production fixes | `hotfix/description` | < 2 hours | `hotfix/security-patch` |
 
-### Development Workflow
+### Trunk-Based Development Workflow
 
 ```mermaid
 graph LR
-    A[feature/new-feature] --> B[main]
-    B --> C[release/v0.3.0]
-    C --> D[v0.3.0 tag]
-    D --> E[Production]
+    A[feature/new-feature] -->|< 1 day| B[main]
+    B --> C[Automatic Release]
+    C --> D[Production]
     
-    F[hotfix/critical-fix] --> B
-    F --> C
+    E[fix/bug-fix] -->|< 1 day| B
+    F[hotfix/critical-fix] -->|< 2 hours| B
 ```
+
+**Key Principles:**
+- **Main is always deployable** - All merges must pass full validation
+- **Short-lived branches** - Feature branches live less than 1 day
+- **Frequent integration** - Push to main multiple times per day
+- **Feature flags** - Use toggles for incomplete features
+- **No release branches** - Releases happen automatically on main
 
 ## 🚀 Development Process
 
 ### 1. Creating a Feature Branch
 
 ```bash
-# Start from latest main
+# Start from latest main (always up to date)
 git checkout main
 git pull origin main
 
-# Create and switch to feature branch
+# Create and switch to short-lived feature branch
 git checkout -b feat/event-discovery-feature
+
+# Goal: Merge back to main within 24 hours
 ```
 
 ### 2. Development with Conventional Commits
@@ -116,40 +123,25 @@ gh pr create --title "feat: add event discovery feature" --body "Description of 
 - Ensures conventional commit format in main branch
 - Enables proper semantic-release versioning
 
-## 📦 Release Strategy
+## 📦 Trunk-Based Release Strategy
 
-We support two release approaches:
+We use **continuous releases** aligned with trunk-based development:
 
-### Option A: Continuous Releases (Default)
+### Automatic Continuous Releases
 
-Every merge to `main` can trigger an automatic release via semantic-release:
-
-```bash
-feat/event-ratings → main → automatic v0.3.0 release
-```
-
-### Option B: Controlled Releases with Release Branches
-
-Accumulate features on `main`, then create release branches for controlled deployment:
+Every successful merge to `main` triggers an automatic release:
 
 ```bash
-# Accumulate features on main
-feat/event-ratings → main
-feat/ui-improvements → main
-feat/event-discovery → main
-
-# Create release branch when ready
-git checkout main
-git checkout -b release/v0.3.0
-
-# Finalize release
-npm run release:prepare
-npm run semantic-release
-
-# Merge back to main
-git checkout main
-git merge release/v0.3.0
+feat/event-ratings → main → CI validation passes → automatic v0.3.0 release
 ```
+
+**Release Flow:**
+1. **Feature merged to main** - All parallel component validation passes
+2. **Semantic versioning** - Version determined by conventional commits
+3. **Automatic release** - Tagged and published to GitHub releases
+4. **Production deployment** - Immediately available for deployment
+
+**No manual release management** - The system handles versioning and releases automatically.
 
 ## 🛠️ Development Commands
 

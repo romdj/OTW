@@ -2,12 +2,12 @@ name: Parallel Component Validation
 
 on:
   pull_request:
-    branches: [ main, dev ]
+    branches: [ main ]
     paths-ignore:
       - '**.md'
       - 'docs/**'
   push:
-    branches: [ main, dev ]
+    branches: [ main ]
     paths-ignore:
       - '**.md'
       - 'docs/**'

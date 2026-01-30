@@ -1,8 +1,8 @@
-# Simplified CI/CD Pipeline Documentation
+# GitHub Workflows - Trunk-Based Development
 
-## Philosophy: Local First, CI for Deployment
+## Philosophy: Trunk-Based Development with Local First Validation
 
-This project uses a **"Local First"** approach to avoid redundant work between local development and CI pipelines.
+This project uses **trunk-based development** with a **"Local First"** approach to ensure fast feedback and maintain a production-ready main branch.
 
 ## Responsibility Separation
 
@@ -23,12 +23,25 @@ This project uses a **"Local First"** approach to avoid redundant work between l
 
 ### 🚀 GitHub Actions CI (Deployment Focus - 5-10 min)
 
+**parallel-build.yml** - Comprehensive parallel component validation:
+- ✅ Frontend (SvelteKit) - build, lint, test, type-check
+- ✅ GraphQL Server (Node.js) - build, lint, test, type-check  
+- ✅ Mobile App (Flutter) - build, analyze, test
+- ✅ Database (MongoDB + Neo4j) - schema validation
+- ✅ Integration Tests - API connectivity verification
+- ✅ Docker Build Validation - image creation
+- ✅ Release Gate - all components must pass
+
 **ci.yml** - Production deployment pipeline:
 - ✅ Application builds for deployment
 - ✅ Docker image creation and registry push
-- ✅ Docker Compose integration testing (PRs)
 - ✅ Container security scanning (Trivy)
 - ✅ CodeQL static analysis (main branch)
+
+**release.yml** - Automated semantic releases:
+- ✅ Triggered by successful parallel validation
+- ✅ Semantic versioning and changelog generation
+- ✅ Automated release publishing
 
 ### 🤖 Automated Maintenance
 
@@ -55,24 +68,57 @@ These workflows were **removed** to eliminate redundancy:
 4. **Better Developer Experience** - Know issues before pushing
 5. **Reliable Deployments** - Comprehensive validation before any push
 
-## Workflow Triggers
+## Trunk-Based Development Branch Strategy
 
-- **Pre-commit**: Every commit
-- **Pre-push**: Every push attempt  
-- **CI**: Pull requests and pushes to main/dev branches
-- **Updates**: Weekly on main branch
+### ✅ **Single Source of Truth**
+- **main**: Production-ready code, always deployable
+- **feature/***: Short-lived branches (< 1 day) for specific features
+- **hotfix/***: Critical production fixes (merge directly to main)
+- No long-lived `dev`, `staging`, or integration branches
 
-## Development Workflow
+### Workflow Triggers
+
+- **Pre-commit**: Every commit (local validation)
+- **Pre-push**: Every push attempt (comprehensive testing)
+- **CI**: Pull requests and pushes to **main only**
+- **Release**: Automated on successful main branch validation
+- **Updates**: Weekly dependency updates on main branch
+
+## Trunk-Based Development Workflow
 
 ```bash
-# Developer makes changes
+# 1. Create short-lived feature branch
+git checkout -b feature/add-premier-league
+
+# 2. Make small, focused changes
 git add .
 # → Pre-commit runs (30-60s) - lint, types, tests, security
 
-git commit -m "feat: new feature"
-git push
+git commit -m "feat: add Premier League standings API"
+
+# 3. Push early and often (same day)
+git push origin feature/add-premier-league
 # → Pre-push runs (2-3m) - build, coverage, integration tests
-# → CI runs (5-10m) - deployment, container security, static analysis
+# → Parallel validation runs (5-10m) - all components validated
+
+# 4. Create PR and merge quickly (< 1 day)
+# → All components pass validation
+# → Merge to main
+# → Automatic release triggered
+```
+
+## Integration Flow
+
+```mermaid
+graph TD
+    A[Feature Branch] --> B[Push Changes]
+    B --> C[Parallel Component Validation]
+    C --> D{All Pass?}
+    D -->|Yes| E[Merge to Main]
+    D -->|No| F[Fix Issues]
+    F --> B
+    E --> G[Automatic Release]
+    G --> H[Production Deployment]
 ```
 
 This approach ensures quality at every step while minimizing redundant work and CI pipeline complexity.

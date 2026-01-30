@@ -64,6 +64,19 @@ npm run test:coverage      # Coverage reporting
 
 ## Development Guidelines
 
+### Trunk-Based Development
+
+otw follows **trunk-based development** practices:
+
+1. **Main branch is always deployable** - All code merged to main must be production-ready
+2. **Short-lived feature branches** - Work in small, focused branches that live < 2 days
+3. **Frequent integration** - Merge to main multiple times per day when possible
+4. **Feature flags** - Use feature toggles for incomplete features rather than long-lived branches
+5. **Rapid feedback** - All checks (lint, test, build) run on every commit
+6. **No "development" branch** - All development flows through main with proper CI/CD gates
+
+### Code Quality Standards
+
 When working on otw:
 
 1. **Follow established patterns** from the existing codebase structure
@@ -72,6 +85,20 @@ When working on otw:
 4. **Code organization** should mirror the clean architecture shown in the codebase
 5. **Build processes** should be consistent across components
 6. **Focus on the vision**: Capture the emotional and experiential aspects of sporting events
+
+### Branch Strategy
+
+- **main**: Production-ready code, always deployable
+- **feature/***: Short-lived branches for specific features (delete after merge)
+- **hotfix/***: Critical production fixes (rare, merge directly to main)
+- No long-lived development or staging branches
+
+### Commit Practices
+
+- Make small, logical commits that build and pass tests
+- Use conventional commit format: `feat:`, `fix:`, `docs:`, `refactor:`
+- Each commit should represent a complete, working change
+- Push frequently to avoid conflicts
 
 ## Project Structure
 
