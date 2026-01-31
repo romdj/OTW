@@ -111,7 +111,7 @@
       <PlayoffStatusIndicator status={playoffStatus} />
     </div>
   </td>
-  {#each columns as column}
+  {#each columns as column (column.key)}
     <td class="text-sm {column.key === 'teamName' ? 'font-medium' : 'text-center'} {getTextColor(playoffStatus, column.key === 'teamName')}">
       {#if column.key === 'teamName'}
         <div class="flex items-center gap-3">

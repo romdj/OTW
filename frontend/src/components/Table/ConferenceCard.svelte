@@ -26,7 +26,7 @@
     
     <!-- Division sections for wildcard view -->
     {#if viewType === 'wildcard'}
-      {#each Object.entries(conferenceGroups).filter(([name]) => !name.includes('Wild Card') && !name.includes('Race') && !name.includes('Rest')) as [groupName, groupTeams]}
+      {#each Object.entries(conferenceGroups).filter(([name]) => !name.includes('Wild Card') && !name.includes('Race') && !name.includes('Rest')) as [groupName, groupTeams] (groupName)}
         {#if groupTeams.length > 0}
           <TableSection 
             {groupName} 
@@ -45,7 +45,7 @@
     
     <!-- Conference and division sections -->
     {#if viewType === 'conference' || viewType === 'division'}
-      {#each Object.entries(conferenceGroups) as [groupName, groupTeams]}
+      {#each Object.entries(conferenceGroups) as [groupName, groupTeams] (groupName)}
         {#if groupTeams.length > 0}
           <TableSection 
             {groupName} 
@@ -66,7 +66,7 @@
   <!-- Wild Card section - only for wildcard view -->
   {#if viewType === 'wildcard'}
     <div class="bg-white rounded-xl shadow-md overflow-hidden mb-6">
-      {#each Object.entries(conferenceGroups).filter(([name]) => name.includes('Wild Card')) as [groupName, groupTeams]}
+      {#each Object.entries(conferenceGroups).filter(([name]) => name.includes('Wild Card')) as [groupName, groupTeams] (groupName)}
         {#if groupTeams.length > 0}
           <div class="bg-gradient-to-r from-green-600 to-green-800 text-white p-4">
             <h4 class="text-lg font-semibold flex items-center">
@@ -90,7 +90,7 @@
     
     <!-- Race section -->
     <div class="bg-white rounded-xl shadow-md overflow-hidden mb-6">
-      {#each Object.entries(conferenceGroups).filter(([name]) => name.includes('Race')) as [groupName, groupTeams]}
+      {#each Object.entries(conferenceGroups).filter(([name]) => name.includes('Race')) as [groupName, groupTeams] (groupName)}
         {#if groupTeams.length > 0}
           <div class="bg-gradient-to-r from-yellow-500 to-yellow-700 text-white p-4">
             <h4 class="text-lg font-semibold flex items-center">
@@ -114,7 +114,7 @@
     
     <!-- Rest section -->
     <div class="bg-white rounded-xl shadow-md overflow-hidden">
-      {#each Object.entries(conferenceGroups).filter(([name]) => name.includes('Rest')) as [groupName, groupTeams]}
+      {#each Object.entries(conferenceGroups).filter(([name]) => name.includes('Rest')) as [groupName, groupTeams] (groupName)}
         {#if groupTeams.length > 0}
           <div class="bg-gradient-to-r from-gray-600 to-gray-800 text-white p-4">
             <h4 class="text-lg font-semibold flex items-center">

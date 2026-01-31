@@ -3,7 +3,7 @@
  */
 
 import got from 'got';
-import type { NHLApiStandingsResponse, NHLApiTeam, StandingsQueryArgs, TransformedTeam } from '../types/nhl-api.types.js';
+import type { NHLApiStandingsResponse, NHLApiTeam, TransformedTeam } from '../types/nhl-api.types.js';
 import { NHL_API_ENDPOINTS, NHL_POINT_SYSTEMS, NHL_ERROR_MESSAGES } from '../constants/index.js';
 import { logger, PerformanceLogger } from '../../../../../utils/logger.js';
 import { API_TIMEOUTS, RETRY_LIMITS } from '../../../../../constants/shared.js';
@@ -118,9 +118,10 @@ export class NHLStandingsService {
   /**
    * Gets powerplay stats for a team (delegated to powerplay service)
    */
-  async getTeamPowerplayStats(teamAbbrev: string, season?: string): Promise<any> {
+  async getTeamPowerplayStats(teamAbbrev: string, season?: string): Promise<Record<string, unknown> | null> {
     try {
-      return await powerplayService.getPowerplayStats(teamAbbrev, season);
+      const stats = await powerplayService.getPowerplayStats(teamAbbrev, season);
+      return stats as Record<string, unknown> | null;
     } catch (error) {
       logger.error({ 
         teamAbbrev,

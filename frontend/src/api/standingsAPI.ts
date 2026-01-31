@@ -3,6 +3,12 @@ import { gql } from '@urql/svelte';
 import { getDefaultStandingsDate } from '../utils/seasonUtils';
 import { AppErrorHandler } from '../utils/errorHandler';
 import { logger, PerformanceLogger } from '../utils/logger';
+import type { Standing, PowerplayStats } from '../domain/standing';
+
+// API response type (before transformation)
+interface ApiStanding extends Omit<Standing, 'minutesPerPowerplayGoal' | 'powerplayPercentage'> {
+  powerplayStats?: PowerplayStats;
+}
 
 const STANDINGS_QUERY = gql`
   query GetStandings($date: String!) {
@@ -70,7 +76,7 @@ export const fetchStandingsForDate = async (date: string) => {
         );
         
         // Transform standings to include derived powerplay fields for sorting
-        const transformedStandings = queryResult.data.standings.map((standing: any) => ({
+        const transformedStandings = queryResult.data.standings.map((standing: ApiStanding) => ({
           ...standing,
           minutesPerPowerplayGoal: standing.powerplayStats?.minutesPerPowerplayGoal ?? null,
           powerplayPercentage: standing.powerplayStats?.powerplayPercentage ?? null,

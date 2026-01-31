@@ -2,6 +2,9 @@
  * Generic sports service interface for standardizing sports data operations
  */
 
+/* eslint-disable no-unused-vars */
+// Interface parameter names are for documentation and are not "used" in the traditional sense
+
 export interface TeamStanding {
   teamName: string;
   teamAbbrev: string;
@@ -30,17 +33,17 @@ export interface SportsService {
    * Get standings for the sport/league
    */
   getStandings(query?: StandingsQuery): Promise<TeamStanding[]>;
-  
+
   /**
    * Get detailed team information
    */
-  getTeamDetails(teamId: string): Promise<any>;
-  
+  getTeamDetails(teamId: string): Promise<Record<string, unknown>>;
+
   /**
    * Get sport-specific statistics
    */
-  getTeamStats(teamId: string, season?: string): Promise<any>;
-  
+  getTeamStats(teamId: string, season?: string): Promise<Record<string, unknown> | null>;
+
   /**
    * Validate team identifier
    */
@@ -62,12 +65,12 @@ export interface SportResolver {
   /**
    * GraphQL query resolvers for the sport
    */
-  Query: Record<string, any>;
-  
+  Query: Record<string, unknown>;
+
   /**
    * GraphQL field resolvers for sport-specific types
    */
-  [key: string]: Record<string, any>;
+  [key: string]: Record<string, unknown>;
 }
 
 export interface SportConfig {

@@ -5,7 +5,7 @@
 import type { SportsService, TeamStanding, StandingsQuery, SportConfig } from '../../../shared/interfaces/SportsService.js';
 import { nhlStandingsService } from './services/standingsService.js';
 import type { TransformedTeam } from './types/nhl-api.types.js';
-import { NHL_CONFERENCES, NHL_DIVISIONS } from './constants/index.js';
+import { NHL_CONFERENCES } from './constants/index.js';
 
 export class NHLSportAdapter implements SportsService {
   private config: SportConfig = {
@@ -35,7 +35,7 @@ export class NHLSportAdapter implements SportsService {
     }));
   }
 
-  async getTeamDetails(teamId: string): Promise<any> {
+  async getTeamDetails(teamId: string): Promise<Record<string, unknown>> {
     // TODO: Implement NHL team details fetching
     return {
       id: teamId,
@@ -44,12 +44,12 @@ export class NHLSportAdapter implements SportsService {
     };
   }
 
-  async getTeamStats(teamId: string, season?: string): Promise<any> {
+  async getTeamStats(teamId: string, season?: string): Promise<Record<string, unknown> | null> {
     return await nhlStandingsService.getTeamPowerplayStats(teamId, season);
   }
 
   isValidTeam(teamId: string): boolean {
-    const allTeams = [
+    const allTeams: string[] = [
       ...NHL_CONFERENCES.EASTERN,
       ...NHL_CONFERENCES.WESTERN
     ];

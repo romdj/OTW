@@ -74,8 +74,8 @@ export class SportRegistry {
   /**
    * Merge all sport resolvers into a single resolver object
    */
-  getMergedResolvers(): Record<string, any> {
-    const mergedResolvers: Record<string, any> = {
+  getMergedResolvers(): Record<string, Record<string, unknown>> {
+    const mergedResolvers: Record<string, Record<string, unknown>> = {
       Query: {},
     };
 
@@ -109,7 +109,7 @@ export class SportRegistry {
   /**
    * Get standings from all registered sports
    */
-  async getAllStandings(date?: string): Promise<Array<{ sport: string; league: string; standings: any[] }>> {
+  async getAllStandings(date?: string): Promise<Array<{ sport: string; league: string; standings: unknown[] }>> {
     const results = [];
 
     for (const [sportKey, service] of this.services) {

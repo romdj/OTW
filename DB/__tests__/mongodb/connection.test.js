@@ -25,7 +25,7 @@ describe('MongoDB Connection & Initialization', () => {
         const content = await fs.readFile(initPath, 'utf8');
         
         // Check for essential MongoDB commands
-        expect(content).toMatch(/use\s+\w+/); // use database command
+        expect(content).toMatch(/use\s*\(\s*['"]?\w+['"]?\s*\)|use\s+\w+/); // use database command (both function and shell syntax)
         expect(content).toMatch(/createCollection|db\.\w+\.insertOne/); // collection creation
       } catch (error) {
         // Skip test if file doesn't exist yet

@@ -18,19 +18,21 @@
     historicalDate: string;
   } | null = null;
 
+  /* eslint-disable svelte/prefer-svelte-reactivity -- Date used for calculation, not reactivity */
   function getDefaultSeasonStart(): string {
     const today = new Date();
     const currentYear = today.getFullYear();
     // NHL season typically starts in October
     const seasonStart = new Date(currentYear, 9, 1); // October 1st
-    
+
     // If we're before October, use previous year's season
     if (today.getMonth() < 9) {
       seasonStart.setFullYear(currentYear - 1);
     }
-    
+
     return seasonStart.toISOString().split('T')[0];
   }
+  /* eslint-enable svelte/prefer-svelte-reactivity */
 
   async function loadComparison() {
     if (!historicalDate || !currentDate) {

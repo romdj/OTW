@@ -115,7 +115,7 @@
   <!-- All views now use the side-by-side layout for conferences -->
   {#if ($viewTypeStore === 'wildcard' || $viewTypeStore === 'conference' || $viewTypeStore === 'division') && conferencePairs}
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" in:slide={{ duration: ANIMATION_DURATIONS.SLIDE, easing: quintOut }}>
-      {#each conferencePairs as conferenceGroups, i}
+      {#each conferencePairs as conferenceGroups, i (i)}
         <ConferenceCard 
           conferenceIndex={i}
           {conferenceGroups}
@@ -132,7 +132,7 @@
   {:else}
     <!-- League View - Full Width -->
     <div class="space-y-8" in:slide={{ duration: ANIMATION_DURATIONS.SLIDE, easing: quintOut }}>
-      {#each Object.entries(groupedStandings) as [groupName, groupTeams]}
+      {#each Object.entries(groupedStandings) as [groupName, groupTeams] (groupName)}
         <div class="card bg-base-100 shadow-lg border border-base-200">
           <div class="card-header bg-gradient-primary text-primary-content p-4">
             <h3 class="text-xl font-bold group relative">

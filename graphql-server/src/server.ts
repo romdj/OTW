@@ -69,7 +69,7 @@ app.get('/health', async () => {
 
 app.listen({ port: config.PORT, host: '0.0.0.0' }, (error, serverAddress) => {
   if (error) {
-    logger.error('Failed to start server', error);
+    logger.error({ err: error }, 'Failed to start server');
     process.exit(1);
   }
   logger.info(`Server is running at ${serverAddress}`);

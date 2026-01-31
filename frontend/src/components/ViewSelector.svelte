@@ -44,7 +44,7 @@
 
   <!-- View Selector -->
   <div class="tabs tabs-boxed bg-base-200">
-    {#each views as view}
+    {#each views as view (view.id)}
       <button
         class="tab {$viewTypeStore === view.id ? 'tab-active' : ''}"
         on:click={() => viewTypeStore.set(view.id)}

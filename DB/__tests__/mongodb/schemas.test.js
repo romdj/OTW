@@ -73,10 +73,11 @@ describe('MongoDB Schema Validation', () => {
       if (await fs.access(eventsPath).then(() => true).catch(() => false)) {
         const content = await fs.readFile(eventsPath, 'utf8');
         const schema = JSON.parse(content);
-        
+        const properties = schema.$jsonSchema?.properties || schema.properties;
+
         const requiredFields = ['title', 'sport', 'date', 'participants'];
         requiredFields.forEach(field => {
-          expect(schema.properties).toHaveProperty(field);
+          expect(properties).toHaveProperty(field);
         });
       }
     });
@@ -86,10 +87,11 @@ describe('MongoDB Schema Validation', () => {
       if (await fs.access(usersPath).then(() => true).catch(() => false)) {
         const content = await fs.readFile(usersPath, 'utf8');
         const schema = JSON.parse(content);
-        
+        const properties = schema.$jsonSchema?.properties || schema.properties;
+
         const requiredFields = ['username', 'email'];
         requiredFields.forEach(field => {
-          expect(schema.properties).toHaveProperty(field);
+          expect(properties).toHaveProperty(field);
         });
       }
     });

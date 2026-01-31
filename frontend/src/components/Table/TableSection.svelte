@@ -56,7 +56,7 @@
     <table class="table table-zebra w-full">
       <TableHeader {columns} {sortKey} {sortOrder} {onSort} />
       <tbody>
-        {#each teams as standing, index}
+        {#each teams as standing, index (standing.teamAbbrev)}
           {@const playoffStatus = getPlayoffStatus(groupName, index)}
           {@const _positionChange = getPositionChange(standing.teamName, index)}
           <TableRow 

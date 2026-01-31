@@ -19,7 +19,7 @@
 <thead>
   <tr>
     <th class="text-left font-semibold text-base-content w-16">Pos</th>
-    {#each columns as column}
+    {#each columns as column (column.key)}
       <th 
         class="text-left font-semibold text-base-content {isSortableColumn(column.key) ? 'cursor-pointer hover:bg-base-200' : 'cursor-default'} transition-colors duration-150 select-none"
         on:click={() => isSortableColumn(column.key) && handleSort(column.key)}

@@ -41,7 +41,7 @@
       <div class="card-body">
         <h3 class="card-title text-lg mb-4">Biggest Position Changes</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {#each biggestMovers as team}
+          {#each biggestMovers as team (team.current.teamAbbrev)}
             <div class="flex items-center justify-between p-3 bg-base-200 rounded-lg">
               <div class="flex items-center gap-3">
                 {#if team.current.teamLogo}
@@ -93,7 +93,7 @@
             </tr>
           </thead>
           <tbody>
-            {#each comparisonData as team}
+            {#each comparisonData as team (team.current.teamAbbrev)}
               <tr class="hover">
                 <td>
                   <div class="flex items-center gap-3">

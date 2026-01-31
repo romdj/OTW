@@ -40,7 +40,7 @@ export const baseTestConfig = {
 };
 
 export const baseIgnoreConfig = {
-  ignores: ['dist/', 'build/', '.svelte-kit/', 'node_modules/', 'coverage/'],
+  ignores: ['dist/', 'build/', '.svelte-kit/', 'node_modules/', 'coverage/', '**/archive/**'],
 };
 
 export const nodeGlobals = globals.node;

@@ -4,12 +4,12 @@
   "description": "Database schemas and validation for otw.sport platform",
   "type": "module",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
+    "test": "NODE_OPTIONS='--experimental-vm-modules' jest",
+    "test:watch": "NODE_OPTIONS='--experimental-vm-modules' jest --watch",
+    "test:coverage": "NODE_OPTIONS='--experimental-vm-modules' jest --coverage",
     "validate": "npm test",
-    "validate:mongodb": "jest __tests__/mongodb",
-    "validate:neo4j": "jest __tests__/neo4j"
+    "validate:mongodb": "NODE_OPTIONS='--experimental-vm-modules' jest __tests__/mongodb",
+    "validate:neo4j": "NODE_OPTIONS='--experimental-vm-modules' jest __tests__/neo4j"
   },
   "devDependencies": {
     "jest": "^30.0.5",
@@ -17,11 +17,8 @@
     "babel-jest": "^30.0.5"
   },
   "jest": {
-    "preset": "es2022",
     "testEnvironment": "node",
-    "transform": {
-      "^.+\\.js$": "babel-jest"
-    },
+    "transform": {},
     "testMatch": [
       "**/__tests__/**/*.test.js"
     ],
@@ -29,18 +26,6 @@
       "**/*.js",
       "!**/node_modules/**",
       "!**/__tests__/**"
-    ]
-  },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "node": "18"
-          }
-        }
-      ]
     ]
   }
 }
