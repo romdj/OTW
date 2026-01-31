@@ -62,7 +62,7 @@ jobs:
     if: needs.verify-build-success.outputs.release-approved == 'true'
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           # Use the commit that triggered the original workflow
