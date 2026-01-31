@@ -271,12 +271,12 @@ Each sport implementation includes:
 
 ### **Phase 1: Foundation Sports**
 - ✅ **Ice Hockey (NHL)** - Complete
-- 🔄 **Association Football** - Premier League, Champions League
-- 🔄 **Basketball** - NBA, March Madness
-- 🔄 **American Football** - NFL, Super Bowl
+- ❌ **Tennis** - Grand Slams, ATP/WTA Tours (Priority 2)
+- ❌ **American Football** - NFL, Super Bowl (Priority 3)
+- ❌ **Association Football** - Premier League, Champions League (Priority 4)
+- ❌ **Basketball** - NBA, March Madness (Priority 5)
 
 ### **Phase 2: Global Expansion**
-- **Tennis** - Grand Slams, ATP/WTA Tours
 - **Baseball** - MLB, World Series
 - **Cricket** - IPL, World Cup
 - **Golf** - Major Championships
@@ -291,6 +291,53 @@ Each sport implementation includes:
 - **Regional Leagues** - European football leagues, Asian basketball
 - **Emerging Sports** - Mixed martial arts, drone racing
 - **Historical Events** - Classic games and legendary moments
+
+---
+
+## 📋 Current Sprint Progress
+
+*Last updated: 2026-01-30*
+
+### Sport Implementation Priority
+| Priority | Sport | Type | Status |
+|----------|-------|------|--------|
+| 1 | Ice Hockey (NHL) | Team | ✅ Complete |
+| 2 | Tennis (Grand Slams) | Individual | ❌ Next up |
+| 3 | American Football (NFL) | Team | ❌ Planned |
+| 4 | Association Football (Premier League) | Team | ❌ Planned |
+| 5 | Basketball (NBA) | Team | ❌ Planned |
+
+### Active Work
+| Task | Status | Notes |
+|------|--------|-------|
+| Review pending workflow changes | Pending | CI/CD and package.json updates |
+| Establish integration testing infrastructure | Blocked | Waiting on workflow cleanup |
+| Tennis adapter | Blocked | Waiting on testing infrastructure |
+| NFL adapter | Blocked | Waiting on Tennis |
+| Football adapter | Blocked | Waiting on NFL |
+| Basketball adapter | Blocked | Waiting on Football |
+| Event rating/review system | Blocked | Waiting on Football |
+
+### Testing Requirements (Critical)
+Each sport implementation MUST include:
+- **Integration tests** for every GraphQL endpoint
+- **Data model validation** tests for API responses
+- **Service layer tests** with mocked external APIs
+- **End-to-end tests** for frontend data display
+
+### Recently Completed
+| Date | Milestone |
+|------|-----------|
+| 2025-xx | Migrated to Mercurius (from Apollo Server v3) |
+| 2025-xx | Multi-sport architecture foundation |
+| 2025-xx | Database schema design (MongoDB + Neo4j) |
+| 2025-xx | CI/CD parallel validation workflow |
+| 2025-xx | NHL integration complete |
+
+### Collaboration
+- Session logs: `.claude/collaboration-logs/`
+- Task tracking: Claude Code TaskList tool
+- Planning: Plan Mode for significant features
 
 ---
 
