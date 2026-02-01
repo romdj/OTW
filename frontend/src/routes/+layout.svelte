@@ -2,11 +2,14 @@
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
   import { themeStore } from '../stores/themeStore';
+  import { authStore } from '../stores/authStore';
   import ThemeToggle from '../components/ThemeToggle.svelte';
+  import { UserMenu } from '../components/Auth';
   import '../app.css';
 
   onMount(() => {
     themeStore.initializeTheme();
+    authStore.initialize();
   });
 
   // Navigation items
@@ -53,8 +56,9 @@
       </div>
 
       <!-- Right Actions -->
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-3">
         <ThemeToggle />
+        <UserMenu />
 
         <!-- Mobile Menu Button -->
         <div class="dropdown dropdown-end md:hidden">

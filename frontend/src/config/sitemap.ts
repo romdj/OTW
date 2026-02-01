@@ -197,6 +197,30 @@ export const SITEMAP: SitemapRoute[] = [
     implemented: true,
     showInNav: true,
   },
+  {
+    path: '/profile',
+    title: 'My Profile',
+    description: 'Your OTW.sport profile and preferences',
+    icon: '👤',
+    implemented: true,
+    showInNav: false, // Only accessible when logged in
+  },
+  {
+    path: '/settings',
+    title: 'Settings',
+    description: 'Account and notification settings',
+    icon: '⚙️',
+    implemented: false,
+    showInNav: false,
+  },
+  {
+    path: '/auth/callback',
+    title: 'Authentication',
+    description: 'OIDC authentication callback',
+    icon: '🔐',
+    implemented: true,
+    showInNav: false,
+  },
 ];
 
 /**
