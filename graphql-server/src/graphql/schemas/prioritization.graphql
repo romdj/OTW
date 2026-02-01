@@ -1,0 +1,415 @@
+# Prioritization GraphQL Types
+# Event Prioritization Engine for personalized event recommendations
+
+# ============================================
+# Enums
+# ============================================
+
+enum PriorityTier {
+  MUST_WATCH
+  WORTH_TIME
+  HIGHLIGHTS
+  SKIP
+}
+
+enum SpoilerLevel {
+  SAFE
+  MILD
+  FULL
+}
+
+enum TagCategory {
+  EMOTIONAL
+  CONTEXT
+  OUTCOME
+  QUALITY
+  MOMENT
+}
+
+enum TagSource {
+  ALGORITHM
+  USER
+  CURATOR
+}
+
+enum FollowStrength {
+  CASUAL
+  REGULAR
+  DEDICATED
+  DIEHARD
+  OBSESSED
+}
+
+enum ComprehensionLevel {
+  NOVICE
+  CASUAL
+  INFORMED
+  EXPERT
+}
+
+enum WatchFrequency {
+  RARELY
+  OCCASIONALLY
+  REGULARLY
+  FREQUENTLY
+}
+
+enum ViewingMood {
+  CASUAL
+  ENGAGED
+  INTENSE
+  DISCOVERY
+}
+
+enum SpoilerTolerance {
+  NONE
+  MILD
+  MODERATE
+  FULL
+}
+
+enum PriorityReasonType {
+  FOLLOW
+  PREFERENCE_MATCH
+  UNIVERSAL
+  TRENDING
+  HISTORIC
+  RIVALRY
+}
+
+# ============================================
+# Core Types
+# ============================================
+
+"""
+Emotional profile of an event - what makes it compelling to watch
+"""
+type EmotionalProfile {
+  "Uncertainty of outcome - close scores, lead changes, late drama (0-100)"
+  suspense: Int!
+  "Something meaningful at risk - playoff implications, rivalry, records (0-100)"
+  stakes: Int!
+  "Rapid hope/fear shifts - momentum swings, critical moments (0-100)"
+  volatility: Int!
+  "Asymmetry being corrected - underdog narrative, upset potential (0-100)"
+  underdog: Int!
+  "Instant classic potential - transcendent moments, historic significance (0-100)"
+  transcendence: Int!
+}
+
+"""
+A tag associated with an event
+"""
+type EventTag {
+  "The tag text (e.g., 'nail-biter', 'upset', 'rivalry')"
+  tag: String!
+  "Category of tag"
+  category: TagCategory!
+  "Source of the tag"
+  source: TagSource!
+  "Confidence in the tag for algorithm-generated (0-100)"
+  confidence: Int
+  "Number of users who applied this tag"
+  userCount: Int
+  "Is this tag verified by a curator"
+  curatorVerified: Boolean
+}
+
+"""
+Why an event has a particular priority for a user
+"""
+type PriorityReason {
+  "The reason text"
+  reason: String!
+  "Type of reason"
+  type: PriorityReasonType!
+  "How much this reason contributed to the score (0-100)"
+  contribution: Int!
+}
+
+"""
+The complete priority assessment for an event for a specific user
+"""
+type EventPriority {
+  "Event identifier"
+  eventId: String!
+  "Personalized priority score (0-100)"
+  priorityScore: Int!
+  "Priority tier based on score"
+  priorityTier: PriorityTier!
+  "Why this priority for THIS user"
+  priorityReasons: [PriorityReason!]!
+  "Universal emotional factors (spoiler-safe)"
+  emotionalProfile: EmotionalProfile!
+  "Tags (hybrid: algo + user + curator)"
+  tags: [EventTag!]!
+  "Current spoiler level of this data"
+  spoilerLevel: SpoilerLevel!
+  "Spoiler-safe summary for event cards"
+  spoilerFreeSummary: String
+  "Full summary (with spoilers)"
+  fullSummary: String
+}
+
+"""
+Prioritized events grouped by tier
+"""
+type PrioritizedTiers {
+  mustWatch: [EventPriority!]!
+  worthTime: [EventPriority!]!
+  highlights: [EventPriority!]!
+  skip: [EventPriority!]!
+}
+
+"""
+A prioritized list of events
+"""
+type PrioritizedEventList {
+  "User ID these priorities are for"
+  userId: String!
+  "Events grouped by tier"
+  tiers: PrioritizedTiers!
+  "Total number of events"
+  totalEvents: Int!
+  "When this list was generated"
+  generatedAt: String!
+  "Time range start"
+  startDate: String!
+  "Time range end"
+  endDate: String!
+}
+
+"""
+Summary statistics for prioritized events
+"""
+type PriorityListSummary {
+  totalEvents: Int!
+  mustWatchCount: Int!
+  worthTimeCount: Int!
+  highlightsCount: Int!
+  skipCount: Int!
+  topTags: [TagCount!]!
+  sportBreakdown: [SportSummary!]!
+}
+
+type TagCount {
+  tag: String!
+  count: Int!
+}
+
+type SportSummary {
+  sport: String!
+  count: Int!
+  avgPriority: Float!
+}
+
+# ============================================
+# User Preferences Types
+# ============================================
+
+"""
+A team, player, or league that a user follows
+"""
+type UserFollow {
+  "Unique identifier for the followed entity"
+  id: String!
+  "Type of entity being followed"
+  type: String!
+  "Display name"
+  name: String!
+  "Sport this entity belongs to"
+  sport: String!
+  "League/competition context"
+  league: String
+  "How strongly the user follows this"
+  followStrength: FollowStrength!
+}
+
+"""
+User's familiarity with a sport
+"""
+type SportFamiliarity {
+  sport: String!
+  comprehensionLevel: ComprehensionLevel!
+  watchFrequency: WatchFrequency!
+  preferredLeagues: [String!]!
+}
+
+"""
+User's emotional experience preferences
+"""
+type EmotionalPreferences {
+  nailBiters: Int!
+  dominance: Int!
+  upsets: Int!
+  historicMoments: Int!
+  skillDisplay: Int!
+  intensity: Int!
+  drama: Int!
+}
+
+"""
+Complete user preferences
+"""
+type UserPreferences {
+  userId: String!
+  follows: [UserFollow!]!
+  sportFamiliarity: [SportFamiliarity!]!
+  emotionalPreferences: EmotionalPreferences!
+  lastUpdated: String!
+}
+
+# ============================================
+# Input Types
+# ============================================
+
+input UserFollowInput {
+  id: String!
+  type: String!
+  name: String!
+  sport: String!
+  league: String
+  followStrength: FollowStrength!
+}
+
+input SportFamiliarityInput {
+  sport: String!
+  comprehensionLevel: ComprehensionLevel!
+  watchFrequency: WatchFrequency!
+  preferredLeagues: [String!]!
+}
+
+input EmotionalPreferencesInput {
+  nailBiters: Int
+  dominance: Int
+  upsets: Int
+  historicMoments: Int
+  skillDisplay: Int
+  intensity: Int
+  drama: Int
+}
+
+input UserPreferencesInput {
+  follows: [UserFollowInput!]
+  sportFamiliarity: [SportFamiliarityInput!]
+  emotionalPreferences: EmotionalPreferencesInput
+}
+
+input ViewingContextInput {
+  availableTime: Int
+  currentMood: ViewingMood
+  spoilerTolerance: SpoilerTolerance
+  alreadyWatched: [String!]
+}
+
+input PriorityFiltersInput {
+  sports: [String!]
+  leagues: [String!]
+  minTier: PriorityTier
+  tags: [String!]
+  followedOnly: Boolean
+  startDate: String
+  endDate: String
+  maxDuration: Int
+}
+
+input UserTagInput {
+  eventId: String!
+  tag: String!
+  category: TagCategory
+}
+
+# ============================================
+# Queries & Mutations
+# ============================================
+
+extend type Query {
+  """
+  Get personalized prioritized events for the weekend/time period
+  """
+  prioritizedEvents(
+    userId: String!
+    filters: PriorityFiltersInput
+    viewingContext: ViewingContextInput
+  ): PrioritizedEventList!
+
+  """
+  Get priority for a single event
+  """
+  eventPriority(
+    eventId: String!
+    userId: String!
+  ): EventPriority
+
+  """
+  Get summary statistics for prioritized events
+  """
+  prioritySummary(
+    userId: String!
+    filters: PriorityFiltersInput
+  ): PriorityListSummary!
+
+  """
+  Get user's preferences
+  """
+  userPreferences(userId: String!): UserPreferences
+
+  """
+  Get tags for an event
+  """
+  eventTags(eventId: String!): [EventTag!]!
+
+  """
+  Get popular tags across all events
+  """
+  popularTags(limit: Int): [TagCount!]!
+
+  """
+  Search events by tag
+  """
+  eventsByTag(tag: String!): [String!]!
+}
+
+type Mutation {
+  """
+  Update user preferences
+  """
+  updateUserPreferences(
+    userId: String!
+    input: UserPreferencesInput!
+  ): UserPreferences!
+
+  """
+  Add a follow
+  """
+  addUserFollow(
+    userId: String!
+    follow: UserFollowInput!
+  ): UserPreferences!
+
+  """
+  Remove a follow
+  """
+  removeUserFollow(
+    userId: String!
+    followId: String!
+  ): UserPreferences!
+
+  """
+  Add a tag to an event
+  """
+  addEventTag(
+    userId: String!
+    input: UserTagInput!
+  ): EventTag!
+
+  """
+  Verify a tag (curator only)
+  """
+  verifyCuratorTag(
+    curatorId: String!
+    eventId: String!
+    tag: String!
+    verified: Boolean!
+  ): EventTag
+}

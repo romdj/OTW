@@ -18,7 +18,12 @@ const tennisSchema = loadSchemaSync(join(__dirname, './tennis.graphql'), {
   loaders: [new GraphQLFileLoader()],
 });
 
+// Load prioritization schema
+const prioritizationSchema = loadSchemaSync(join(__dirname, './prioritization.graphql'), {
+  loaders: [new GraphQLFileLoader()],
+});
+
 // Merge all schemas
-const typeDefs = mergeTypeDefs([baseSchema, tennisSchema]);
+const typeDefs = mergeTypeDefs([baseSchema, tennisSchema, prioritizationSchema]);
 
 export { typeDefs };
