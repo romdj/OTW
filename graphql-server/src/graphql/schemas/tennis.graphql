@@ -1,0 +1,165 @@
+# Tennis GraphQL Types
+
+enum TennisTour {
+  ATP
+  WTA
+}
+
+enum TennisRankingType {
+  SINGLES
+  DOUBLES
+}
+
+enum TennisSurface {
+  HARD
+  CLAY
+  GRASS
+  INDOOR_HARD
+}
+
+enum TournamentCategory {
+  GRAND_SLAM
+  MASTERS_1000
+  WTA_1000
+  ATP_500
+  WTA_500
+  ATP_250
+  WTA_250
+  ATP_FINALS
+  WTA_FINALS
+}
+
+enum MatchStatus {
+  SCHEDULED
+  LIVE
+  COMPLETED
+  CANCELLED
+}
+
+type TennisRanking {
+  rank: Int!
+  previousRank: Int!
+  movement: String!
+  playerName: String!
+  playerId: String!
+  country: String!
+  countryCode: String!
+  points: Int!
+  tournamentsPlayed: Int!
+  pointsDropping: Int!
+  nextBestPoints: Int!
+  tour: TennisTour!
+  type: TennisRankingType!
+  player: TennisPlayer
+}
+
+type TennisPlayer {
+  id: String!
+  firstName: String!
+  lastName: String!
+  fullName: String!
+  country: String!
+  countryCode: String!
+  birthDate: String!
+  birthPlace: String!
+  height: Int
+  weight: Int
+  turnedPro: Int!
+  plays: String!
+  backhand: String!
+  coach: String
+  currentRanking: Int!
+  highestRanking: Int!
+  highestRankingDate: String!
+  careerTitles: Int!
+  careerWins: Int!
+  careerLosses: Int!
+  ytdWins: Int!
+  ytdLosses: Int!
+  prizeMoney: Float!
+}
+
+type TournamentPoints {
+  winner: Int!
+  finalist: Int!
+  semifinalist: Int!
+  quarterfinalist: Int!
+  round16: Int!
+  round32: Int!
+  round64: Int
+  round128: Int
+}
+
+type TennisTournament {
+  id: String!
+  name: String!
+  location: String!
+  country: String!
+  surface: TennisSurface!
+  category: TournamentCategory!
+  startDate: String!
+  endDate: String!
+  prizeMoney: Float!
+  currency: String!
+  drawSize: Int!
+  points: TournamentPoints!
+}
+
+type MatchPlayer {
+  id: String!
+  name: String!
+  seed: Int
+  countryCode: String!
+}
+
+type SetTiebreak {
+  player1: Int!
+  player2: Int!
+}
+
+type SetScore {
+  player1: Int!
+  player2: Int!
+  tiebreak: SetTiebreak
+}
+
+type MatchScore {
+  sets: [SetScore!]!
+  winner: String
+  retired: Boolean
+  walkover: Boolean
+}
+
+type TennisMatch {
+  id: String!
+  tournamentId: String!
+  tournamentName: String!
+  round: String!
+  surface: String!
+  player1: MatchPlayer!
+  player2: MatchPlayer!
+  score: MatchScore
+  formattedScore: String
+  scheduledTime: String
+  completedTime: String
+  status: MatchStatus!
+  court: String
+  duration: Int
+  tournament: TennisTournament
+}
+
+extend type Query {
+  # Tennis Rankings
+  tennisRankings(tour: TennisTour, type: TennisRankingType, limit: Int): [TennisRanking!]!
+
+  # Tennis Tournaments
+  tennisTournaments(tour: TennisTour, year: Int, surface: TennisSurface, category: TournamentCategory): [TennisTournament!]!
+  tennisTournament(tournamentId: String!): TennisTournament
+
+  # Tennis Matches
+  tennisMatches(tournamentId: String, playerId: String, status: MatchStatus, date: String): [TennisMatch!]!
+  tennisLiveMatches: [TennisMatch!]!
+
+  # Tennis Players
+  tennisPlayer(playerId: String!): TennisPlayer
+}

@@ -5,6 +5,8 @@
 import { sportRegistry } from './shared/utils/SportRegistry.js';
 import { NHLSportAdapter } from './ice-hockey/leagues/nhl/NHLSportAdapter.js';
 import { nhlStandingsResolvers } from './ice-hockey/leagues/nhl/resolvers/standingsResolvers.js';
+import { TennisSportAdapter } from './tennis/leagues/atp/TennisSportAdapter.js';
+import { tennisResolvers } from './tennis/leagues/atp/resolvers/tennisResolvers.js';
 
 // Register NHL
 const nhlAdapter = new NHLSportAdapter();
@@ -17,9 +19,21 @@ const nhlConfig = {
 
 sportRegistry.registerSport('nhl', nhlAdapter, nhlStandingsResolvers, nhlConfig);
 
+// Register Tennis (ATP)
+const tennisAdapter = new TennisSportAdapter();
+const tennisConfig = {
+  name: 'ATP',
+  sport: 'Tennis',
+  country: 'International',
+  defaultSeason: '2025'
+};
+
+sportRegistry.registerSport('atp', tennisAdapter, tennisResolvers, tennisConfig);
+
 // Export unified access
 export { sportRegistry };
 export { NHLSportAdapter };
+export { TennisSportAdapter };
 
 // Export types for external use
 export type { SportsService, TeamStanding, StandingsQuery } from './shared/interfaces/SportsService.js';

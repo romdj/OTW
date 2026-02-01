@@ -19,6 +19,7 @@
   "dependencies": {
     "@graphql-tools/graphql-file-loader": "^8.0.1",
     "@graphql-tools/load": "^8.0.2",
+    "@graphql-tools/merge": "^9.0.21",
     "dotenv": "^17.2.1",
     "fastify": "^5.4.0",
     "got": "^14.4.5",
