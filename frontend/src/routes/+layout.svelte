@@ -12,7 +12,7 @@
   // Navigation items
   const navItems = [
     { href: '/sports', label: 'Sports', icon: '🏆' },
-    { href: '/sports/ice-hockey/standings', label: 'NHL Standings', icon: '🏒' },
+    { href: '/sports/ice-hockey/events', label: 'NHL Games', icon: '🏒' },
     { href: '/how-it-works', label: 'How It Works', icon: '❓' },
     { href: '/about', label: 'About', icon: 'ℹ️' },
   ];

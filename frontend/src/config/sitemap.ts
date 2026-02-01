@@ -51,19 +51,11 @@ export const SITEMAP: SitemapRoute[] = [
         showInNav: true,
         children: [
           {
-            path: '/sports/ice-hockey/standings',
-            title: 'Standings',
-            description: 'NHL standings with 3-point system comparison',
-            icon: '📊',
-            implemented: true,
-            showInNav: true,
-          },
-          {
             path: '/sports/ice-hockey/events',
-            title: 'Upcoming Events',
-            description: 'Games worth watching with watchability scores',
-            icon: '📅',
-            implemented: true, // Placeholder page exists
+            title: 'Games',
+            description: 'Live, upcoming, and recent games with watchability scores',
+            icon: '🎮',
+            implemented: true,
             showInNav: true,
           },
           {
@@ -71,7 +63,7 @@ export const SITEMAP: SitemapRoute[] = [
             title: 'My Watchlist',
             description: 'Your personal list of games to watch',
             icon: '⭐',
-            implemented: true, // Placeholder page exists
+            implemented: true,
             showInNav: true,
           },
           {
@@ -79,7 +71,7 @@ export const SITEMAP: SitemapRoute[] = [
             title: 'Unmissable Moments',
             description: 'Historic games and legendary matchups',
             icon: '🏛️',
-            implemented: true, // Placeholder page exists
+            implemented: true,
             showInNav: true,
           },
         ],
@@ -125,18 +117,10 @@ export const SITEMAP: SitemapRoute[] = [
         showInNav: true,
         children: [
           {
-            path: '/sports/american-football/standings',
-            title: 'Standings',
-            description: 'NFL division and conference standings',
-            icon: '📊',
-            implemented: false,
-            showInNav: true,
-          },
-          {
             path: '/sports/american-football/events',
-            title: 'Game Day',
+            title: 'Games',
             description: 'This week\'s must-watch matchups',
-            icon: '📅',
+            icon: '🎮',
             implemented: false,
             showInNav: true,
           },
