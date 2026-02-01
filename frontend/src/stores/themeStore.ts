@@ -1,11 +1,12 @@
 /**
  * Theme store for managing DaisyUI theme switching
+ * Using Material Design inspired light/dark themes
  */
 
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
 
-export type Theme = 'cupcake' | 'sunset';
+export type Theme = 'light' | 'dark';
 
 export interface ThemeConfig {
   name: Theme;
@@ -17,29 +18,29 @@ export interface ThemeConfig {
 }
 
 export const themes: Record<Theme, ThemeConfig> = {
-  cupcake: {
-    name: 'cupcake',
-    displayName: 'Cupcake',
+  light: {
+    name: 'light',
+    displayName: 'Light',
     isDark: false,
-    description: 'Light and sweet theme',
-    primaryColor: '#65c3c8',
-    secondaryColor: '#ef9fbc',
+    description: 'Clean, bright Material Design theme',
+    primaryColor: '#1976D2',
+    secondaryColor: '#9C27B0',
   },
-  sunset: {
-    name: 'sunset',
-    displayName: 'Sunset',
+  dark: {
+    name: 'dark',
+    displayName: 'Dark',
     isDark: true,
-    description: 'Dark theme with warm colors',
-    primaryColor: '#FF865B',
-    secondaryColor: '#FD6F9C',
+    description: 'Material Design dark theme',
+    primaryColor: '#90CAF9',
+    secondaryColor: '#CE93D8',
   },
 };
 
 // Default theme
-const DEFAULT_THEME: Theme = 'cupcake';
+const DEFAULT_THEME: Theme = 'light';
 
 // Storage key for theme preference
-const THEME_STORAGE_KEY = 'nhl-standings-theme';
+const THEME_STORAGE_KEY = 'otw-sport-theme';
 
 // Create the store
 function createThemeStore() {
@@ -48,7 +49,7 @@ function createThemeStore() {
 
   return {
     subscribe,
-    
+
     // Set theme and persist to localStorage
     setTheme: (theme: Theme) => {
       set(theme);
@@ -57,11 +58,11 @@ function createThemeStore() {
         document.documentElement.setAttribute('data-theme', theme);
       }
     },
-    
+
     // Toggle between light and dark themes
     toggleTheme: () => {
       update(currentTheme => {
-        const newTheme = currentTheme === 'cupcake' ? 'sunset' : 'cupcake';
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         if (browser) {
           localStorage.setItem(THEME_STORAGE_KEY, newTheme);
           document.documentElement.setAttribute('data-theme', newTheme);
@@ -69,52 +70,52 @@ function createThemeStore() {
         return newTheme;
       });
     },
-    
+
     // Initialize theme from localStorage or system preference
     initializeTheme: () => {
       if (!browser) return;
-      
+
       let savedTheme = localStorage.getItem(THEME_STORAGE_KEY) as Theme;
-      
+
       // If no saved theme, check system preference
       if (!savedTheme) {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        savedTheme = prefersDark ? 'sunset' : 'cupcake';
+        savedTheme = prefersDark ? 'dark' : 'light';
       }
-      
+
       // Validate saved theme
       if (!themes[savedTheme]) {
         savedTheme = DEFAULT_THEME;
       }
-      
+
       set(savedTheme);
       document.documentElement.setAttribute('data-theme', savedTheme);
-      
+
       // Listen for system theme changes
       const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
       const handleSystemThemeChange = (e: MediaQueryListEvent) => {
         // Only auto-switch if user hasn't manually selected a theme
         const hasManualSelection = localStorage.getItem(THEME_STORAGE_KEY);
         if (!hasManualSelection) {
-          const systemTheme = e.matches ? 'sunset' : 'cupcake';
+          const systemTheme = e.matches ? 'dark' : 'light';
           set(systemTheme);
           document.documentElement.setAttribute('data-theme', systemTheme);
         }
       };
-      
+
       mediaQuery.addEventListener('change', handleSystemThemeChange);
-      
+
       // Return cleanup function
       return () => {
         mediaQuery.removeEventListener('change', handleSystemThemeChange);
       };
     },
-    
+
     // Get current theme config
     getCurrentThemeConfig: (currentTheme: Theme): ThemeConfig => {
       return themes[currentTheme];
     },
-    
+
     // Reset to default theme
     resetTheme: () => {
       set(DEFAULT_THEME);

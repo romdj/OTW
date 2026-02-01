@@ -1,117 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS for NHL Standings App */
+/* Material Design inspired CSS for OTW.sport */
 
-/* Base styles */
 @layer base {
   html {
     scroll-behavior: smooth;
+    font-size: 16px;
   }
 
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+  }
+
+  /* Material Design typography scale */
+  h1 {
+    font-weight: 300;
+    letter-spacing: -0.015em;
+  }
+
+  h2 {
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  h3 {
+    font-weight: 500;
+    letter-spacing: 0.01em;
   }
 }
 
-/* Component styles */
 @layer components {
+  /* Container */
   .container {
     max-width: 1200px;
   }
 
-  /* Custom table styles for better readability */
-  .standings-table {
-    @apply table table-zebra w-full;
+  /* Material Card - clean elevation-based styling */
+  .card {
+    @apply rounded-md border-0;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
+    transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .standings-table th {
-    @apply bg-base-200 text-base-content font-bold;
+  .card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
   }
 
-  .standings-table td {
-    @apply border-base-300;
+  /* Material Button overrides */
+  .btn {
+    @apply font-medium tracking-wide border-0;
+    text-transform: none;
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Custom card styles */
-  .team-card {
-    @apply card bg-base-100 shadow-sm border border-base-200;
+  .btn:not(.btn-ghost):not(.btn-outline) {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
   }
 
-  .team-card:hover {
-    @apply shadow-md border-primary/20;
+  .btn:hover:not(.btn-ghost):not(.btn-outline) {
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);
   }
 
-  /* Custom button styles */
-  .btn-standings {
-    @apply btn btn-outline btn-primary;
+  .btn:active {
+    transform: scale(0.98);
   }
 
-  .btn-standings:hover {
-    @apply btn-primary;
+  .btn-ghost {
+    @apply bg-transparent hover:bg-base-content/5;
   }
 
-  /* Loading state styles */
+  /* Material Navbar */
+  .navbar {
+    @apply border-0 px-4;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
+  }
+
+  /* Material Badge */
+  .badge {
+    @apply border-0 font-medium;
+    letter-spacing: 0.02em;
+  }
+
+  /* Material Tabs */
+  .tabs-boxed {
+    @apply bg-base-200/50 p-1 rounded-lg;
+  }
+
+  .tab {
+    @apply rounded-md transition-all duration-200;
+  }
+
+  .tab-active {
+    @apply bg-base-100 shadow-elevation-2;
+  }
+
+  /* Material Input */
+  .input, .select, .textarea {
+    @apply border-base-300 focus:border-primary rounded-sm;
+    transition: border-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Material Alert */
+  .alert {
+    @apply border-0 rounded-sm;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
+  }
+
+  /* Material Menu */
+  .menu {
+    @apply p-1;
+  }
+
+  .menu li > *:not(ul, .menu-title, details, .btn):active,
+  .menu li > *:not(ul, .menu-title, details, .btn).active,
+  .menu li > details > summary:active {
+    @apply bg-primary/10 text-primary;
+  }
+
+  /* Material Dropdown */
+  .dropdown-content {
+    @apply rounded-sm border-0 mt-2;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1);
+  }
+
+  /* Surface containers */
+  .surface {
+    @apply bg-base-100 rounded-md;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);
+  }
+
+  .surface-variant {
+    @apply bg-base-200 rounded-md;
+  }
+
+  /* Loading overlay */
   .loading-overlay {
     @apply fixed inset-0 bg-base-100/80 backdrop-blur-sm flex items-center justify-center z-50;
   }
-
-  /* Custom alert styles */
-  .alert-custom {
-    @apply alert shadow-lg;
-  }
 }
 
-/* Utility styles */
 @layer utilities {
-  .text-shadow {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  }
+  /* Material elevation utilities */
+  .elevation-0 { box-shadow: none; }
+  .elevation-1 { box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); }
+  .elevation-2 { box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1); }
+  .elevation-3 { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1); }
+  .elevation-4 { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1); }
+  .elevation-5 { box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1); }
 
-  .text-shadow-md {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+  /* Text utilities */
+  .text-on-surface { @apply text-base-content; }
+  .text-on-surface-variant { @apply text-base-content/70; }
+  .text-on-primary { @apply text-primary-content; }
 
-  .bg-gradient-primary {
-    background: linear-gradient(135deg, hsl(var(--p)) 0%, hsl(var(--s)) 100%);
-  }
-
-  .bg-gradient-accent {
-    background: linear-gradient(135deg, hsl(var(--a)) 0%, hsl(var(--p)) 100%);
-  }
+  /* State layer utilities (Material Design) */
+  .state-hover { @apply hover:bg-base-content/5; }
+  .state-focus { @apply focus:bg-base-content/10; }
+  .state-press { @apply active:bg-base-content/12; }
 
   /* Custom scrollbar */
   .scrollbar-thin {
     scrollbar-width: thin;
-    scrollbar-color: hsl(var(--p)) hsl(var(--b2));
+    scrollbar-color: hsl(var(--bc) / 0.2) transparent;
   }
 
   .scrollbar-thin::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
+    height: 8px;
   }
 
   .scrollbar-thin::-webkit-scrollbar-track {
-    background: hsl(var(--b2));
+    background: transparent;
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: hsl(var(--p));
-    border-radius: 3px;
+    background: hsl(var(--bc) / 0.2);
+    border-radius: 4px;
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: hsl(var(--pf));
+    background: hsl(var(--bc) / 0.3);
   }
 }
 
-/* Animation styles */
+/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -120,38 +205,63 @@
 }
 
 .fade-in {
-  animation: fadeIn 0.5s ease-out;
+  animation: fadeIn 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-@keyframes slideIn {
+@keyframes scaleIn {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: scale(1);
   }
 }
 
-.slide-in {
-  animation: slideIn 0.3s ease-out;
+.scale-in {
+  animation: scaleIn 200ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-/* Theme transition */
+/* Ripple effect */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, currentColor 10%, transparent 10%);
+  background-position: 50%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: scale(10);
+  transition: transform 400ms, opacity 400ms;
+}
+
+.ripple:active::after {
+  transform: scale(0);
+  opacity: 0.1;
+  transition: 0s;
+}
+
+/* Theme transition - smoother */
 html {
-  transition: color-scheme 0.3s ease;
+  transition: color-scheme 250ms ease;
 }
 
-* {
-  transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+*, *::before, *::after {
+  transition:
+    color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Custom focus styles */
-.btn:focus-visible,
-.input:focus-visible,
-.select:focus-visible,
-.textarea:focus-visible {
+/* Focus visible for accessibility */
+:focus-visible {
   @apply outline-2 outline-offset-2 outline-primary;
 }
 
@@ -159,9 +269,5 @@ html {
 @media print {
   .no-print {
     display: none !important;
-  }
-
-  .print-only {
-    display: block !important;
   }
 }

@@ -20,9 +20,12 @@
 </script>
 
 <button
-  class="card bg-base-200 hover:bg-base-300 transition-all duration-200 cursor-pointer group
-         {sport.available ? 'hover:scale-105 hover:shadow-lg' : 'opacity-50 cursor-not-allowed'}
-         w-full flex items-center justify-center overflow-hidden"
+  class="group relative bg-base-100 rounded-lg p-6 text-left transition-all duration-200 w-full
+         {sport.available
+           ? 'hover:shadow-elevation-3 cursor-pointer'
+           : 'opacity-60 cursor-not-allowed'}"
+  class:shadow-elevation-2={sport.available}
+  class:shadow-elevation-1={!sport.available}
   on:click={handleClick}
   on:keydown={handleKeydown}
   on:mouseenter={() => (isHovered = true)}
@@ -30,52 +33,49 @@
   disabled={!sport.available}
   aria-label="Select {sport.name}"
 >
-  <div class="card-body items-center text-center p-4">
-    <!-- Icon -->
-    <div
-      class="text-5xl md:text-6xl mb-2 transition-transform duration-200
-             {sport.available ? 'group-hover:scale-110' : ''}"
-      style="filter: {sport.available ? 'none' : 'grayscale(100%)'}"
+  <!-- Icon -->
+  <div
+    class="text-5xl mb-4 transition-transform duration-200
+           {sport.available && isHovered ? 'scale-110' : ''}"
+    style="filter: {sport.available ? 'none' : 'grayscale(80%)'}"
+  >
+    {sport.icon}
+  </div>
+
+  <!-- Name -->
+  <h3 class="text-lg font-medium text-base-content mb-1">
+    {sport.name}
+  </h3>
+
+  <!-- Tagline or Coming Soon -->
+  {#if sport.available}
+    <p
+      class="text-sm text-base-content/60 transition-opacity duration-200
+             {isHovered ? 'opacity-100' : 'opacity-70'}"
     >
-      {sport.icon}
-    </div>
+      {sport.tagline}
+    </p>
 
-    <!-- Name -->
-    <h3 class="card-title text-base md:text-lg font-semibold text-base-content">
-      {sport.name}
-    </h3>
-
-    <!-- Tagline (visible on hover for available sports) -->
-    {#if sport.available}
-      <p
-        class="text-xs text-base-content/60 transition-opacity duration-200
-               {isHovered ? 'opacity-100' : 'opacity-0'}"
-      >
-        {sport.tagline}
-      </p>
-    {:else}
-      <span class="badge badge-ghost badge-sm">Coming Soon</span>
-    {/if}
-
-    <!-- Watchability hints (visible on hover) -->
-    {#if sport.available && isHovered}
-      <div class="flex flex-wrap gap-1 mt-2 justify-center">
+    <!-- Watchability hints on hover -->
+    {#if isHovered}
+      <div class="flex flex-wrap gap-1 mt-3">
         {#each sport.watchabilityHints.slice(0, 2) as hint}
-          <span class="badge badge-outline badge-xs">{hint}</span>
+          <span class="text-xs px-2 py-1 rounded-full bg-primary/10 text-primary">
+            {hint}
+          </span>
         {/each}
       </div>
     {/if}
-  </div>
+  {:else}
+    <p class="text-sm text-base-content/40">Coming soon</p>
+  {/if}
+
+  <!-- Hover indicator for available sports -->
+  {#if sport.available}
+    <div
+      class="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-b-lg
+             transition-transform duration-200 origin-left
+             {isHovered ? 'scale-x-100' : 'scale-x-0'}"
+    />
+  {/if}
 </button>
-
-<style>
-  .card {
-    min-height: 180px;
-  }
-
-  @media (min-width: 768px) {
-    .card {
-      min-height: 200px;
-    }
-  }
-</style>
