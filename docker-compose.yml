@@ -5,13 +5,13 @@ services:
       context: .
       dockerfile: Dockerfile.server
     ports:
-      - "4000:4000"
+      - "11000:11000"
     environment:
       - NODE_ENV=production
-      - PORT=4000
-      - GRAPHQL_ENDPOINT=http://localhost:4000/graphql
+      - PORT=11000
+      - GRAPHQL_ENDPOINT=http://localhost:11000/graphql
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:11000/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -31,7 +31,7 @@ services:
       graphql-server:
         condition: service_healthy
     environment:
-      - PUBLIC_GRAPHQL_ENDPOINT=http://localhost:4000/graphql
+      - PUBLIC_GRAPHQL_ENDPOINT=http://localhost:11000/graphql
     restart: unless-stopped
     networks:
       - nhl-network
@@ -43,10 +43,10 @@ services:
       dockerfile: Dockerfile.server
       target: build
     ports:
-      - "4001:4000"
+      - "11002:11000"
     environment:
       - NODE_ENV=development
-      - PORT=4000
+      - PORT=11000
     volumes:
       - ./graphql-server/src:/app/graphql-server/src
       - ./shared:/app/shared
@@ -62,9 +62,9 @@ services:
       dockerfile: Dockerfile.frontend
       target: build
     ports:
-      - "5173:5173"
+      - "11001:11001"
     environment:
-      - PUBLIC_GRAPHQL_ENDPOINT=http://localhost:4001/graphql
+      - PUBLIC_GRAPHQL_ENDPOINT=http://localhost:11002/graphql
     volumes:
       - ./frontend/src:/app/frontend/src
       - ./shared:/app/shared
