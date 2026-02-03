@@ -7,6 +7,32 @@
 // Pro Tour (UCI WorldTour road racing)
 export { ProCyclingAttributes } from './pro-tour/attributes.js';
 
+// Pro Tour Types
+export type {
+  CyclingRace,
+  CyclingStage,
+  RaceCategory,
+  StageType,
+  Gender,
+  GCStanding,
+  GCMovement,
+  CommunityRating,
+  RaceFilters,
+  StageFilters,
+  ExcitementFactors,
+} from './pro-tour/types.js';
+
+export { calculateExcitementScore, isExcitingGCMovement } from './pro-tour/types.js';
+
+// Pro Tour Services
+export { ScheduleService, scheduleService } from './pro-tour/services/ScheduleService.js';
+
+// Pro Tour Adapters
+export { UCIAdapter, uciAdapter } from './pro-tour/adapters/UCIAdapter.js';
+
+// Pro Tour GraphQL Resolvers
+export { cyclingResolvers } from './pro-tour/resolvers/cyclingResolvers.js';
+
 // Cyclocross
 export { CyclocrossAttributes } from './cyclocross/attributes.js';
 
