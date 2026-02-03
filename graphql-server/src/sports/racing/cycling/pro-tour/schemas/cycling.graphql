@@ -1,0 +1,358 @@
+# Cycling GraphQL Types
+# UCI WorldTour and Pro Series road cycling schedule integration
+
+# Race category enum
+enum RaceCategory {
+  GRAND_TOUR
+  MONUMENT
+  WORLD_TOUR
+  PRO_SERIES
+}
+
+# Stage type classification
+enum StageType {
+  FLAT
+  HILLY
+  MOUNTAIN
+  ITT
+  TTT
+  PROLOGUE
+}
+
+# Gender classification
+enum CyclingGender {
+  MEN
+  WOMEN
+}
+
+# Race status
+enum RaceStatus {
+  UPCOMING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+# Stage status
+enum StageStatus {
+  UPCOMING
+  LIVE
+  COMPLETED
+  CANCELLED
+  REST_DAY
+}
+
+# General Classification (GC) Standing
+type GCStanding {
+  position: Int!
+  riderId: String!
+  riderName: String!
+  teamId: String!
+  teamName: String!
+  totalTime: Int! # milliseconds from leader
+  timeGap: String! # formatted gap e.g., "+2:45"
+}
+
+# GC Movement - Changes in standings between stages
+# Critical for identifying exciting grand tour stages
+type GCMovement {
+  "Did the race leader (yellow/pink/red jersey) change?"
+  leaderChanged: Boolean!
+
+  "Previous leader name (if changed)"
+  previousLeader: String
+
+  "New leader name (if changed)"
+  newLeader: String
+
+  "Number of position changes in the top 10"
+  top10Changes: Int!
+
+  "Number of position changes in the top 20"
+  top20Changes: Int!
+
+  "Biggest position gain"
+  biggestGain: PositionChange
+
+  "Biggest position loss"
+  biggestLoss: PositionChange
+
+  "Did time gaps between GC contenders change significantly (>30s)?"
+  significantTimeGapsChanged: Boolean!
+
+  "Detailed time changes for top contenders"
+  timeChanges: [TimeChange!]!
+
+  "GC standings after this stage"
+  standingsAfter: [GCStanding!]!
+}
+
+# Position change record
+type PositionChange {
+  riderName: String!
+  positionsBefore: Int!
+  positionsAfter: Int!
+  positionsGained: Int
+  positionsLost: Int
+}
+
+# Time change record
+type TimeChange {
+  riderName: String!
+  previousGap: String!
+  newGap: String!
+  timeLost: Int! # seconds, negative = gained time
+}
+
+# Community rating for a stage
+type CommunityRating {
+  "Overall excitement score (0-100)"
+  excitementScore: Float!
+
+  "Total number of user ratings"
+  totalRatings: Int!
+
+  "Distribution of ratings"
+  distribution: RatingDistribution!
+
+  "User-submitted emotional tags"
+  tags: [String!]!
+}
+
+# Rating distribution
+type RatingDistribution {
+  mustWatch: Int!
+  exciting: Int!
+  decent: Int!
+  skipable: Int!
+  boring: Int!
+}
+
+# Categorized climb in a stage
+type StageClimb {
+  name: String!
+  category: String! # HC, 1, 2, 3, 4
+  altitude: Int!
+  length: Float! # km
+  averageGradient: Float! # percentage
+  distanceFromStart: Float! # km
+}
+
+# Sprint point location
+type SprintPoint {
+  location: String!
+  distanceFromStart: Float! # km
+}
+
+# Stage winner
+type StageWinner {
+  riderId: String!
+  riderName: String!
+  teamName: String!
+  finishTime: String
+}
+
+# Predicted excitement factors
+type ExcitementPrediction {
+  score: Float!
+  factors: ExcitementFactors!
+}
+
+# Excitement factors breakdown
+type ExcitementFactors {
+  terrain: Float!
+  gcImportance: Float!
+  gcMovement: Float!
+  finaleProfile: Float!
+  historicLocation: Float!
+}
+
+# Cycling Stage - Child of a multi-day race
+type CyclingStage {
+  id: ID!
+  raceId: String!
+  stageNumber: Int!
+  name: String!
+
+  "Stage date"
+  date: String!
+
+  "Scheduled start time"
+  startTime: String
+
+  "Start location/city"
+  startLocation: String!
+
+  "Finish location/city"
+  finishLocation: String!
+
+  "Stage distance in kilometers"
+  distance: Float!
+
+  "Elevation gain in meters"
+  elevationGain: Int
+
+  "Stage classification"
+  stageType: StageType!
+
+  "Current status"
+  status: StageStatus!
+
+  "Categorized climbs in the stage"
+  climbs: [StageClimb!]
+
+  "Sprint points locations"
+  sprints: [SprintPoint!]
+
+  "Stage winner (after completion)"
+  winner: StageWinner
+
+  """
+  GC Movement - Changes in overall standings after this stage
+  This is THE key excitement indicator for grand tours
+  """
+  gcMovement: GCMovement
+
+  "Community ratings"
+  communityRating: CommunityRating
+
+  "Predicted excitement based on stage characteristics"
+  predictedExcitement: ExcitementPrediction
+
+  "Parent race"
+  race: CyclingRace
+}
+
+# Classification leader (jersey holder)
+type ClassificationLeader {
+  riderId: String!
+  riderName: String!
+  teamName: String!
+  points: Int
+  totalTime: Int
+}
+
+# Overall race excitement metrics
+type RaceExcitement {
+  averageStageExcitement: Float!
+  mostExcitingStages: [String!]!
+  gcDramaScore: Float!
+  totalLeaderChanges: Int!
+}
+
+# Cycling Race - Parent entity
+type CyclingRace {
+  id: ID!
+  name: String!
+  slug: String!
+
+  "Race category"
+  category: RaceCategory!
+
+  "Men's or women's race"
+  gender: CyclingGender!
+
+  "Race start date"
+  startDate: String!
+
+  "Race end date"
+  endDate: String!
+
+  "Primary country"
+  country: String!
+
+  "Countries visited (for multi-country races)"
+  countries: [String!]
+
+  "Total race distance in kilometers"
+  totalDistance: Int
+
+  "Total number of stages"
+  totalStages: Int
+
+  "Total elevation gain"
+  totalElevation: Int
+
+  "Current race status"
+  status: RaceStatus!
+
+  "Stages (tree structure for multi-day races)"
+  stages: [CyclingStage!]
+
+  "UCI race code"
+  uciCode: String
+
+  "Race website"
+  website: String
+
+  "Current GC standings (for in-progress races)"
+  currentGC: [GCStanding!]
+
+  "Points classification leader"
+  pointsLeader: ClassificationLeader
+
+  "Mountains classification leader"
+  mountainsLeader: ClassificationLeader
+
+  "Young rider classification leader"
+  youthLeader: ClassificationLeader
+
+  "Overall excitement metrics for the race"
+  overallExcitement: RaceExcitement
+}
+
+# Extend the root Query type
+extend type Query {
+  """
+  Get cycling races with optional filters
+  """
+  cyclingRaces(
+    year: Int
+    category: RaceCategory
+    gender: CyclingGender
+    country: String
+    status: RaceStatus
+  ): [CyclingRace!]!
+
+  """
+  Get a single cycling race by ID
+  """
+  cyclingRace(id: ID!): CyclingRace
+
+  """
+  Get upcoming cycling stages across all races
+  """
+  upcomingCyclingStages(
+    limit: Int
+    minExcitement: Float
+    stageType: StageType
+  ): [CyclingStage!]!
+
+  """
+  Get stages for a specific race
+  """
+  cyclingStages(
+    raceId: ID!
+    stageType: StageType
+  ): [CyclingStage!]!
+
+  """
+  Get a single stage by ID
+  """
+  cyclingStage(id: ID!): CyclingStage
+
+  """
+  Get grand tours only (convenience query)
+  """
+  grandTours(year: Int, gender: CyclingGender): [CyclingRace!]!
+
+  """
+  Get monuments only (convenience query)
+  """
+  monuments(year: Int, gender: CyclingGender): [CyclingRace!]!
+
+  """
+  Get most exciting upcoming stages (stages with high predicted excitement)
+  """
+  mustWatchStages(limit: Int): [CyclingStage!]!
+}
