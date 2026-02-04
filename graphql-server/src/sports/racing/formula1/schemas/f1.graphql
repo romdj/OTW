@@ -1,0 +1,278 @@
+# Formula 1 GraphQL Types
+# Race calendar, standings, and championship battle tracking
+
+# Session type enum
+enum F1SessionType {
+  FP1
+  FP2
+  FP3
+  QUALIFYING
+  SPRINT_SHOOTOUT
+  SPRINT
+  RACE
+}
+
+# Weekend format
+enum F1WeekendFormat {
+  STANDARD
+  SPRINT
+}
+
+# Grand Prix status
+enum F1GrandPrixStatus {
+  UPCOMING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+# Session status
+enum F1SessionStatus {
+  SCHEDULED
+  LIVE
+  COMPLETED
+  DELAYED
+  CANCELLED
+  RED_FLAGGED
+}
+
+# Circuit type
+enum F1CircuitType {
+  PERMANENT
+  STREET
+  SEMI_PERMANENT
+}
+
+# Circuit characteristics
+type F1CircuitCharacteristics {
+  overtakingDifficulty: String!
+  weatherVariability: String!
+  tireWear: String!
+  safetyCarLikelihood: String!
+}
+
+# Lap record
+type F1LapRecord {
+  time: String!
+  driver: String!
+  year: Int!
+}
+
+# Circuit information
+type F1Circuit {
+  id: ID!
+  name: String!
+  location: String!
+  country: String!
+  countryCode: String!
+  length: Float!
+  turns: Int!
+  lapRecord: F1LapRecord
+  type: F1CircuitType!
+  drsZones: Int!
+  characteristics: F1CircuitCharacteristics!
+}
+
+# Session within a Grand Prix weekend
+type F1Session {
+  id: ID!
+  grandPrixId: String!
+  type: F1SessionType!
+  name: String!
+  date: String!
+  startTime: String
+  startTimeUTC: String
+  status: F1SessionStatus!
+  grandPrixName: String
+}
+
+# Race excitement factors
+type F1RaceExcitementFactors {
+  trackFactor: Float!
+  weatherFactor: Float!
+  titleFactor: Float!
+  prestigeFactor: Float!
+  gridFactor: Float!
+}
+
+# Race excitement prediction
+type F1RaceExcitement {
+  score: Float!
+  factors: F1RaceExcitementFactors!
+  tags: [String!]!
+}
+
+# Tire compound allocation
+type F1TireAllocation {
+  soft: String!
+  medium: String!
+  hard: String!
+}
+
+# Championship context at a race
+type F1ChampionshipContext {
+  driversLeader: String!
+  constructorsLeader: String!
+  titleDecider: Boolean!
+  pointsGapToSecond: Int!
+}
+
+# Grand Prix - A race weekend
+type F1GrandPrix {
+  id: ID!
+  name: String!
+  officialName: String!
+  slug: String!
+  round: Int!
+  season: Int!
+  circuit: F1Circuit!
+  format: F1WeekendFormat!
+  startDate: String!
+  endDate: String!
+  status: F1GrandPrixStatus!
+  sessions: [F1Session!]!
+  tireCompounds: F1TireAllocation
+  championshipContext: F1ChampionshipContext
+  predictedExcitement: F1RaceExcitement
+}
+
+# Driver information
+type F1Driver {
+  id: ID!
+  number: Int!
+  code: String!
+  firstName: String!
+  lastName: String!
+  fullName: String!
+  nationality: String!
+  nationalityCode: String!
+  dateOfBirth: String
+  constructorId: String!
+  constructorName: String!
+}
+
+# Constructor (team) information
+type F1Constructor {
+  id: ID!
+  name: String!
+  fullName: String!
+  nationality: String!
+  nationalityCode: String!
+  base: String
+  powerUnit: String
+  drivers: [String!]!
+}
+
+# Driver championship standing
+type F1DriverStanding {
+  position: Int!
+  driver: F1Driver!
+  points: Int!
+  wins: Int!
+  podiums: Int!
+  poles: Int!
+  fastestLaps: Int!
+  dnfs: Int!
+  pointsToLeader: Int!
+  pointsToNext: Int!
+  theoreticalMaxPoints: Int!
+  canWinTitle: Boolean!
+}
+
+# Constructor championship standing
+type F1ConstructorStanding {
+  position: Int!
+  constructor: F1Constructor!
+  points: Int!
+  wins: Int!
+  podiums: Int!
+  poles: Int!
+  oneTwo: Int!
+  pointsToLeader: Int!
+  pointsToNext: Int!
+  theoreticalMaxPoints: Int!
+  canWinTitle: Boolean!
+}
+
+# Driver championship battle info
+type F1DriverChampionshipBattle {
+  leader: F1DriverStanding!
+  challengers: [F1DriverStanding!]!
+  eliminated: [F1DriverStanding!]!
+  gap: Int!
+  closenessScore: Float!
+}
+
+# Constructor championship battle info
+type F1ConstructorChampionshipBattle {
+  leader: F1ConstructorStanding!
+  challengers: [F1ConstructorStanding!]!
+  eliminated: [F1ConstructorStanding!]!
+  gap: Int!
+  closenessScore: Float!
+}
+
+# Championship battle - tracks the title fight
+type F1ChampionshipBattle {
+  season: Int!
+  racesRemaining: Int!
+  maxPointsAvailable: Int!
+  isOpen: Boolean!
+  earliestDecider: Int
+  drivers: F1DriverChampionshipBattle!
+  constructors: F1ConstructorChampionshipBattle!
+  narratives: [String!]!
+}
+
+# Extend the root Query type
+extend type Query {
+  """
+  Get F1 calendar for a season
+  """
+  f1Calendar(
+    season: Int
+    status: F1GrandPrixStatus
+    format: F1WeekendFormat
+    country: String
+  ): [F1GrandPrix!]!
+
+  """
+  Get a single Grand Prix by ID
+  """
+  f1GrandPrix(id: ID!): F1GrandPrix
+
+  """
+  Get upcoming F1 sessions across all races
+  """
+  f1UpcomingSessions(limit: Int): [F1Session!]!
+
+  """
+  Get next F1 race
+  """
+  f1NextRace: F1GrandPrix
+
+  """
+  Get driver standings
+  """
+  f1DriverStandings(season: Int, round: Int): [F1DriverStanding!]!
+
+  """
+  Get constructor standings
+  """
+  f1ConstructorStandings(season: Int, round: Int): [F1ConstructorStanding!]!
+
+  """
+  Get championship battle analysis
+  """
+  f1ChampionshipBattle(season: Int): F1ChampionshipBattle!
+
+  """
+  Get sprint weekends only
+  """
+  f1SprintWeekends(season: Int): [F1GrandPrix!]!
+
+  """
+  Get most exciting upcoming races (by predicted excitement score)
+  """
+  f1MustWatchRaces(limit: Int): [F1GrandPrix!]!
+}
