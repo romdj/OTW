@@ -38,50 +38,50 @@ describe('themeStore', () => {
     vi.clearAllMocks();
   });
 
-  it('should have cupcake as default theme', () => {
-    expect(get(themeStore)).toBe('cupcake');
+  it('should have light as default theme', () => {
+    expect(get(themeStore)).toBe('light');
   });
 
   it('should update theme and persist to localStorage', () => {
-    themeStore.setTheme('sunset');
+    themeStore.setTheme('dark');
 
-    expect(get(themeStore)).toBe('sunset');
-    expect(mockLocalStorage.setItem).toHaveBeenCalledWith('nhl-standings-theme', 'sunset');
-    expect(mockDocumentElement.setAttribute).toHaveBeenCalledWith('data-theme', 'sunset');
+    expect(get(themeStore)).toBe('dark');
+    expect(mockLocalStorage.setItem).toHaveBeenCalledWith('otw-sport-theme', 'dark');
+    expect(mockDocumentElement.setAttribute).toHaveBeenCalledWith('data-theme', 'dark');
   });
 
   it('should toggle between themes', () => {
-    // Reset to cupcake first
-    themeStore.setTheme('cupcake');
-    expect(get(themeStore)).toBe('cupcake');
+    // Reset to light first
+    themeStore.setTheme('light');
+    expect(get(themeStore)).toBe('light');
 
-    // Toggle to sunset
+    // Toggle to dark
     themeStore.toggleTheme();
-    expect(get(themeStore)).toBe('sunset');
+    expect(get(themeStore)).toBe('dark');
 
-    // Toggle back to cupcake
+    // Toggle back to light
     themeStore.toggleTheme();
-    expect(get(themeStore)).toBe('cupcake');
+    expect(get(themeStore)).toBe('light');
   });
 
   it('should reset theme to default', () => {
-    themeStore.setTheme('sunset');
-    expect(get(themeStore)).toBe('sunset');
+    themeStore.setTheme('dark');
+    expect(get(themeStore)).toBe('dark');
 
     themeStore.resetTheme();
-    expect(get(themeStore)).toBe('cupcake');
-    expect(mockLocalStorage.removeItem).toHaveBeenCalledWith('nhl-standings-theme');
+    expect(get(themeStore)).toBe('light');
+    expect(mockLocalStorage.removeItem).toHaveBeenCalledWith('otw-sport-theme');
   });
 
   it('should provide theme configurations', () => {
-    expect(themes.cupcake).toBeDefined();
-    expect(themes.sunset).toBeDefined();
+    expect(themes.light).toBeDefined();
+    expect(themes.dark).toBeDefined();
 
-    expect(themes.cupcake.isDark).toBe(false);
-    expect(themes.sunset.isDark).toBe(true);
+    expect(themes.light.isDark).toBe(false);
+    expect(themes.dark.isDark).toBe(true);
 
-    expect(themes.cupcake.displayName).toBe('Cupcake');
-    expect(themes.sunset.displayName).toBe('Sunset');
+    expect(themes.light.displayName).toBe('Light');
+    expect(themes.dark.displayName).toBe('Dark');
   });
 
   it('should handle system theme preference', () => {

@@ -43,7 +43,7 @@ export const SPORTS: SportConfig[] = [
     name: 'Tennis',
     icon: '🎾',
     color: 'success',
-    available: false,
+    available: true,
     tagline: 'Individual brilliance on court',
     watchabilityHints: ['Ranking clashes', 'Surface specialists', 'Grand Slam drama'],
   },
