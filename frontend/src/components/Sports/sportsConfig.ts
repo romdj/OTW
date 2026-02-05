@@ -83,6 +83,24 @@ export const SPORTS: SportConfig[] = [
     tagline: 'The fastest game on two feet',
     watchabilityHints: ['College showdowns', 'Championship runs', 'Goal fests'],
   },
+  {
+    id: 'formula1',
+    name: 'Formula 1',
+    icon: '🏎️',
+    color: 'error',
+    available: true,
+    tagline: 'The pinnacle of motorsport',
+    watchabilityHints: ['Championship battles', 'Street circuit chaos', 'Weather wildcards'],
+  },
+  {
+    id: 'cycling',
+    name: 'Pro Cycling',
+    icon: '🚴',
+    color: 'warning',
+    available: true,
+    tagline: 'Grand Tours and Monuments',
+    watchabilityHints: ['Mountain stages', 'GC shake-ups', 'Sprint finishes'],
+  },
 ];
 
 /** Sports categories for future filtering/grouping */
@@ -97,4 +115,6 @@ export const SPORT_CATEGORIES: Record<string, SportCategory> = {
   'cricket': 'team',
   'lacrosse': 'team',
   'tennis': 'individual',
+  'formula1': 'racing',
+  'cycling': 'racing',
 };
