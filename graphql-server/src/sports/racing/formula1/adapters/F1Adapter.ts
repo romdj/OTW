@@ -735,6 +735,19 @@ export class F1Adapter implements F1DataAdapter {
     if (season === 2025) {
       return Promise.resolve(F1_CALENDAR_2025);
     }
+    // For 2026+, adapt 2025 data with updated years
+    if (season >= 2026) {
+      const adapted = F1_CALENDAR_2025.map(race => ({
+        ...race,
+        season,
+        date: race.date.replace('2025', String(season)),
+        sessions: race.sessions.map(s => ({
+          ...s,
+          date: s.date.replace('2025', String(season)),
+        })),
+      }));
+      return Promise.resolve(adapted);
+    }
     console.warn(`No seed data available for F1 season ${season}`);
     return Promise.resolve([]);
   }
@@ -743,7 +756,7 @@ export class F1Adapter implements F1DataAdapter {
    * Fetch driver standings
    */
   async fetchDriverStandings(season: number, _round?: number): Promise<F1DriverStandingData[]> {
-    if (season === 2025) {
+    if (season === 2025 || season >= 2026) {
       return Promise.resolve(DRIVER_STANDINGS_2025);
     }
     return Promise.resolve([]);
@@ -753,7 +766,7 @@ export class F1Adapter implements F1DataAdapter {
    * Fetch constructor standings
    */
   async fetchConstructorStandings(season: number, _round?: number): Promise<F1ConstructorStandingData[]> {
-    if (season === 2025) {
+    if (season === 2025 || season >= 2026) {
       return Promise.resolve(CONSTRUCTOR_STANDINGS_2025);
     }
     return Promise.resolve([]);

@@ -20,8 +20,9 @@ export const tennisResolvers = {
         logger.info({ args }, 'Tennis rankings query received');
 
         // Default to ATP singles if not specified
-        const tour = args.tour || 'atp';
-        const type = args.type || 'singles';
+        // Convert from GraphQL enum (uppercase) to internal (lowercase)
+        const tour = (args.tour || 'ATP').toUpperCase();
+        const type = (args.type || 'SINGLES').toUpperCase();
 
         // TODO: Add WTA support
         if (tour === 'wta') {
