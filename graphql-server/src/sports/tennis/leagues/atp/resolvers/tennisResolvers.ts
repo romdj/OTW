@@ -4,11 +4,73 @@
  * Handles all tennis-related GraphQL queries for ATP and WTA tours.
  */
 
-import type { RankingsQueryArgs, TournamentsQueryArgs, MatchesQueryArgs, PlayerQueryArgs } from '../types/atp-api.types.js';
+import type { RankingsQueryArgs, TournamentsQueryArgs, MatchesQueryArgs, PlayerQueryArgs, ATPTournamentEntry, ATPMatchEntry } from '../types/atp-api.types.js';
 import { logger } from '../../../../../utils/logger.js';
 import { atpRankingsService } from '../services/rankingsService.js';
 import { atpTournamentsService } from '../services/tournamentsService.js';
 import { ATP_ERROR_MESSAGES } from '../constants/index.js';
+
+// Transform surface to GraphQL enum (uppercase)
+const surfaceToEnum: Record<string, string> = {
+  hard: 'HARD',
+  clay: 'CLAY',
+  grass: 'GRASS',
+  indoor_hard: 'INDOOR_HARD',
+};
+
+// Transform category to GraphQL enum (uppercase)
+const categoryToEnum: Record<string, string> = {
+  grand_slam: 'GRAND_SLAM',
+  masters_1000: 'MASTERS_1000',
+  wta_1000: 'WTA_1000',
+  atp_500: 'ATP_500',
+  wta_500: 'WTA_500',
+  atp_250: 'ATP_250',
+  wta_250: 'WTA_250',
+  atp_finals: 'ATP_FINALS',
+  wta_finals: 'WTA_FINALS',
+};
+
+// Transform match status to GraphQL enum
+const statusToEnum: Record<string, string> = {
+  scheduled: 'SCHEDULED',
+  live: 'LIVE',
+  completed: 'COMPLETED',
+  cancelled: 'CANCELLED',
+};
+
+/**
+ * Transform tournament to GraphQL response
+ */
+function transformTournament(tournament: ATPTournamentEntry) {
+  return {
+    ...tournament,
+    surface: surfaceToEnum[tournament.surface] || tournament.surface.toUpperCase(),
+    category: categoryToEnum[tournament.category] || tournament.category.toUpperCase(),
+    points: {
+      winner: tournament.points,
+      finalist: Math.floor(tournament.points * 0.6),
+      semifinalist: Math.floor(tournament.points * 0.36),
+      quarterfinalist: Math.floor(tournament.points * 0.18),
+      round16: Math.floor(tournament.points * 0.09),
+      round32: Math.floor(tournament.points * 0.045),
+      round64: Math.floor(tournament.points * 0.025),
+      round128: Math.floor(tournament.points * 0.01),
+    },
+  };
+}
+
+/**
+ * Transform match to GraphQL response
+ */
+function transformMatch(match: ATPMatchEntry) {
+  return {
+    ...match,
+    surface: surfaceToEnum[match.surface] || match.surface.toUpperCase(),
+    status: statusToEnum[match.status] || match.status.toUpperCase(),
+    formattedScore: atpTournamentsService.formatScore(match),
+  };
+}
 
 export const tennisResolvers = {
   Query: {
@@ -52,7 +114,8 @@ export const tennisResolvers = {
     tennisTournaments: async (_: unknown, args: TournamentsQueryArgs) => {
       try {
         logger.info({ args }, 'Tennis tournaments query received');
-        return await atpTournamentsService.getTournaments(args);
+        const tournaments = await atpTournamentsService.getTournaments(args);
+        return tournaments.map(transformTournament);
       } catch (error) {
         logger.error({
           args,
@@ -68,7 +131,8 @@ export const tennisResolvers = {
     tennisTournament: async (_: unknown, { tournamentId }: { tournamentId: string }) => {
       try {
         logger.info({ tournamentId }, 'Tennis tournament query received');
-        return await atpTournamentsService.getTournamentById(tournamentId);
+        const tournament = await atpTournamentsService.getTournamentById(tournamentId);
+        return tournament ? transformTournament(tournament) : null;
       } catch (error) {
         logger.error({
           tournamentId,
@@ -85,11 +149,7 @@ export const tennisResolvers = {
       try {
         logger.info({ args }, 'Tennis matches query received');
         const matches = await atpTournamentsService.getMatches(args);
-
-        return matches.map(match => ({
-          ...match,
-          formattedScore: atpTournamentsService.formatScore(match),
-        }));
+        return matches.map(transformMatch);
       } catch (error) {
         logger.error({
           args,
@@ -106,11 +166,7 @@ export const tennisResolvers = {
       try {
         logger.info('Tennis live matches query received');
         const matches = await atpTournamentsService.getLiveMatches();
-
-        return matches.map(match => ({
-          ...match,
-          formattedScore: atpTournamentsService.formatScore(match),
-        }));
+        return matches.map(transformMatch);
       } catch (error) {
         logger.error({
           error: error instanceof Error ? error.message : String(error),
@@ -151,7 +207,8 @@ export const tennisResolvers = {
      * Resolve tournament details from match
      */
     tournament: async (parent: { tournamentId: string }) => {
-      return await atpTournamentsService.getTournamentById(parent.tournamentId);
+      const tournament = await atpTournamentsService.getTournamentById(parent.tournamentId);
+      return tournament ? transformTournament(tournament) : null;
     },
   },
 };
