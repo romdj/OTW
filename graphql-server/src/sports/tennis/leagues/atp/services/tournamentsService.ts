@@ -151,6 +151,18 @@ const MOCK_MATCHES: ATPMatchEntry[] = [
 
 class ATPTournamentsService {
   /**
+   * Adapt tournaments to a different year (for 2026+ when we only have 2025 data)
+   */
+  private adaptTournamentsToYear(tournaments: ATPTournamentEntry[], targetYear: number): ATPTournamentEntry[] {
+    return tournaments.map(t => ({
+      ...t,
+      id: t.id.replace('2025', String(targetYear)),
+      startDate: t.startDate.replace('2025', String(targetYear)),
+      endDate: t.endDate.replace('2025', String(targetYear)),
+    }));
+  }
+
+  /**
    * Get tournament schedule
    */
   async getTournaments(args?: TournamentsQueryArgs): Promise<ATPTournamentEntry[]> {
@@ -160,14 +172,22 @@ class ATPTournamentsService {
       // TODO: Replace with real API call
       let tournaments = [...MOCK_TOURNAMENTS];
 
-      // Filter by surface if specified
-      if (args?.surface) {
-        tournaments = tournaments.filter(t => t.surface === args.surface);
+      // Support 2026+ by adapting 2025 data
+      const requestedYear = args?.year ?? new Date().getFullYear();
+      if (requestedYear >= 2026) {
+        tournaments = this.adaptTournamentsToYear(tournaments, requestedYear);
       }
 
-      // Filter by category if specified
+      // Filter by surface if specified (case-insensitive to handle GraphQL enums)
+      if (args?.surface) {
+        const surfaceLower = args.surface.toLowerCase();
+        tournaments = tournaments.filter(t => t.surface.toLowerCase() === surfaceLower);
+      }
+
+      // Filter by category if specified (case-insensitive to handle GraphQL enums)
       if (args?.category) {
-        tournaments = tournaments.filter(t => t.category === args.category);
+        const categoryLower = args.category.toLowerCase();
+        tournaments = tournaments.filter(t => t.category.toLowerCase() === categoryLower);
       }
 
       // Filter by year if specified
@@ -193,11 +213,26 @@ class ATPTournamentsService {
       logger.info({ tournamentId }, 'Fetching tournament by ID');
 
       // TODO: Replace with real API call
-      const tournament = MOCK_TOURNAMENTS.find(t => t.id === tournamentId);
+      // Support 2026+ IDs by converting to 2025 for lookup
+      const yearMatch = tournamentId.match(/(20\d{2})$/);
+      const requestedYear = yearMatch ? parseInt(yearMatch[1]) : 2025;
+      const lookupId = requestedYear >= 2026 ? tournamentId.replace(String(requestedYear), '2025') : tournamentId;
+
+      const tournament = MOCK_TOURNAMENTS.find(t => t.id === lookupId);
 
       if (!tournament) {
         logger.warn({ tournamentId }, 'Tournament not found');
         return null;
+      }
+
+      // Adapt to requested year if needed
+      if (requestedYear >= 2026) {
+        return {
+          ...tournament,
+          id: tournamentId,
+          startDate: tournament.startDate.replace('2025', String(requestedYear)),
+          endDate: tournament.endDate.replace('2025', String(requestedYear)),
+        };
       }
 
       return tournament;
@@ -205,6 +240,19 @@ class ATPTournamentsService {
       logger.error({ err: error, tournamentId }, ATP_ERROR_MESSAGES.FETCH_TOURNAMENTS_FAILED);
       throw error;
     }
+  }
+
+  /**
+   * Adapt matches to a different year (for 2026+ when we only have 2025 data)
+   */
+  private adaptMatchesToYear(matches: ATPMatchEntry[], targetYear: number): ATPMatchEntry[] {
+    return matches.map(m => ({
+      ...m,
+      id: m.id.replace('2025', String(targetYear)),
+      tournamentId: m.tournamentId.replace('2025', String(targetYear)),
+      scheduledTime: m.scheduledTime?.replace('2025', String(targetYear)),
+      completedTime: m.completedTime?.replace('2025', String(targetYear)),
+    }));
   }
 
   /**
@@ -216,6 +264,12 @@ class ATPTournamentsService {
 
       // TODO: Replace with real API call
       let matches = [...MOCK_MATCHES];
+
+      // Support 2026+ by adapting 2025 data
+      const currentYear = new Date().getFullYear();
+      if (currentYear >= 2026) {
+        matches = this.adaptMatchesToYear(matches, currentYear);
+      }
 
       // Filter by tournament if specified
       if (args?.tournamentId) {
@@ -229,9 +283,10 @@ class ATPTournamentsService {
         );
       }
 
-      // Filter by status if specified
+      // Filter by status if specified (case-insensitive to handle GraphQL enums)
       if (args?.status) {
-        matches = matches.filter(m => m.status === args.status);
+        const statusLower = args.status.toLowerCase();
+        matches = matches.filter(m => m.status.toLowerCase() === statusLower);
       }
 
       logger.info({ count: matches.length }, 'Successfully fetched ATP matches');
