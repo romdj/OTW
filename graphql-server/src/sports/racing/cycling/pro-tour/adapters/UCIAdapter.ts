@@ -681,6 +681,17 @@ export class UCIAdapter implements CyclingDataAdapter {
       return Promise.resolve(WORLDTOUR_2025);
     }
 
+    // For 2026+, adapt 2025 data with updated years
+    if (year >= 2026) {
+      const adapted = WORLDTOUR_2025.map(race => ({
+        ...race,
+        uciCode: race.uciCode.replace('2025', String(year)),
+        startDate: race.startDate.replace('2025', String(year)),
+        endDate: race.endDate.replace('2025', String(year)),
+      }));
+      return Promise.resolve(adapted);
+    }
+
     // Return empty for other years until we have more data
     console.warn(`No seed data available for year ${year}, returning empty calendar`);
     return Promise.resolve([]);
@@ -690,7 +701,24 @@ export class UCIAdapter implements CyclingDataAdapter {
    * Fetch stages for a specific race
    */
   async fetchStages(raceCode: string): Promise<UCIStageData[]> {
-    const stages = STAGES_BY_RACE[raceCode];
+    // Try direct lookup first
+    let stages = STAGES_BY_RACE[raceCode];
+
+    // If not found, try 2025 equivalent (for 2026+ races)
+    if (!stages) {
+      const code2025 = raceCode.replace(/\d{4}$/, '2025');
+      const baseStages = STAGES_BY_RACE[code2025];
+      if (baseStages) {
+        // Extract year from raceCode
+        const yearMatch = raceCode.match(/(\d{4})$/);
+        const year = yearMatch ? yearMatch[1] : '2025';
+        stages = baseStages.map(stage => ({
+          ...stage,
+          date: stage.date.replace('2025', year),
+        }));
+      }
+    }
+
     if (stages) {
       return Promise.resolve(stages);
     }
