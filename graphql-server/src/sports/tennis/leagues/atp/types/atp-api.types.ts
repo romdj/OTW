@@ -34,8 +34,8 @@ export interface ATPTournamentEntry {
     quarterfinalist: number;
     round16: number;
     round32: number;
-    round64: number;
-    round128: number;
+    round64?: number;
+    round128?: number;
   };
 }
 

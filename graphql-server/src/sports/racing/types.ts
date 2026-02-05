@@ -11,8 +11,8 @@ import type { RacingScoring } from './scoring.js';
 // Discipline types
 export type RacingDiscipline = keyof typeof RacingAttributes.disciplines;
 
-// Flag types
-export type RacingFlag = keyof typeof RacingAttributes.flags;
+// Flag types (motorsport flags)
+export type RacingFlag = keyof typeof RacingAttributes.disciplines.motorsport.flags;
 
 // Emotional tags
 export type TensionTag = (typeof RacingQualities.emotionalTags.tension)[number];

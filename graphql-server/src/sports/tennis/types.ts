@@ -67,13 +67,12 @@ export interface TennisMatchStats {
 export interface TennisWatchabilityScore {
   overall: number;
   factors: {
-    closeMatch: number;
-    tiebreaks: number;
-    breakPointDrama: number;
-    matchLength: number;
-    rivalry: number;
-    stakes: number;
-    starPower: number;
+    rankingProximity: number;
+    headToHeadHistory: number;
+    surfaceSpecialist: number;
+    tournamentStage: number;
+    matchTightness: number;
+    comebackPotential: number;
   };
   tags: EmotionalTag[];
   recommendedFor: ('casual_fan' | 'tennis_enthusiast' | 'neutral_viewer')[];

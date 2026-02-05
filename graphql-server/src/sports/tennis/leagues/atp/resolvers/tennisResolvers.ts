@@ -47,16 +47,8 @@ function transformTournament(tournament: ATPTournamentEntry) {
     ...tournament,
     surface: surfaceToEnum[tournament.surface] || tournament.surface.toUpperCase(),
     category: categoryToEnum[tournament.category] || tournament.category.toUpperCase(),
-    points: {
-      winner: tournament.points,
-      finalist: Math.floor(tournament.points * 0.6),
-      semifinalist: Math.floor(tournament.points * 0.36),
-      quarterfinalist: Math.floor(tournament.points * 0.18),
-      round16: Math.floor(tournament.points * 0.09),
-      round32: Math.floor(tournament.points * 0.045),
-      round64: Math.floor(tournament.points * 0.025),
-      round128: Math.floor(tournament.points * 0.01),
-    },
+    // Points are already in the correct structure from the service
+    points: tournament.points,
   };
 }
 

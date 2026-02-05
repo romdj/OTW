@@ -98,7 +98,7 @@ describe('f1Resolvers', () => {
 
   describe('Query.f1NextRace', () => {
     it('should return next upcoming race', async () => {
-      const nextRace = await f1Resolvers.Query.f1NextRace({}, {});
+      const nextRace = await f1Resolvers.Query.f1NextRace();
 
       if (nextRace) {
         expect(nextRace.status).toBe('UPCOMING');
@@ -189,8 +189,10 @@ describe('f1Resolvers', () => {
 
       for (const race of races) {
         expect(race.predictedExcitement).toBeDefined();
-        expect(race.predictedExcitement.score).toBeDefined();
-        expect(race.predictedExcitement.factors).toBeDefined();
+        if (race.predictedExcitement) {
+          expect(race.predictedExcitement.score).toBeDefined();
+          expect(race.predictedExcitement.factors).toBeDefined();
+        }
       }
     });
   });
