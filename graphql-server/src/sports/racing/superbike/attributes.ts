@@ -143,7 +143,7 @@ export const WSBKAttributes = {
     mostChampionships: { holder: 'Jonathan Rea', count: 6 },
     mostWins: { holder: 'Jonathan Rea', count: 117 },
     mostPoles: { holder: 'Jonathan Rea', count: 38 },
-    mostPodiums: { holder: 'Jonathan Rea', count: 250+ },
+    mostPodiums: { holder: 'Jonathan Rea', count: 250 },
   },
 
   // Legends

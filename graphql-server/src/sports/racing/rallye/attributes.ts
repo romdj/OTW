@@ -143,7 +143,7 @@ export const WRCAttributes = {
   records: {
     mostDriverChampionships: { holder: 'Sebastien Loeb', count: 9 },
     mostRallyWins: { holder: 'Sebastien Loeb', count: 80 },
-    mostStageWins: { holder: 'Sebastien Loeb', count: 900+ },
+    mostStageWins: { holder: 'Sebastien Loeb', count: 900 },
     mostManufacturerTitles: { holder: 'Lancia', count: 10 },
     youngestChampion: { holder: 'Kalle Rovanpera', age: 22 },
   },
