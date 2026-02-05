@@ -16,3 +16,5 @@ export * from './types.js';
 
 // Re-export leagues
 export * from './leagues/nhl/index.js';
+export * from './leagues/pwhl/index.js';
+export * from './leagues/iihf/index.js';
