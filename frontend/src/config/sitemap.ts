@@ -29,17 +29,9 @@ export interface SitemapRoute {
 export const SITEMAP: SitemapRoute[] = [
   {
     path: '/',
-    title: 'Home',
-    description: 'OTW.sport - The IMDb of Sporting Events',
-    icon: '🏠',
-    implemented: true,
-    showInNav: true,
-  },
-  {
-    path: '/sports',
     title: 'Sports',
-    description: 'Choose your sport to discover unmissable moments',
-    icon: '🏆',
+    description: 'OTW.sport - Find Something Worth Watching',
+    icon: '🏠',
     implemented: true,
     showInNav: true,
     children: [
@@ -277,6 +269,14 @@ export const SITEMAP: SitemapRoute[] = [
     description: 'Account and notification settings',
     icon: '⚙️',
     implemented: false,
+    showInNav: false,
+  },
+  {
+    path: '/nhl-standings',
+    title: 'NHL 3-Point Standings',
+    description: 'Explore NHL standings with the international 3-point system',
+    icon: '🏒',
+    implemented: true,
     showInNav: false,
   },
   {
