@@ -127,8 +127,8 @@ describe('cyclingResolvers', () => {
 
       for (const stage of stages) {
         expect(stage.predictedExcitement).toBeDefined();
-        expect(stage.predictedExcitement.score).toBeDefined();
-        expect(stage.predictedExcitement.factors).toBeDefined();
+        expect(stage.predictedExcitement?.score).toBeDefined();
+        expect(stage.predictedExcitement?.factors).toBeDefined();
       }
     });
   });
@@ -233,7 +233,7 @@ describe('cyclingResolvers', () => {
       const stages = await cyclingResolvers.Query.mustWatchStages({}, {});
 
       for (const stage of stages) {
-        expect(stage.predictedExcitement.score).toBeGreaterThanOrEqual(60);
+        expect(stage.predictedExcitement?.score).toBeGreaterThanOrEqual(60);
       }
     });
 
@@ -241,8 +241,8 @@ describe('cyclingResolvers', () => {
       const stages = await cyclingResolvers.Query.mustWatchStages({}, {});
 
       for (let i = 1; i < stages.length; i++) {
-        expect(stages[i - 1].predictedExcitement.score)
-          .toBeGreaterThanOrEqual(stages[i].predictedExcitement.score);
+        expect(stages[i - 1].predictedExcitement?.score ?? 0)
+          .toBeGreaterThanOrEqual(stages[i].predictedExcitement?.score ?? 0);
       }
     });
 

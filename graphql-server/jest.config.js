@@ -19,13 +19,6 @@ export default {
 
   // The environment that will be used for testing
   testEnvironment: 'node',
-  
-  // Provide global variables
-  globals: {
-    'ts-jest': {
-      useESM: true
-    }
-  },
 
   // Automatically reset mock state between every test
   resetMocks: true,
@@ -38,11 +31,6 @@ export default {
 
   // A list of file extensions that Jest will scan for tests and modules
   moduleFileExtensions: ['ts', 'js', 'json', 'node'],
-
-  // Transform ESM imports for compatibility
-  moduleNameMapper: {
-    '^(\\.{1,2}/.*)\\.js$': '$1',
-  },
 
   // Coverage collection configuration
   collectCoverage: false,
@@ -74,8 +62,9 @@ export default {
     },
   },
 
-  // Map module aliases if needed
+  // Map module aliases and handle ESM .js imports
   moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1',
     '^@app/(.*)$': '<rootDir>/src/$1',
   },
 
