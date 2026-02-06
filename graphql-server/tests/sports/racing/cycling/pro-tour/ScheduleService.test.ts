@@ -43,9 +43,15 @@ describe('ScheduleService', () => {
     });
 
     it('should filter by category', async () => {
-      const grandTours = await service.getRaces({ year: 2025, category: 'grand_tour' });
-      expect(grandTours.length).toBe(3);
-      expect(grandTours.every(r => r.category === 'grand_tour')).toBe(true);
+      // Filter by men's grand tours (3: TDF, Giro, Vuelta)
+      const mensGrandTours = await service.getRaces({ year: 2025, category: 'grand_tour', gender: 'men' });
+      expect(mensGrandTours.length).toBe(3);
+      expect(mensGrandTours.every(r => r.category === 'grand_tour')).toBe(true);
+
+      // Women's grand tours also exist
+      const womensGrandTours = await service.getRaces({ year: 2025, category: 'grand_tour', gender: 'women' });
+      expect(womensGrandTours.length).toBe(3);
+      expect(womensGrandTours.every(r => r.category === 'grand_tour' && r.gender === 'women')).toBe(true);
     });
 
     it('should filter by gender', async () => {
@@ -61,15 +67,20 @@ describe('ScheduleService', () => {
     });
 
     it('should identify monuments correctly', async () => {
-      const monuments = await service.getRaces({ year: 2025, category: 'monument' });
-      expect(monuments.length).toBe(5);
+      // Filter by men's gender for the classic 5 monuments
+      const mensMonuments = await service.getRaces({ year: 2025, category: 'monument', gender: 'men' });
+      expect(mensMonuments.length).toBe(5);
 
-      const names = monuments.map(r => r.name);
+      const names = mensMonuments.map(r => r.name);
       expect(names.some(n => n.includes('Sanremo'))).toBe(true);
       expect(names.some(n => n.includes('Vlaanderen'))).toBe(true);
       expect(names.some(n => n.includes('Roubaix'))).toBe(true);
       expect(names.some(n => n.includes('Liege'))).toBe(true);
       expect(names.some(n => n.includes('Lombardia'))).toBe(true);
+
+      // Women's monuments also exist
+      const womensMonuments = await service.getRaces({ year: 2025, category: 'monument', gender: 'women' });
+      expect(womensMonuments.length).toBeGreaterThan(0);
     });
 
     it('should generate valid slugs', async () => {

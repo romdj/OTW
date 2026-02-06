@@ -267,11 +267,16 @@ export class ScheduleService {
 
     // Determine category
     let category: RaceCategory = 'world_tour';
-    if (raw.category === '2.GT') {
+    // Check for grand tours (men's have 2.GT, women's have 2.WWT but specific names)
+    const isGrandTour = raw.category === '2.GT' ||
+      raw.name.includes('Tour de France') ||
+      raw.name.includes("Giro d'Italia") ||
+      raw.name.includes('Vuelta');
+    if (isGrandTour) {
       category = 'grand_tour';
     } else if (raw.name.includes('Roubaix') || raw.name.includes('Lombardia') ||
-               raw.name.includes('Sanremo') || raw.name.includes('Vlaanderen') ||
-               raw.name.includes('Liege')) {
+               raw.name.includes('Sanremo') || raw.name.includes('Ronde van Vlaanderen') ||
+               raw.name.includes('Liege-Bastogne-Liege')) {
       category = 'monument';
     } else if (raw.category.includes('Pro')) {
       category = 'pro_series';

@@ -155,14 +155,15 @@ describe('cyclingResolvers', () => {
 
   describe('Query.grandTours', () => {
     it('should return only grand tours', async () => {
-      const grandTours = await cyclingResolvers.Query.grandTours({}, { year: 2025 });
+      // Filter by men's gender for the 3 classic grand tours
+      const grandTours = await cyclingResolvers.Query.grandTours({}, { year: 2025, gender: 'MEN' });
 
       expect(grandTours.length).toBe(3);
       expect(grandTours.every(r => r.category === 'GRAND_TOUR')).toBe(true);
     });
 
     it('should include Tour de France, Giro, and Vuelta', async () => {
-      const grandTours = await cyclingResolvers.Query.grandTours({}, { year: 2025 });
+      const grandTours = await cyclingResolvers.Query.grandTours({}, { year: 2025, gender: 'MEN' });
       const names = grandTours.map(r => r.name);
 
       expect(names).toContain('Tour de France');
@@ -176,21 +177,22 @@ describe('cyclingResolvers', () => {
         gender: 'WOMEN',
       });
 
-      expect(womenGT.length).toBeGreaterThan(0);
+      expect(womenGT.length).toBe(3);
       expect(womenGT.every(r => r.gender === 'WOMEN')).toBe(true);
     });
   });
 
   describe('Query.monuments', () => {
     it('should return only monuments', async () => {
-      const monuments = await cyclingResolvers.Query.monuments({}, { year: 2025 });
+      // Filter by men's gender for the classic 5 monuments
+      const mensMonuments = await cyclingResolvers.Query.monuments({}, { year: 2025, gender: 'MEN' });
 
-      expect(monuments.length).toBe(5);
-      expect(monuments.every(r => r.category === 'MONUMENT')).toBe(true);
+      expect(mensMonuments.length).toBe(5);
+      expect(mensMonuments.every(r => r.category === 'MONUMENT')).toBe(true);
     });
 
     it('should include all five classic monuments', async () => {
-      const monuments = await cyclingResolvers.Query.monuments({}, { year: 2025 });
+      const monuments = await cyclingResolvers.Query.monuments({}, { year: 2025, gender: 'MEN' });
       const names = monuments.map(r => r.name);
 
       expect(names.some(n => n.includes('Sanremo'))).toBe(true);
@@ -198,6 +200,13 @@ describe('cyclingResolvers', () => {
       expect(names.some(n => n.includes('Roubaix'))).toBe(true);
       expect(names.some(n => n.includes('Liege'))).toBe(true);
       expect(names.some(n => n.includes('Lombardia'))).toBe(true);
+    });
+
+    it('should return womens monuments when filtered', async () => {
+      const womensMonuments = await cyclingResolvers.Query.monuments({}, { year: 2025, gender: 'WOMEN' });
+
+      expect(womensMonuments.length).toBeGreaterThan(0);
+      expect(womensMonuments.every(r => r.gender === 'WOMEN')).toBe(true);
     });
   });
 
