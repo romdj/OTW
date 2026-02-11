@@ -11,6 +11,8 @@ dotenv.config();
 export interface EnvConfig {
   NODE_ENV: 'development' | 'production' | 'test';
   NHL_API_BASE_URL: string;
+  BALLDONTLIE_API_KEY: string;
+  BALLDONTLIE_API_BASE_URL: string;
   PORT: number;
   CORS_ORIGIN: string;
   GRAPHQL_PLAYGROUND: boolean;
@@ -22,6 +24,8 @@ function validateEnv(): EnvConfig {
   return {
     NODE_ENV: (env.NODE_ENV as EnvConfig['NODE_ENV']) || 'development',
     NHL_API_BASE_URL: env.NHL_API_BASE_URL || 'https://api-web.nhle.com/v1',
+    BALLDONTLIE_API_KEY: env.BALLDONTLIE_API_KEY || '',
+    BALLDONTLIE_API_BASE_URL: env.BALLDONTLIE_API_BASE_URL || 'https://api.balldontlie.io/v1',
     PORT: parseInt(env.PORT || DEFAULT_PORTS.GRAPHQL_SERVER.toString(), 10),
     CORS_ORIGIN: env.CORS_ORIGIN || 'http://localhost:5173',
     GRAPHQL_PLAYGROUND: env.GRAPHQL_PLAYGROUND === 'true' || env.NODE_ENV === 'development'

@@ -2,6 +2,22 @@
  * ATP Tour Constants
  */
 
+import { config } from '../../../../../config/env.js';
+
+// BALLDONTLIE API Configuration
+export const BALLDONTLIE_API = {
+  baseUrl: config.BALLDONTLIE_API_BASE_URL,
+  endpoints: {
+    players: '/tennis/players',
+    tournaments: '/tennis/tournaments',
+    matches: '/tennis/matches',
+  },
+  headers: () => ({
+    'Authorization': config.BALLDONTLIE_API_KEY,
+    'Content-Type': 'application/json',
+  }),
+} as const;
+
 export const ATP_TOUR_CONFIG = {
   name: 'ATP Tour',
   sport: 'Tennis',
