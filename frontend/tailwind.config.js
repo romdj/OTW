@@ -7,6 +7,20 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
+      fontSize: {
+        'display': ['3rem', { lineHeight: '1.1', fontWeight: '600' }],
+        'display-sm': ['2.25rem', { lineHeight: '1.15', fontWeight: '600' }],
+        'headline': ['1.25rem', { lineHeight: '1.4', fontWeight: '500' }],
+        'section': ['0.8125rem', { lineHeight: '1', fontWeight: '600', letterSpacing: '0.05em' }],
+      },
+      colors: {
+        tier: {
+          must: '#F59E0B',
+          worth: '#3B82F6',
+          highlights: '#8B5CF6',
+          skip: '#94A3B8',
+        },
+      },
       // Subtle shadows for a lighter feel
       boxShadow: {
         'subtle': '0 1px 2px 0 rgba(0, 0, 0, 0.03)',

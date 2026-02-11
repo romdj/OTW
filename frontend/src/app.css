@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -16,8 +16,12 @@
     letter-spacing: -0.01em;
   }
 
-  /* Lighter typography */
-  h1, h2, h3 {
+  h1 {
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  h2, h3 {
     font-weight: 500;
     letter-spacing: -0.02em;
   }
@@ -87,11 +91,25 @@
   .text-subtle {
     @apply text-base-content/40;
   }
+
+  /* Priority tier left-border accents */
+  .tier-accent-must {
+    border-left: 3px solid theme('colors.tier.must');
+  }
+  .tier-accent-worth {
+    border-left: 3px solid theme('colors.tier.worth');
+  }
+  .tier-accent-highlights {
+    border-left: 3px solid theme('colors.tier.highlights');
+  }
+  .tier-accent-skip {
+    border-left: 3px solid theme('colors.tier.skip');
+  }
 }
 
-/* Smooth transitions */
-* {
-  transition-property: background-color, border-color, opacity;
+/* Smooth transitions — scoped to interactive elements to avoid Svelte transition conflicts */
+a, button, input, select, textarea, [role="button"], .btn, .card, .badge {
+  transition-property: background-color, border-color, opacity, color, box-shadow;
   transition-duration: 150ms;
   transition-timing-function: ease;
 }
