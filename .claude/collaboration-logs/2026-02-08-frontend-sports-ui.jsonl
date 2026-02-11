@@ -1,0 +1,27 @@
+{"type":"session","date":"2026-02-08","title":"Frontend Sports UI & Build Fixes","branch":"main","previous_session":"2026-01-30-session.md"}
+{"type":"context","description":"Continuing frontend development for multi-sport platform. Focus on homepage restructuring, TypeScript build fixes, and main branch merge preparation."}
+{"type":"task","status":"completed","category":"homepage","description":"Replaced NHL-specific standings homepage with multi-sport selection page","files":["frontend/src/routes/+page.svelte"]}
+{"type":"task","status":"completed","category":"homepage","description":"Created /nhl-standings route to preserve original NHL 3-point standings","files":["frontend/src/routes/nhl-standings/+page.svelte"]}
+{"type":"task","status":"completed","category":"homepage","description":"Updated sitemap configuration with new route structure","files":["frontend/src/config/sitemap.ts"]}
+{"type":"task","status":"completed","category":"typescript-fix","description":"Created missing NHL index.ts barrel export file","files":["graphql-server/src/sports/ice-hockey/leagues/nhl/index.ts"]}
+{"type":"task","status":"completed","category":"typescript-fix","description":"Fixed RacingFlag type to use correct nested path (disciplines.motorsport.flags)","files":["graphql-server/src/sports/racing/types.ts"]}
+{"type":"task","status":"completed","category":"typescript-fix","description":"Fixed invalid TypeScript syntax (900+, 250+) in rallye/superbike attributes","files":["graphql-server/src/sports/racing/rallye/attributes.ts","graphql-server/src/sports/racing/superbike/attributes.ts"]}
+{"type":"task","status":"completed","category":"typescript-fix","description":"Updated TennisWatchabilityScore.factors to match adapter implementations","files":["graphql-server/src/sports/tennis/types.ts"]}
+{"type":"task","status":"completed","category":"typescript-fix","description":"Fixed tennisResolvers to pass through points structure correctly","files":["graphql-server/src/sports/tennis/leagues/atp/resolvers/tennisResolvers.ts"]}
+{"type":"task","status":"completed","category":"typescript-fix","description":"Made round64/round128 optional in ATP tournament points type","files":["graphql-server/src/sports/tennis/leagues/atp/types/atp-api.types.ts"]}
+{"type":"task","status":"completed","category":"typescript-fix","description":"Added year adaptation for 2026+ mock data in tennis","files":["graphql-server/src/sports/tennis/leagues/atp/services/tournamentsService.ts"]}
+{"type":"task","status":"completed","category":"typescript-fix","description":"Fixed f1NextRace test arguments and added null check for predictedExcitement","files":["graphql-server/tests/sports/racing/formula1/f1Resolvers.test.ts"]}
+{"type":"task","status":"completed","category":"typescript-fix","description":"Improved grand tour and monument race classification in cycling","files":["graphql-server/src/sports/racing/cycling/pro-tour/services/ScheduleService.ts"]}
+{"type":"commit","hash":"90a08fe","message":"fix(cycling): improve grand tour and monument race classification"}
+{"type":"commit","hash":"b3ab7ae","message":"fix: resolve TypeScript build errors across sports modules"}
+{"type":"commit","hash":"ff45016","message":"fix: remove invalid TypeScript syntax in racing attributes"}
+{"type":"commit","hash":"5d8c4a9","message":"fix(tennis): add year adaptation and case-insensitive enum filtering"}
+{"type":"commit","hash":"d68c197","message":"fix: transform tennis resolver values to GraphQL enum format"}
+{"type":"commit","hash":"79ad2ed","message":"feat: restructure homepage to multi-sport selection"}
+{"type":"status","category":"working","items":["GraphQL server builds successfully (no TypeScript errors)","Frontend builds successfully (warnings only)","Tennis schedule pages: /sports/tennis/ (rankings, tournaments, events)","F1 schedule pages: /sports/formula1/ (calendar, standings, schedule)","Cycling schedule pages: /sports/cycling/ (races, stages)","Ice Hockey pages: /sports/ice-hockey/ (events, watchlist, history)","Multi-sport homepage with sport cards"]}
+{"type":"status","category":"blocked","items":["Push to main blocked by pre-push hook (1 test failing + lint warnings)","Pre-push hooks run full test suite and lint on main branch"]}
+{"type":"status","category":"pending","items":["Fix remaining test failure to enable push to main","Tennis UI only shows ATP data - WTA integration needed","Contract testing with real API calls (discussed, not implemented)"]}
+{"type":"technical_note","topic":"testing","content":"Current tests use mock data for unit testing. Contract testing (real API calls to validate upstream schemas) was discussed but not implemented. Would use Pact or schema validation."}
+{"type":"technical_note","topic":"tennis_integration","content":"GraphQL schema has separate ATP and WTA queries. Frontend currently only uses ATP queries. WTA rankings/tournaments could be added."}
+{"type":"technical_note","topic":"pre_push_hooks","content":"On feature branches: hooks are skipped. On main branch: full lint, build, test, and security audit. Strategy: commit on feature branches, merge to main, then push."}
+{"type":"next_steps","items":["Investigate and fix failing test to unblock main push","Add WTA data to tennis UI","Address Svelte warnings (self-closing tags, a11y issues in UserMenu)","Consider implementing contract tests as separate suite"]}

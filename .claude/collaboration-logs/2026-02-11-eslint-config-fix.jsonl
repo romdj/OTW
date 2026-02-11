@@ -1,0 +1,12 @@
+{"type":"session","date":"2026-02-11","title":"ESLint Configuration Fix","branch":"main","previous_session":"2026-02-08-frontend-sports-ui.md"}
+{"type":"context","description":"Pre-commit hooks blocking commits due to 78+ ESLint errors. Root cause: base no-unused-vars rule conflicting with TypeScript version."}
+{"type":"problem","description":"ESLint reporting no-unused-vars errors for underscore-prefixed parameters (_param). Base ESLint rule doesn't respect argsIgnorePattern configured in @typescript-eslint/no-unused-vars."}
+{"type":"task","status":"completed","category":"eslint-fix","description":"Disabled base no-unused-vars rule in shared ESLint config","files":["shared/eslint.config.base.js"]}
+{"type":"task","status":"completed","category":"cleanup","description":"Removed unnecessary eslint-disable comment from PriorityCalculator.ts","files":["graphql-server/src/prioritization/services/PriorityCalculator.ts"]}
+{"type":"task","status":"completed","category":"cleanup","description":"Removed unnecessary eslint-disable block from SportsService.ts","files":["graphql-server/src/sports/shared/interfaces/SportsService.ts"]}
+{"type":"status","category":"working","items":["GraphQL server lint: 0 errors, 0 warnings","Pre-commit hooks should now pass for graphql-server changes"]}
+{"type":"status","category":"pending","items":["Frontend has 23 errors, 20 warnings (separate issues: unused vars in Svelte, missing each keys, any types)"]}
+{"type":"technical_note","topic":"eslint_typescript","content":"When using TypeScript with ESLint, must disable base no-unused-vars and use @typescript-eslint/no-unused-vars with argsIgnorePattern: ^_ for underscore convention."}
+{"type":"technical_note","topic":"flat_config","content":"Project uses ESLint 9.x flat config. shared/eslint.config.base.js defines base rules, imported by graphql-server and frontend configs."}
+{"type":"code_change","file":"shared/eslint.config.base.js","change":"Added 'no-unused-vars': 'off' to rules object before @typescript-eslint/no-unused-vars"}
+{"type":"next_steps","items":["Commit graphql-server changes (lint now passes)","Address frontend lint issues in separate session","Continue with API integration plan"]}
