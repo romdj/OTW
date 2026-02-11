@@ -36,6 +36,7 @@
 	"dependencies": {
 		"@urql/svelte": "^4.2.1",
 		"daisyui": "^4.12.12",
+		"lucide-svelte": "^0.563.0",
 		"svelte-table": "^0.6.3"
 	}
 }
