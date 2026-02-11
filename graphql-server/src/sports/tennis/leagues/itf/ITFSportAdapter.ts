@@ -14,7 +14,7 @@ import type { EventType, DavisCupTie, OlympicMatch } from './types/itf-api.types
 import { ITF_NATION_CODES } from './constants/index.js';
 
 export class ITFSportAdapter implements SportsService {
-  private config: SportConfig = {
+  private _config: SportConfig = {
     name: 'ITF',
     sport: 'Tennis',
     country: 'International',

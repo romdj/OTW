@@ -43,7 +43,7 @@ export class NFLLeagueAdapter {
   /**
    * Fetch current NFL standings
    */
-  async getStandings(season?: number): Promise<NFLStandings[]> {
+  async getStandings(_season?: number): Promise<NFLStandings[]> {
     // TODO: Implement NFL API integration
     throw new Error('NFL API integration not yet implemented');
   }
@@ -51,7 +51,7 @@ export class NFLLeagueAdapter {
   /**
    * Fetch NFL schedule for a given week
    */
-  async getSchedule(week: number, season?: number): Promise<NFLSchedule> {
+  async getSchedule(_week: number, _season?: number): Promise<NFLSchedule> {
     // TODO: Implement schedule fetching
     throw new Error('NFL schedule fetching not yet implemented');
   }
@@ -67,7 +67,7 @@ export class NFLLeagueAdapter {
   /**
    * Fetch playoff bracket
    */
-  async getPlayoffBracket(season: number): Promise<Record<string, unknown>> {
+  async getPlayoffBracket(_season: number): Promise<Record<string, unknown>> {
     // TODO: Implement playoff bracket fetching
     throw new Error('Playoff bracket fetching not yet implemented');
   }
@@ -75,7 +75,7 @@ export class NFLLeagueAdapter {
   /**
    * Calculate watchability score for an NFL game
    */
-  calculateWatchability(game: FootballGame): FootballWatchabilityScore {
+  calculateWatchability(_game: FootballGame): FootballWatchabilityScore {
     // TODO: Implement NFL-specific watchability calculation
     // Consider: playoff implications, rivalry, primetime, star QBs, etc.
     return {

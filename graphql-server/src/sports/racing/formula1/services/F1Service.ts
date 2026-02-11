@@ -12,8 +12,6 @@ import type {
   Circuit,
   DriverStanding,
   ConstructorStanding,
-  Driver,
-  Constructor,
   ChampionshipBattle,
   GrandPrixFilters,
   StandingsFilters,
@@ -189,7 +187,6 @@ export class F1Service {
     ]);
 
     // Calculate races remaining
-    const now = new Date();
     const completedRaces = calendar.filter((gp) => gp.status === 'completed').length;
     const racesRemaining = calendar.length - completedRaces;
 

@@ -4,7 +4,6 @@
  * Handles all prioritization-related queries and mutations.
  */
 
-import { emotionalAnalyzer } from '../services/EmotionalAnalyzer.js';
 import { priorityCalculator } from '../services/PriorityCalculator.js';
 import { tagService } from '../services/TagService.js';
 import type {
@@ -12,7 +11,6 @@ import type {
   UserFollow,
   SportFamiliarity,
   EmotionalPreferences,
-  EmotionalProfile,
   PriorityFilters,
   EventPriority,
   PrioritizedEventList,

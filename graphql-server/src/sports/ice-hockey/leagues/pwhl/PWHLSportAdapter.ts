@@ -11,7 +11,7 @@ import type { PWHLTeamStanding } from './types/pwhl-api.types.js';
 import { PWHL_TEAM_ABBREVS } from './constants/index.js';
 
 export class PWHLSportAdapter implements SportsService {
-  private config: SportConfig = {
+  private _config: SportConfig = {
     name: 'PWHL',
     sport: 'Ice Hockey',
     country: 'North America',

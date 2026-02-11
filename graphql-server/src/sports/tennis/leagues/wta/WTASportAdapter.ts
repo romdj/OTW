@@ -11,7 +11,7 @@ import { wtaTournamentsService } from './services/tournamentsService.js';
 import type { WTARankingEntry } from './types/wta-api.types.js';
 
 export class WTASportAdapter implements SportsService {
-  private config: SportConfig = {
+  private _config: SportConfig = {
     name: 'WTA',
     sport: 'Tennis',
     country: 'International',

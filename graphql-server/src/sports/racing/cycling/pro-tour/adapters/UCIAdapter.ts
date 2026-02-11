@@ -666,10 +666,10 @@ const STAGES_BY_RACE: Record<string, UCIStageData[]> = {
  * TODO: Implement actual data fetching when UCI API/scraping is available.
  */
 export class UCIAdapter implements CyclingDataAdapter {
-  private readonly year: number;
+  private readonly _year: number;
 
   constructor(year: number = new Date().getFullYear()) {
-    this.year = year;
+    this._year = year;
   }
 
   /**
@@ -693,6 +693,7 @@ export class UCIAdapter implements CyclingDataAdapter {
     }
 
     // Return empty for other years until we have more data
+    // eslint-disable-next-line no-console
     console.warn(`No seed data available for year ${year}, returning empty calendar`);
     return Promise.resolve([]);
   }
@@ -724,6 +725,7 @@ export class UCIAdapter implements CyclingDataAdapter {
     }
 
     // No stages available for this race
+    // eslint-disable-next-line no-console
     console.warn(`No stage data available for race ${raceCode}`);
     return Promise.resolve([]);
   }
@@ -733,6 +735,7 @@ export class UCIAdapter implements CyclingDataAdapter {
    */
   async fetchGCStandings(_raceCode: string): Promise<unknown[]> {
     // TODO: Implement GC standings fetch from live data source
+    // eslint-disable-next-line no-console
     console.warn('GC standings fetch not yet implemented');
     return Promise.resolve([]);
   }

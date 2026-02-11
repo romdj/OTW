@@ -6,7 +6,6 @@
  */
 
 import type { IceHockeyAttributes } from './attributes.js';
-import type { IceHockeyScoring } from './scoring.js';
 import type { IceHockeyPositions } from './positions.js';
 import type { IceHockeyQualities } from './qualities.js';
 

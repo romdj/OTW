@@ -10,7 +10,6 @@ import type {
   ITFEvent,
   DavisCupTie,
   OlympicMatch,
-  ITFGroupStanding,
   EventType,
 } from '../types/itf-api.types.js';
 import { ITF_ERROR_MESSAGES } from '../constants/index.js';

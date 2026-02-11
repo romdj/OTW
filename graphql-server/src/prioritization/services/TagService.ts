@@ -10,7 +10,6 @@
 import type {
   EventTag,
   TagCategory,
-  TagSource,
   EmotionalProfile,
 } from '../types/index.js';
 

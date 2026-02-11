@@ -84,17 +84,17 @@ export interface CyclingDataAdapter {
   /**
    * Fetch race calendar for a given year
    */
-  fetchCalendar(year: number): Promise<UCIRaceData[]>;
+  fetchCalendar(_year: number): Promise<UCIRaceData[]>;
 
   /**
    * Fetch stages for a specific race
    */
-  fetchStages(raceCode: string): Promise<UCIStageData[]>;
+  fetchStages(_raceCode: string): Promise<UCIStageData[]>;
 
   /**
    * Fetch current GC standings for an in-progress race
    */
-  fetchGCStandings?(raceCode: string): Promise<unknown[]>;
+  fetchGCStandings?(_raceCode: string): Promise<unknown[]>;
 
   /**
    * Get adapter name/source

@@ -19,7 +19,7 @@ import type {
   GCMovement,
   StageType,
 } from '../types.js';
-import { calculateExcitementScore, isExcitingGCMovement } from '../types.js';
+import { calculateExcitementScore } from '../types.js';
 
 /**
  * Cache entry with expiration

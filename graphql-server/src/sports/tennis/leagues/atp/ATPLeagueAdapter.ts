@@ -40,7 +40,7 @@ export class ATPLeagueAdapter {
   /**
    * Fetch tournament schedule
    */
-  async getTournamentSchedule(year: number): Promise<ATPTournament[]> {
+  async getTournamentSchedule(_year: number): Promise<ATPTournament[]> {
     // TODO: Implement tournament schedule fetching
     throw new Error('Tournament schedule fetching not yet implemented');
   }
@@ -56,7 +56,7 @@ export class ATPLeagueAdapter {
   /**
    * Calculate watchability score for an ATP match
    */
-  calculateWatchability(match: TennisMatch): TennisWatchabilityScore {
+  calculateWatchability(_match: TennisMatch): TennisWatchabilityScore {
     // TODO: Implement ATP-specific watchability calculation
     return {
       overall: 0,

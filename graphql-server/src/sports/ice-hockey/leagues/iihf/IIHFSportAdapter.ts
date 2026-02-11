@@ -14,7 +14,7 @@ import type { IIHFTeamStanding, TournamentType } from './types/iihf-api.types.js
 import { IIHF_NATION_CODES } from './constants/index.js';
 
 export class IIHFSportAdapter implements SportsService {
-  private config: SportConfig = {
+  private _config: SportConfig = {
     name: 'IIHF',
     sport: 'Ice Hockey',
     country: 'International',

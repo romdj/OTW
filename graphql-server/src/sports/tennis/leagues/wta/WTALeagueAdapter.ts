@@ -40,7 +40,7 @@ export class WTALeagueAdapter {
   /**
    * Fetch tournament schedule
    */
-  async getTournamentSchedule(year: number): Promise<WTATournament[]> {
+  async getTournamentSchedule(_year: number): Promise<WTATournament[]> {
     // TODO: Implement tournament schedule fetching
     throw new Error('Tournament schedule fetching not yet implemented');
   }
@@ -56,7 +56,7 @@ export class WTALeagueAdapter {
   /**
    * Calculate watchability score for a WTA match
    */
-  calculateWatchability(match: TennisMatch): TennisWatchabilityScore {
+  calculateWatchability(_match: TennisMatch): TennisWatchabilityScore {
     // TODO: Implement WTA-specific watchability calculation
     return {
       overall: 0,

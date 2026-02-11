@@ -11,7 +11,7 @@ import { atpTournamentsService } from './services/tournamentsService.js';
 import type { ATPRankingEntry } from './types/atp-api.types.js';
 
 export class TennisSportAdapter implements SportsService {
-  private config: SportConfig = {
+  private _config: SportConfig = {
     name: 'ATP',
     sport: 'Tennis',
     country: 'International',

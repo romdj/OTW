@@ -105,22 +105,22 @@ export interface F1DataAdapter {
   /**
    * Fetch race calendar for a season
    */
-  fetchCalendar(season: number): Promise<F1RaceData[]>;
+  fetchCalendar(_season: number): Promise<F1RaceData[]>;
 
   /**
    * Fetch driver standings
    */
-  fetchDriverStandings(season: number, round?: number): Promise<F1DriverStandingData[]>;
+  fetchDriverStandings(_season: number, _round?: number): Promise<F1DriverStandingData[]>;
 
   /**
    * Fetch constructor standings
    */
-  fetchConstructorStandings(season: number, round?: number): Promise<F1ConstructorStandingData[]>;
+  fetchConstructorStandings(_season: number, _round?: number): Promise<F1ConstructorStandingData[]>;
 
   /**
    * Fetch circuit details
    */
-  fetchCircuit(circuitId: string): Promise<F1CircuitData | null>;
+  fetchCircuit(_circuitId: string): Promise<F1CircuitData | null>;
 
   /**
    * Get adapter source name

@@ -30,7 +30,7 @@ export class ITFLeagueAdapter {
   /**
    * Fetch Davis Cup draw and results
    */
-  async getDavisCupDraw(year: number): Promise<ITFEvent[]> {
+  async getDavisCupDraw(_year: number): Promise<ITFEvent[]> {
     // TODO: Implement Davis Cup API integration
     throw new Error('Davis Cup API integration not yet implemented');
   }
@@ -38,7 +38,7 @@ export class ITFLeagueAdapter {
   /**
    * Fetch Billie Jean King Cup draw and results
    */
-  async getBJKCupDraw(year: number): Promise<ITFEvent[]> {
+  async getBJKCupDraw(_year: number): Promise<ITFEvent[]> {
     // TODO: Implement BJK Cup API integration
     throw new Error('BJK Cup API integration not yet implemented');
   }
@@ -46,7 +46,7 @@ export class ITFLeagueAdapter {
   /**
    * Fetch Olympic tennis schedule
    */
-  async getOlympicSchedule(year: number): Promise<ITFEvent[]> {
+  async getOlympicSchedule(_year: number): Promise<ITFEvent[]> {
     // TODO: Implement Olympic schedule fetching
     throw new Error('Olympic schedule fetching not yet implemented');
   }
@@ -55,7 +55,7 @@ export class ITFLeagueAdapter {
    * Calculate watchability for national team events
    * (Different factors than individual tour events)
    */
-  calculateWatchability(match: TennisMatch): TennisWatchabilityScore {
+  calculateWatchability(_match: TennisMatch): TennisWatchabilityScore {
     // TODO: Implement ITF-specific watchability (national pride factor, etc.)
     return {
       overall: 0,
