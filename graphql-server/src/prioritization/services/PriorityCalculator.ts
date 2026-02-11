@@ -11,12 +11,10 @@ import type {
   EmotionalPreferences,
   EventPriority,
   PriorityReason,
-  PriorityReasonType,
   PriorityScoreBreakdown,
   PriorityCalculationInput,
   PrioritizedEventList,
   PriorityFilters,
-  EventTag,
 } from '../types/index.js';
 
 import {
@@ -454,8 +452,9 @@ export class PriorityCalculator {
   /**
    * Get time range from inputs
    */
-  private getTimeRange(inputs: PriorityCalculationInput[]): { start: Date; end: Date } {
+  private getTimeRange(_inputs: PriorityCalculationInput[]): { start: Date; end: Date } {
     // Default to current weekend if no date info
+    // TODO: Extract date range from inputs when available
     const now = new Date();
     const start = new Date(now);
     start.setDate(start.getDate() - start.getDay()); // Start of week

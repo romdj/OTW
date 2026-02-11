@@ -18,9 +18,11 @@ export const baseTypeScriptConfig = {
     '@typescript-eslint': typescript,
   },
   rules: {
+    // Disable base rule - it conflicts with the TypeScript version
+    'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': [
       'error',
-      { 
+      {
         argsIgnorePattern: '^_',
         varsIgnorePattern: '^_',
         caughtErrorsIgnorePattern: '^_'

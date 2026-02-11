@@ -2,9 +2,6 @@
  * Generic sports service interface for standardizing sports data operations
  */
 
-/* eslint-disable no-unused-vars */
-// Interface parameter names are for documentation and are not "used" in the traditional sense
-
 export interface TeamStanding {
   teamName: string;
   teamAbbrev: string;
