@@ -1,17 +1,14 @@
 <script lang="ts">
-  import { WeekendRecap } from '../../components/Discovery';
-
-  // In a real app, this would come from auth context
-  const userId = 'demo-user';
+  import PlanPrototype from '../../components/Discovery/PlanPrototype.svelte';
 </script>
 
 <svelte:head>
-  <title>Discover Events | OTW Sport</title>
-  <meta name="description" content="Discover the most exciting sporting events personalized for you. Never miss a must-watch game again." />
+  <title>Your sports edit | OTW</title>
+  <meta name="description" content="A personal, spoiler-aware plan for sporting events worth your time." />
 </svelte:head>
 
 <main class="discover-page">
-  <WeekendRecap {userId} />
+  <PlanPrototype />
 </main>
 
 <style>
