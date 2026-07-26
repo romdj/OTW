@@ -22,6 +22,7 @@ All proposed behaviors remain **hypotheses until tested with target users**.
 - [Journeys and information architecture](journeys-and-information-architecture.md)
 - [Spoiler safety and trust](spoiler-safety-and-trust.md)
 - [Qualitative watchability experience](qualitative-watchability-experience.md)
+- [Catch-up prototype acceptance specification](prototype-acceptance-spec.md)
 - [Validation plan](validation-plan.md)
 
 ## Product principles

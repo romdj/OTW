@@ -19,6 +19,7 @@ Files:
 - [Visual direction](visual-direction.md): hierarchy, responsive layouts, tokens, accessibility, motion, and states.
 - [Component system](component-system.md): concrete Svelte component contracts and event-card anatomy.
 - [Implementation roadmap](implementation-roadmap.md): sequenced delivery and validation.
+- [Plan prototype UI specification](prototype-ui-spec.md): reconciled implementation contract for disclosure, exact OTW Score, responsive layouts, event detail, reranking, and accessibility.
 
 ## North-star screen
 
