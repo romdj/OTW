@@ -1,35 +1,58 @@
 export type DisclosureMode = 'no-hints' | 'guidance' | 'full-story';
+export type TimeBudget = 15 | 30 | 60 | 120;
+export type SportAccent = 'racing' | 'tennis' | 'hockey';
 
-export type Sport = 'Formula 1' | 'Tennis' | 'NHL';
-
-export type ViewingFormat = 'Full replay' | 'Condensed' | 'Highlights' | 'Recap';
-
-export type PlanEvent = {
+type EventBase = {
   id: string;
-  sport: Sport;
-  accent: 'racing' | 'tennis' | 'hockey';
-  competition: string;
+  sport: string;
+  accent: SportAccent;
   context: string;
   title: string;
   dateLabel: string;
-  score: number;
-  scoreBand: 'Exceptional' | 'Excellent' | 'Very good';
-  percentile: string;
-  fit: 'Great fit' | 'Good fit';
-  format: ViewingFormat;
-  minutes: number;
-  safeReason: string;
-  guidanceTraits: string[];
-  result: string;
-  fullReason: string;
-  dimensions: Array<{
-    label: 'Competitiveness' | 'Eventfulness' | 'Aesthetic quality' | 'Importance';
-    value: number;
-    band: 'Exceptional' | 'High' | 'Medium';
-  }>;
-  preEventRank: number;
-  guidanceRank: number;
-  fullStoryRank: number;
+  format: 'Full replay' | 'Condensed' | 'Highlights' | 'Recap';
+  estimatedMinutes: number;
+  availability: 'available' | 'unavailable' | 'postponed';
+  availabilityLabel: string;
 };
 
-export type TimeBudget = 15 | 30 | 60 | 120;
+export type NoHintsEvent = EventBase & {
+  projection: 'no-hints';
+  preEventReason: string;
+};
+
+export type GuidanceEvent = EventBase & {
+  projection: 'guidance';
+  score: number;
+  scoreBand: string;
+  percentile?: string;
+  fit: string;
+  safeReasons: string[];
+  confidence: 'High' | 'Medium' | 'Low';
+};
+
+export type FullStoryEvent = EventBase & {
+  projection: 'full-story';
+  score: number;
+  scoreBand: string;
+  percentile?: string;
+  fit: string;
+  safeReasons: string[];
+  confidence: 'High' | 'Medium' | 'Low';
+  result: string;
+  analysis: string;
+  dimensions: Array<{ label: string; value: number; band: string }>;
+};
+
+export type PlanEvent = NoHintsEvent | GuidanceEvent | FullStoryEvent;
+
+export type ViewingPlanResponse = {
+  mode: DisclosureMode;
+  budgetMinutes: TimeBudget;
+  generatedAt: string;
+  totalMinutes: number;
+  headline: string;
+  plan: PlanEvent[];
+  excluded: PlanEvent[];
+};
+
+export type FeedbackReason = 'Great pick' | 'Wrong format' | 'Not my taste' | 'Too long' | 'Spoiler issue';

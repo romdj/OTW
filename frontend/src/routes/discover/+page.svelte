@@ -7,9 +7,9 @@
   <meta name="description" content="A personal, spoiler-aware plan for sporting events worth your time." />
 </svelte:head>
 
-<main class="discover-page">
+<div class="discover-page">
   <PlanPrototype />
-</main>
+</div>
 
 <style>
   .discover-page {

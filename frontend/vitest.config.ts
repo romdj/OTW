@@ -3,6 +3,9 @@ import { sveltekit } from '@sveltejs/kit/vite';
 
 export default defineConfig({
   plugins: [sveltekit()],
+  resolve: {
+    conditions: ['browser']
+  },
   test: {
     include: ['src/**/*.spec.{js,ts,jsx,tsx}'],
     environment: 'happy-dom',
