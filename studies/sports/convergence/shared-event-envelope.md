@@ -11,7 +11,7 @@ type Sport =
 type Lifecycle = 'SCHEDULED' | 'LIVE' | 'COMPLETED' | 'DELAYED'
   | 'POSTPONED' | 'SUSPENDED' | 'CANCELLED' | 'ABANDONED' | 'PROVISIONAL';
 type Disclosure = 'PRE_EVENT' | 'LIVE_SAFE' | 'COMPLETED_HIDDEN' | 'REVEALED';
-type SpoilerMode = 'NO_HINTS' | 'LIGHT_CONTEXT' | 'RESULTS_ALLOWED';
+type SpoilerMode = 'NO_HINTS' | 'GUIDANCE' | 'FULL_STORY';
 type ViewingFormat =
   | 'FULL' | 'CONDENSED' | 'FINAL_PHASE' | 'HIGHLIGHTS'
   | 'RECAP' | 'SKIP' | 'QUEUE';
@@ -50,6 +50,17 @@ type QualitativeProfile = {
   modelVersion: string;
 };
 
+type OtwAssessment = {
+  score: number;                 // integer [0,100]
+  band: 'LIMITED'|'SOLID'|'VERY_GOOD'|'EXCELLENT'|'EXCEPTIONAL';
+  percentile?: number;           // scoped to comparisonCohort
+  comparisonCohort: string;
+  state: 'PROVISIONAL'|'REVIEWED'|'FINAL'|'REVISED'|'RECALCULATED';
+  confidence: Confidence;
+  aggregatorVersion: string;
+  taxonomyVersion: string;
+};
+
 type SharedEvent<TSport extends Sport> = {
   schemaVersion: '1.0.0';
   id: string;
@@ -84,6 +95,7 @@ type SharedEvent<TSport extends Sport> = {
     safeReasons: string[];
     confidence: Confidence;
   };
+  otwAssessment?: OtwAssessment;
   affinity: Array<{ entityId: string; entityType: string; label: string }>;
   qualitativeProfile?: QualitativeProfile;
   sportDetails: SportDetailsBySport[TSport];
@@ -135,7 +147,7 @@ Bands must be calibrated within sport/format cohorts before cross-sport ranking.
 
 1. Omitted means unavailable or unauthorized; `null` is reserved for an explicit domain value only where meaningful.
 2. Required card fields never depend on protected data.
-3. `watchabilityBand` is permitted only for `POST_EVENT_PROTECTED` when Light Context explicitly allows ranking leakage, or `POST_EVENT_REVEALED`; absent in No Hints.
+3. `watchabilityBand` and `otwAssessment` are permitted only for `POST_EVENT_PROTECTED` when Guidance explicitly allows ranking leakage, or `POST_EVENT_REVEALED`; both are absent in No Hints.
 4. `protectedOutcome` exists only when disclosure is `REVEALED`.
 5. `estimatedMinutes` requires `format` and an estimation/availability distinction in details or UI copy.
 6. `parentId` and `parentKind` are both required for `CHILD`.
