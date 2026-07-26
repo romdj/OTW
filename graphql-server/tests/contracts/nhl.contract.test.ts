@@ -77,20 +77,16 @@ describe('NHL API Contract', () => {
     });
   });
 
-  describe('GET /schedule/now', () => {
+  describe('GET /schedule/{date}', () => {
     let response: any;
 
     beforeAll(async () => {
-      try {
-        const result = await got(`${API_BASE}/schedule/now`, {
-          timeout,
-          responseType: 'json',
-        });
-        response = result.body;
-      } catch (_error) {
-        // During off-season, schedule might be empty
-        response = { gameWeek: [] };
-      }
+      const date = new Date().toISOString().slice(0, 10);
+      const result = await got(`${API_BASE}/schedule/${date}`, {
+        timeout,
+        responseType: 'json',
+      });
+      response = result.body;
     });
 
     it('should return schedule structure', () => {
@@ -105,10 +101,15 @@ describe('NHL API Contract', () => {
 
         if (day.games && day.games.length > 0) {
           for (const game of day.games) {
-            expect(game).toHaveProperty('id');
-            expect(game).toHaveProperty('awayTeam');
-            expect(game).toHaveProperty('homeTeam');
-            expect(game).toHaveProperty('gameState');
+            expect(typeof game.id).toBe('number');
+            expect(typeof game.season).toBe('number');
+            expect(typeof game.gameType).toBe('number');
+            expect(game.startTimeUTC).toMatch(/Z$/);
+            expect(typeof game.gameState).toBe('string');
+            expect(typeof game.homeTeam.id).toBe('number');
+            expect(typeof game.homeTeam.abbrev).toBe('string');
+            expect(typeof game.awayTeam.id).toBe('number');
+            expect(typeof game.awayTeam.abbrev).toBe('string');
           }
         }
       }

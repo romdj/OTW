@@ -43,19 +43,21 @@ describe('F1 Points System', () => {
 
   describe('calculateMaxPoints', () => {
     it('calculates max points for races only', () => {
-      // 26 points max per race (25 win + 1 fastest lap)
-      expect(calculateMaxPoints(1, 0)).toBe(26);
-      expect(calculateMaxPoints(5, 0)).toBe(130);
+      expect(calculateMaxPoints(1, 0, 2025)).toBe(25);
+      expect(calculateMaxPoints(5, 0, 2025)).toBe(125);
     });
 
     it('includes sprint points when sprints remain', () => {
-      // 26 per race + 8 per sprint
-      expect(calculateMaxPoints(1, 1)).toBe(34);
+      expect(calculateMaxPoints(1, 1, 2025)).toBe(33);
     });
 
     it('calculates full season maximum', () => {
-      // 24 races + 6 sprints = 24*26 + 6*8 = 624 + 48 = 672
-      expect(calculateMaxPoints(24, 6)).toBe(672);
+      expect(calculateMaxPoints(24, 6, 2025)).toBe(648);
+    });
+
+    it('keeps the fastest-lap bonus only before 2025', () => {
+      expect(calculateMaxPoints(1, 0, 2024)).toBe(26);
+      expect(calculateMaxPoints(1, 0, 2025)).toBe(25);
     });
 
     it('returns 0 when no races remain', () => {

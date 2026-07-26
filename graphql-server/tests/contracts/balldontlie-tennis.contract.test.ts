@@ -19,7 +19,7 @@ const isApiConfigured = API_KEY && API_KEY !== 'your_api_key_here';
 // Skip all tests if API key not configured
 const describeIfConfigured = isApiConfigured ? describe : describe.skip;
 
-describeIfConfigured('BALLDONTLIE Tennis API Contract', () => {
+describeIfConfigured('BALLDONTLIE ATP/WTA API Contract', () => {
   const headers = {
     'Authorization': API_KEY,
     'Content-Type': 'application/json',
@@ -27,12 +27,12 @@ describeIfConfigured('BALLDONTLIE Tennis API Contract', () => {
 
   const timeout = { request: 15000 };
 
-  describe('GET /tennis/players', () => {
+  describe('GET /atp/v1/players', () => {
     let response: any;
 
     beforeAll(async () => {
       try {
-        const result = await got(`${API_BASE}/tennis/players`, {
+        const result = await got(`${API_BASE}/atp/v1/players`, {
           headers,
           searchParams: { per_page: 5 },
           timeout,
@@ -53,9 +53,10 @@ describeIfConfigured('BALLDONTLIE Tennis API Contract', () => {
     it('should return pagination meta', () => {
       expect(response).toHaveProperty('meta');
       if (response.meta) {
-        expect(typeof response.meta.total_count).toBe('number');
         expect(typeof response.meta.per_page).toBe('number');
-        expect(typeof response.meta.current_page).toBe('number');
+        if (response.meta.next_cursor != null) {
+          expect(typeof response.meta.next_cursor).toBe('number');
+        }
       }
     });
 
@@ -106,23 +107,17 @@ describeIfConfigured('BALLDONTLIE Tennis API Contract', () => {
     });
   });
 
-  describe('GET /tennis/tournaments', () => {
+  describe('GET /atp/v1/tournaments', () => {
     let response: any;
 
     beforeAll(async () => {
-      try {
-        const result = await got(`${API_BASE}/tennis/tournaments`, {
-          headers,
-          searchParams: { per_page: 10 },
-          timeout,
-          responseType: 'json',
-        });
-        response = result.body;
-      } catch (error) {
-        // Tournament endpoint might not exist - skip gracefully
-        console.warn('Tournaments endpoint may not be available:', error);
-        response = { data: [], meta: {} };
-      }
+      const result = await got(`${API_BASE}/atp/v1/tournaments`, {
+        headers,
+        searchParams: { per_page: 10 },
+        timeout,
+        responseType: 'json',
+      });
+      response = result.body;
     });
 
     it('should return a data array', () => {
@@ -153,22 +148,17 @@ describeIfConfigured('BALLDONTLIE Tennis API Contract', () => {
     });
   });
 
-  describe('GET /tennis/matches', () => {
+  describe('GET /atp/v1/matches', () => {
     let response: any;
 
     beforeAll(async () => {
-      try {
-        const result = await got(`${API_BASE}/tennis/matches`, {
-          headers,
-          searchParams: { per_page: 5 },
-          timeout,
-          responseType: 'json',
-        });
-        response = result.body;
-      } catch (error) {
-        console.warn('Matches endpoint may not be available:', error);
-        response = { data: [], meta: {} };
-      }
+      const result = await got(`${API_BASE}/atp/v1/matches`, {
+        headers,
+        searchParams: { per_page: 5 },
+        timeout,
+        responseType: 'json',
+      });
+      response = result.body;
     });
 
     it('should return a data array', () => {
@@ -200,7 +190,7 @@ describeIfConfigured('BALLDONTLIE Tennis API Contract', () => {
   describe('Error Handling', () => {
     it('should return 401 for invalid API key', async () => {
       try {
-        await got(`${API_BASE}/tennis/players`, {
+        await got(`${API_BASE}/atp/v1/players`, {
           headers: { Authorization: 'invalid-key' },
           timeout,
           responseType: 'json',
@@ -208,6 +198,28 @@ describeIfConfigured('BALLDONTLIE Tennis API Contract', () => {
         throw new Error('Expected request to fail');
       } catch (error: any) {
         expect([401, 403]).toContain(error.response?.statusCode);
+      }
+    });
+  });
+
+  describe.each(['atp', 'wta'])('GET /%s/v1/tournaments exact shape', tour => {
+    it('returns documented cursor pagination and tournament records', async () => {
+      const result = await got(`${API_BASE}/${tour}/v1/tournaments`, {
+        headers,
+        searchParams: { per_page: 2 },
+        timeout,
+        responseType: 'json',
+      });
+      const body = result.body as {
+        data: Array<{ id: number; season?: number | null }>;
+        meta: { next_cursor?: number | null; per_page: number };
+      };
+      expect(Array.isArray(body.data)).toBe(true);
+      expect(body.meta).toBeDefined();
+      expect(typeof body.meta.per_page).toBe('number');
+      for (const tournament of body.data) {
+        expect(typeof tournament.id).toBe('number');
+        if (tournament.season != null) expect(typeof tournament.season).toBe('number');
       }
     });
   });

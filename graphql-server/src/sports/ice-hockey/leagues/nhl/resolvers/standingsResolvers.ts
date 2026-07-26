@@ -7,9 +7,13 @@ import { logger } from '../../../../../utils/logger.js';
 import { nhlStandingsService } from '../services/standingsService.js';
 import { powerplayService } from '../services/powerplayService.js';
 import { NHL_ERROR_MESSAGES } from '../constants/index.js';
+import { nhlScheduleService } from '../services/scheduleService.js';
 
 export const nhlStandingsResolvers = {
   Query: {
+    nhlSchedule: async (_: unknown, { date }: { date: string }) => {
+      return nhlScheduleService.getSchedule(date);
+    },
     /**
      * Fetches NHL standings for a specific date
      */
@@ -27,6 +31,10 @@ export const nhlStandingsResolvers = {
     }
   },
   
+  HockeyCalendarGame: {
+    status: (parent: { status: string }) => parent.status.toUpperCase(),
+  },
+
   Team: {
     /**
      * Resolver for powerplay stats field on Team type

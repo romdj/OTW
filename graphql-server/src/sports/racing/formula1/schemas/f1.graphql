@@ -120,6 +120,7 @@ type F1ChampionshipContext {
 # Grand Prix - A race weekend
 type F1GrandPrix {
   id: ID!
+  providerId: ID
   name: String!
   officialName: String!
   slug: String!
@@ -134,6 +135,9 @@ type F1GrandPrix {
   tireCompounds: F1TireAllocation
   championshipContext: F1ChampionshipContext
   predictedExcitement: F1RaceExcitement
+  source: String!
+  fetchedAt: String!
+  isStale: Boolean!
 }
 
 # Driver information
@@ -167,15 +171,15 @@ type F1Constructor {
 type F1DriverStanding {
   position: Int!
   driver: F1Driver!
-  points: Int!
+  points: Float!
   wins: Int!
   podiums: Int!
   poles: Int!
   fastestLaps: Int!
   dnfs: Int!
-  pointsToLeader: Int!
-  pointsToNext: Int!
-  theoreticalMaxPoints: Int!
+  pointsToLeader: Float!
+  pointsToNext: Float!
+  theoreticalMaxPoints: Float!
   canWinTitle: Boolean!
 }
 
@@ -183,14 +187,14 @@ type F1DriverStanding {
 type F1ConstructorStanding {
   position: Int!
   constructor: F1Constructor!
-  points: Int!
+  points: Float!
   wins: Int!
   podiums: Int!
   poles: Int!
   oneTwo: Int!
-  pointsToLeader: Int!
-  pointsToNext: Int!
-  theoreticalMaxPoints: Int!
+  pointsToLeader: Float!
+  pointsToNext: Float!
+  theoreticalMaxPoints: Float!
   canWinTitle: Boolean!
 }
 
@@ -199,7 +203,7 @@ type F1DriverChampionshipBattle {
   leader: F1DriverStanding!
   challengers: [F1DriverStanding!]!
   eliminated: [F1DriverStanding!]!
-  gap: Int!
+  gap: Float!
   closenessScore: Float!
 }
 
@@ -208,7 +212,7 @@ type F1ConstructorChampionshipBattle {
   leader: F1ConstructorStanding!
   challengers: [F1ConstructorStanding!]!
   eliminated: [F1ConstructorStanding!]!
-  gap: Int!
+  gap: Float!
   closenessScore: Float!
 }
 

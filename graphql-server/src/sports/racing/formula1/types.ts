@@ -106,6 +106,7 @@ export interface SessionResult {
  */
 export interface GrandPrix {
   id: string;
+  providerId?: string;
   name: string;
   officialName: string;
   slug: string;
@@ -117,6 +118,9 @@ export interface GrandPrix {
   endDate: Date;
   status: GrandPrixStatus;
   sessions: Session[];
+  source: string;
+  fetchedAt: string;
+  isStale: boolean;
 
   // Tire allocation for the weekend
   tireCompounds?: {
@@ -303,10 +307,23 @@ export function getPointsForPosition(position: number, isSprint: boolean = false
 /**
  * Calculate maximum possible points for remaining races
  */
-export function calculateMaxPoints(racesRemaining: number, sprintsRemaining: number = 0): number {
-  // Max per race: 25 (win) + 1 (fastest lap) = 26
+export function calculateMaxPoints(
+  racesRemaining: number,
+  sprintsRemaining: number = 0,
+  season: number = new Date().getFullYear()
+): number {
+  const raceMaximum = season >= 2025 ? 25 : 26;
   // Max per sprint: 8
-  return (racesRemaining * 26) + (sprintsRemaining * 8);
+  return (racesRemaining * raceMaximum) + (sprintsRemaining * 8);
+}
+
+export function calculateMaxConstructorPoints(
+  racesRemaining: number,
+  sprintsRemaining: number = 0,
+  season: number = new Date().getFullYear()
+): number {
+  const raceMaximum = season >= 2025 ? 43 : 44;
+  return (racesRemaining * raceMaximum) + (sprintsRemaining * 15);
 }
 
 /**

@@ -3,6 +3,7 @@
 enum TennisTour {
   ATP
   WTA
+  ITF
 }
 
 enum TennisRankingType {
@@ -33,7 +34,134 @@ enum MatchStatus {
   SCHEDULED
   LIVE
   COMPLETED
+  RETIRED
+  WALKOVER
+  DEFAULTED
+  POSTPONED
   CANCELLED
+}
+
+enum TennisEnvironment {
+  INDOOR
+  OUTDOOR
+  UNKNOWN
+}
+
+enum TennisEventStatus {
+  UPCOMING
+  ACTIVE
+  COMPLETED
+  CANCELLED
+  UNAVAILABLE
+}
+
+type TennisProvenance {
+  provider: String!
+  providerId: String!
+  fetchedAt: String!
+  isStale: Boolean!
+}
+
+type TennisCompetitorV2 {
+  otwId: ID!
+  providerId: String!
+  name: String!
+  countryCode: String
+  seed: Int
+}
+
+type TennisSetScoreV2 {
+  setNumber: Int!
+  player1Games: Int!
+  player2Games: Int!
+  player1Tiebreak: Int
+  player2Tiebreak: Int
+}
+
+type TennisEventV2 {
+  otwId: ID!
+  providerId: String!
+  tour: TennisTour!
+  organizer: String!
+  name: String!
+  season: Int!
+  edition: String
+  category: String
+  surface: String!
+  environment: TennisEnvironment!
+  location: String
+  timezone: String!
+  startsAt: String
+  endsAt: String
+  status: TennisEventStatus!
+  provenance: TennisProvenance!
+}
+
+type TennisMatchV2 {
+  otwId: ID!
+  providerId: String!
+  eventId: ID!
+  tour: TennisTour!
+  organizer: String!
+  season: Int!
+  round: String
+  scheduledAt: String
+  timezone: String!
+  status: MatchStatus!
+  competitors: [TennisCompetitorV2!]!
+  winnerId: ID
+  scoreText: String
+  sets: [TennisSetScoreV2!]!
+  provenance: TennisProvenance!
+}
+
+type DavisCupNation {
+  code: String!
+  name: String!
+}
+
+type DavisCupRubber {
+  otwId: ID!
+  providerId: String!
+  order: Int!
+  matchType: String!
+  status: MatchStatus!
+  homeCompetitors: [String!]!
+  awayCompetitors: [String!]!
+  winnerSide: String
+  scoreText: String
+  provenance: TennisProvenance!
+}
+
+type DavisCupTie {
+  otwId: ID!
+  providerId: String!
+  eventId: ID!
+  stage: String!
+  group: String
+  knockout: Boolean!
+  home: DavisCupNation!
+  away: DavisCupNation!
+  neutralVenue: Boolean!
+  venue: String
+  scheduledAt: String
+  status: MatchStatus!
+  homeScore: Int
+  awayScore: Int
+  rubbers: [DavisCupRubber!]!
+  provenance: TennisProvenance!
+}
+
+type DavisCupEvent {
+  otwId: ID!
+  providerId: String!
+  organizer: String!
+  name: String!
+  season: Int!
+  status: TennisEventStatus!
+  ties: [DavisCupTie!]!
+  provenance: TennisProvenance!
+  availabilityMessage: String!
 }
 
 type TennisRanking {
@@ -149,6 +277,19 @@ type TennisMatch {
 }
 
 extend type Query {
+  tennisEventsV2(tour: TennisTour!, season: Int): [TennisEventV2!]!
+  tennisMatchesV2(
+    tour: TennisTour!
+    season: Int
+    tournamentId: String
+    playerId: String
+    status: MatchStatus
+    date: String
+    limit: Int
+  ): [TennisMatchV2!]!
+  davisCupEvent(season: Int!): DavisCupEvent!
+  davisCupTies(season: Int!): [DavisCupTie!]!
+
   # Tennis Rankings
   tennisRankings(tour: TennisTour, type: TennisRankingType, limit: Int): [TennisRanking!]!
 
@@ -157,7 +298,7 @@ extend type Query {
   tennisTournament(tournamentId: String!): TennisTournament
 
   # Tennis Matches
-  tennisMatches(tournamentId: String, playerId: String, status: MatchStatus, date: String): [TennisMatch!]!
+  tennisMatches(tour: TennisTour = ATP, tournamentId: String, playerId: String, status: MatchStatus, date: String): [TennisMatch!]!
   tennisLiveMatches: [TennisMatch!]!
 
   # Tennis Players

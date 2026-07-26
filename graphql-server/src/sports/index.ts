@@ -7,6 +7,8 @@ import { NHLSportAdapter } from './ice-hockey/leagues/nhl/NHLSportAdapter.js';
 import { nhlStandingsResolvers } from './ice-hockey/leagues/nhl/resolvers/standingsResolvers.js';
 import { TennisSportAdapter } from './tennis/leagues/atp/TennisSportAdapter.js';
 import { tennisResolvers } from './tennis/leagues/atp/resolvers/tennisResolvers.js';
+import { WTASportAdapter } from './tennis/leagues/wta/WTASportAdapter.js';
+import { ITFSportAdapter } from './tennis/leagues/itf/ITFSportAdapter.js';
 
 // Register NHL
 const nhlAdapter = new NHLSportAdapter();
@@ -29,6 +31,20 @@ const tennisConfig = {
 };
 
 sportRegistry.registerSport('atp', tennisAdapter, tennisResolvers, tennisConfig);
+
+sportRegistry.registerSport('wta', new WTASportAdapter(), { Query: {} }, {
+  name: 'WTA',
+  sport: 'Tennis',
+  country: 'International',
+  defaultSeason: String(new Date().getUTCFullYear()),
+});
+
+sportRegistry.registerSport('itf', new ITFSportAdapter(), { Query: {} }, {
+  name: 'ITF',
+  sport: 'Tennis',
+  country: 'International',
+  defaultSeason: String(new Date().getUTCFullYear()),
+});
 
 // Export unified access
 export { sportRegistry };

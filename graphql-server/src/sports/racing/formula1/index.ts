@@ -34,7 +34,11 @@ export {
 } from './types.js';
 
 // Adapters
-export { F1Adapter, f1Adapter } from './adapters/F1Adapter.js';
+export {
+  BallDontLieF1Adapter,
+  F1ProviderUnavailableError,
+  f1Adapter,
+} from './adapters/BallDontLieF1Adapter.js';
 export type { F1DataAdapter, F1RaceData, F1SessionData } from './adapters/types.js';
 
 // Services

@@ -1,0 +1,52 @@
+enum HockeyCalendarGameStatus {
+  SCHEDULED
+  PREGAME
+  LIVE
+  FINAL
+  POSTPONED
+  CANCELLED
+  UNKNOWN
+}
+
+type HockeyCalendarTeam {
+  providerId: ID!
+  abbreviation: String!
+  name: String!
+  logo: String
+  score: Int
+}
+
+type HockeyCalendarGame {
+  providerId: ID!
+  provider: String!
+  league: String!
+  season: String!
+  gameType: Int!
+  startTime: String!
+  status: HockeyCalendarGameStatus!
+  providerStatus: String!
+  venue: String
+  neutralSite: Boolean!
+  homeTeam: HockeyCalendarTeam!
+  awayTeam: HockeyCalendarTeam!
+}
+
+type HockeyCalendarMetadata {
+  provider: String!
+  source: String!
+  fetchedAt: String!
+  cached: Boolean!
+}
+
+type HockeyCalendar {
+  anchorDate: String!
+  rangeStart: String
+  rangeEnd: String
+  games: [HockeyCalendarGame!]!
+  metadata: HockeyCalendarMetadata!
+}
+
+extend type Query {
+  "NHL schedule week containing the supplied ISO date."
+  nhlSchedule(date: String!): HockeyCalendar!
+}

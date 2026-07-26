@@ -70,3 +70,48 @@ export interface HockeyGame {
   events: HockeyGameEvent[];
   watchability?: HockeyWatchabilityScore;
 }
+
+export type HockeyCalendarGameStatus =
+  | 'scheduled'
+  | 'pregame'
+  | 'live'
+  | 'final'
+  | 'postponed'
+  | 'cancelled'
+  | 'unknown';
+
+export interface HockeyCalendarTeam {
+  providerId: string;
+  abbreviation: string;
+  name: string;
+  logo?: string;
+  score?: number;
+}
+
+export interface HockeyCalendarGame {
+  providerId: string;
+  provider: 'NHL';
+  league: 'NHL';
+  season: string;
+  gameType: number;
+  startTime: string;
+  status: HockeyCalendarGameStatus;
+  providerStatus: string;
+  venue?: string;
+  neutralSite: boolean;
+  homeTeam: HockeyCalendarTeam;
+  awayTeam: HockeyCalendarTeam;
+}
+
+export interface HockeyCalendar {
+  anchorDate: string;
+  rangeStart: string | null;
+  rangeEnd: string | null;
+  games: HockeyCalendarGame[];
+  metadata: {
+    provider: 'NHL';
+    source: string;
+    fetchedAt: string;
+    cached: boolean;
+  };
+}

@@ -6,6 +6,7 @@ import config from '../../../../../config/env.js';
 
 export const NHL_API_ENDPOINTS = {
   STANDINGS: `${config.NHL_API_BASE_URL}/standings`,
+  SCHEDULE: (date: string) => `${config.NHL_API_BASE_URL}/schedule/${date}`,
   TEAM_STATS: (teamId: string, season: string) => `https://api.nhle.com/stats/rest/en/team/summary?cayenneExp=seasonId=${season} and teamId=${teamId}`,
   POWERPLAY_STATS: (season: string) => `https://api.nhle.com/stats/rest/en/team/powerplay?cayenneExp=seasonId=${season}`,
 } as const;
@@ -33,6 +34,7 @@ export const NHL_SEASONS = {
 
 export const NHL_ERROR_MESSAGES = {
   FETCH_STANDINGS_FAILED: 'Failed to fetch NHL standings data',
+  FETCH_SCHEDULE_FAILED: 'Failed to fetch NHL schedule data',
   FETCH_POWERPLAY_FAILED: 'Failed to fetch NHL powerplay statistics',
   TEAM_NOT_FOUND: 'NHL team not found',
   INVALID_SEASON_FORMAT: 'Invalid NHL season format provided',

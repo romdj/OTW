@@ -54,9 +54,13 @@ Contract tests are designed to make minimal API calls. Run them sparingly.
 - `/tennis/matches` - Match data
 
 ### BALLDONTLIE F1 (`balldontlie-f1.contract.test.ts`)
-- `/formula1/races` - Race calendar with sessions
-- `/formula1/drivers` - Driver standings
-- `/formula1/constructors` - Constructor standings
+- `/f1/v1/events` - Race weekends and cursor envelope
+- `/f1/v1/sessions` - Session identity and UTC timing
+- `/f1/v1/driver_standings` - Driver standings
+- `/f1/v1/team_standings` - Constructor standings
+
+These contracts skip only when `BALLDONTLIE_API_KEY` is absent. Provider,
+network, entitlement, or response-shape failures fail the suite.
 
 ## When to Update
 

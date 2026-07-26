@@ -9,6 +9,10 @@ import { logger } from '../../../../../utils/logger.js';
 import { atpRankingsService } from '../services/rankingsService.js';
 import { atpTournamentsService } from '../services/tournamentsService.js';
 import { ATP_ERROR_MESSAGES } from '../constants/index.js';
+import { wtaRankingsService } from '../../wta/services/rankingsService.js';
+import { wtaTournamentsService } from '../../wta/services/tournamentsService.js';
+import { ballDontLieTennisProvider } from '../../../providers/balldontlie.js';
+import { davisCupService } from '../../itf/davisCupService.js';
 
 // Transform surface to GraphQL enum (uppercase)
 const surfaceToEnum: Record<string, string> = {
@@ -78,18 +82,21 @@ export const tennisResolvers = {
         const tour = (args.tour || 'ATP').toUpperCase();
         const type = (args.type || 'SINGLES').toUpperCase();
 
-        // TODO: Add WTA support
-        if (tour === 'wta') {
-          logger.warn('WTA rankings not yet implemented, returning ATP');
+        if (tour === 'ITF') {
+          throw new Error('ITF does not publish an ATP/WTA-style combined ranking');
         }
-
-        const rankings = await atpRankingsService.getRankings(args);
+        const rankings = await ballDontLieTennisProvider.rankings(
+          tour as 'ATP' | 'WTA',
+          args.limit,
+        );
 
         return rankings.map(entry => ({
           ...entry,
           tour,
           type,
-          movement: atpRankingsService.getRankingMovement(entry.rank, entry.previousRank),
+          movement: tour === 'WTA'
+            ? wtaRankingsService.getRankingMovement(entry.rank, entry.previousRank)
+            : atpRankingsService.getRankingMovement(entry.rank, entry.previousRank),
         }));
       } catch (error) {
         logger.error({
@@ -106,8 +113,29 @@ export const tennisResolvers = {
     tennisTournaments: async (_: unknown, args: TournamentsQueryArgs) => {
       try {
         logger.info({ args }, 'Tennis tournaments query received');
-        const tournaments = await atpTournamentsService.getTournaments(args);
-        return tournaments.map(transformTournament);
+        const tour = String(args.tour ?? 'ATP').toUpperCase();
+        if (tour === 'ITF') throw new Error('Use davisCupEvent for ITF competitions');
+        if (tour === 'WTA') {
+          const tournaments = await wtaTournamentsService.getTournaments({
+            year: args.year,
+            surface: args.surface,
+            category: args.category as 'grand_slam' | 'wta_1000' | 'wta_500' | 'wta_250' | undefined,
+          });
+          return tournaments.map(tournament => ({
+            ...tournament,
+            surface: surfaceToEnum[tournament.surface],
+            category: categoryToEnum[tournament.category],
+            points: {
+              winner: tournament.points,
+              finalist: 0,
+              semifinalist: 0,
+              quarterfinalist: 0,
+              round16: 0,
+              round32: 0,
+            },
+          }));
+        }
+        return (await atpTournamentsService.getTournaments(args)).map(transformTournament);
       } catch (error) {
         logger.error({
           args,
@@ -140,8 +168,49 @@ export const tennisResolvers = {
     tennisMatches: async (_: unknown, args: MatchesQueryArgs) => {
       try {
         logger.info({ args }, 'Tennis matches query received');
-        const matches = await atpTournamentsService.getMatches(args);
-        return matches.map(transformMatch);
+        const tour = String((args as MatchesQueryArgs & { tour?: string }).tour ?? 'ATP').toUpperCase();
+        if (tour === 'ITF') throw new Error('Use davisCupTies for ITF competition matches');
+        const matches = await ballDontLieTennisProvider.matches(tour as 'ATP' | 'WTA', {
+          tournamentId: args.tournamentId,
+          playerId: args.playerId,
+          status: args.status?.toUpperCase() as never,
+          date: args.date,
+        });
+        return matches.map(match => ({
+          id: match.providerId,
+          tournamentId: match.eventId,
+          tournamentName: '',
+          round: match.round ?? '',
+          surface: 'UNKNOWN',
+          player1: {
+            id: match.competitors[0].providerId,
+            name: match.competitors[0].name,
+            seed: match.competitors[0].seed,
+            countryCode: match.competitors[0].countryCode ?? '',
+          },
+          player2: {
+            id: match.competitors[1].providerId,
+            name: match.competitors[1].name,
+            seed: match.competitors[1].seed,
+            countryCode: match.competitors[1].countryCode ?? '',
+          },
+          score: {
+            sets: match.sets.map(set => ({
+              player1: set.player1Games,
+              player2: set.player2Games,
+              tiebreak: set.player1Tiebreak !== undefined && set.player2Tiebreak !== undefined
+                ? { player1: set.player1Tiebreak, player2: set.player2Tiebreak }
+                : undefined,
+            })),
+            winner: match.winnerId === match.competitors[0].otwId ? 'player1'
+              : match.winnerId === match.competitors[1].otwId ? 'player2' : undefined,
+            retired: match.status === 'RETIRED',
+            walkover: match.status === 'WALKOVER',
+          },
+          formattedScore: match.scoreText,
+          scheduledTime: match.scheduledAt,
+          status: match.status,
+        }));
       } catch (error) {
         logger.error({
           args,
@@ -182,6 +251,39 @@ export const tennisResolvers = {
         throw error;
       }
     },
+
+    tennisEventsV2: async (_: unknown, args: { tour: string; season?: number }) => {
+      const tour = args.tour.toUpperCase();
+      if (tour === 'ITF') {
+        throw new Error('Use davisCupEvent for ITF competitions');
+      }
+      return ballDontLieTennisProvider.events(tour as 'ATP' | 'WTA', { season: args.season });
+    },
+
+    tennisMatchesV2: async (_: unknown, args: {
+      tour: string;
+      season?: number;
+      tournamentId?: string;
+      playerId?: string;
+      status?: string;
+      date?: string;
+      limit?: number;
+    }) => {
+      const tour = args.tour.toUpperCase();
+      if (tour === 'ITF') {
+        throw new Error('Use davisCupTies for ITF competition matches');
+      }
+      return ballDontLieTennisProvider.matches(tour as 'ATP' | 'WTA', {
+        ...args,
+        status: args.status as never,
+      });
+    },
+
+    davisCupEvent: async (_: unknown, { season }: { season: number }) =>
+      davisCupService.getEvent(season),
+
+    davisCupTies: async (_: unknown, { season }: { season: number }) =>
+      davisCupService.getTies(season),
   },
 
   // Field resolvers for nested types

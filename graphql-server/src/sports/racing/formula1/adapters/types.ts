@@ -2,13 +2,20 @@
  * F1 API Response Types
  *
  * Types for F1 data source responses.
- * Compatible with Ergast API structure (retiring 2025) and OpenF1.
+ * Provider-neutral normalized records. Provider DTOs must not escape adapters.
  */
+
+export interface F1Provenance {
+  source: string;
+  fetchedAt: string;
+  isStale: boolean;
+}
 
 /**
  * Raw Grand Prix data from calendar API
  */
 export interface F1RaceData {
+  providerId?: string;
   season: number;
   round: number;
   raceName: string;
@@ -21,6 +28,8 @@ export interface F1RaceData {
   time?: string; // UTC time
   format: 'standard' | 'sprint';
   sessions: F1SessionData[];
+  status?: 'upcoming' | 'in_progress' | 'completed' | 'cancelled';
+  provenance: F1Provenance;
 }
 
 /**
@@ -29,7 +38,10 @@ export interface F1RaceData {
 export interface F1SessionData {
   type: string;
   date: string;
-  time: string; // UTC
+  time: string;
+  localTime?: string;
+  status?: 'scheduled' | 'live' | 'completed' | 'delayed' | 'cancelled' | 'red_flagged';
+  providerId?: string;
 }
 
 /**
@@ -85,6 +97,7 @@ export interface F1DriverStandingData {
   wins: number;
   driver: F1DriverData;
   constructors: F1ConstructorData[];
+  provenance: F1Provenance;
 }
 
 /**
@@ -96,6 +109,7 @@ export interface F1ConstructorStandingData {
   points: number;
   wins: number;
   constructor: F1ConstructorData;
+  provenance: F1Provenance;
 }
 
 /**

@@ -19,6 +19,7 @@ export const resolvers = {
   Team: teamsStandings.Team,
   TennisRanking: teamsStandings.TennisRanking,
   TennisMatch: teamsStandings.TennisMatch,
+  HockeyCalendarGame: teamsStandings.HockeyCalendarGame,
   // Prioritization type resolvers
   PrioritizedEventList: priorityResolvers.PrioritizedEventList,
   EventPriority: priorityResolvers.EventPriority,

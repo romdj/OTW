@@ -97,3 +97,40 @@ export interface TransformedTeam {
   wins: number;
   powerplayStats?: PowerplayStats;
 }
+
+export interface NHLApiScheduleTeam {
+  id: number;
+  abbrev: string;
+  logo?: string;
+  score?: number;
+  commonName?: {
+    default: string;
+  };
+  placeName?: {
+    default: string;
+  };
+}
+
+export interface NHLApiScheduleGame {
+  id: number;
+  season: number;
+  gameType: number;
+  gameState: string;
+  gameScheduleState?: string;
+  startTimeUTC: string;
+  venue?: {
+    default: string;
+  };
+  neutralSite?: boolean;
+  awayTeam: NHLApiScheduleTeam;
+  homeTeam: NHLApiScheduleTeam;
+}
+
+export interface NHLApiScheduleDay {
+  date: string;
+  games: NHLApiScheduleGame[];
+}
+
+export interface NHLApiScheduleResponse {
+  gameWeek: NHLApiScheduleDay[];
+}

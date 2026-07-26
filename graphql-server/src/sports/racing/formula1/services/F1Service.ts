@@ -4,8 +4,13 @@
  * Provides cached access to race calendar, standings, and championship battle calculations.
  */
 
-import { F1Adapter } from '../adapters/F1Adapter.js';
-import type { F1RaceData, F1DriverStandingData, F1ConstructorStandingData } from '../adapters/types.js';
+import { BallDontLieF1Adapter } from '../adapters/BallDontLieF1Adapter.js';
+import type {
+  F1DataAdapter,
+  F1RaceData,
+  F1DriverStandingData,
+  F1ConstructorStandingData,
+} from '../adapters/types.js';
 import type {
   GrandPrix,
   Session,
@@ -19,7 +24,12 @@ import type {
   WeekendFormat,
   RaceExcitement,
 } from '../types.js';
-import { calculateMaxPoints, canStillWinChampionship, calculateClosenessScore } from '../types.js';
+import {
+  calculateMaxConstructorPoints,
+  calculateMaxPoints,
+  canStillWinChampionship,
+  calculateClosenessScore,
+} from '../types.js';
 
 /**
  * Cache entry with expiration
@@ -34,7 +44,7 @@ interface CacheEntry<T> {
  * F1 Service
  */
 export class F1Service {
-  private readonly adapter: F1Adapter;
+  private readonly adapter: F1DataAdapter;
   private readonly cacheTTL: number;
 
   // Caches
@@ -42,8 +52,8 @@ export class F1Service {
   private driverStandingsCache: Map<string, CacheEntry<DriverStanding[]>> = new Map();
   private constructorStandingsCache: Map<string, CacheEntry<ConstructorStanding[]>> = new Map();
 
-  constructor(adapter?: F1Adapter, cacheTTLMinutes: number = 60) {
-    this.adapter = adapter ?? new F1Adapter();
+  constructor(adapter?: F1DataAdapter, cacheTTLMinutes: number = 60) {
+    this.adapter = adapter ?? new BallDontLieF1Adapter();
     this.cacheTTL = cacheTTLMinutes * 60 * 1000;
   }
 
@@ -195,16 +205,43 @@ export class F1Service {
       (gp) => gp.format === 'sprint' && gp.status !== 'completed'
     ).length;
 
-    const maxPointsAvailable = calculateMaxPoints(racesRemaining, sprintsRemaining);
+    const maxPointsAvailable = calculateMaxPoints(racesRemaining, sprintsRemaining, targetSeason);
+    const maxConstructorPointsAvailable = calculateMaxConstructorPoints(
+      racesRemaining,
+      sprintsRemaining,
+      targetSeason
+    );
+
+    const driverLeaderPoints = driverStandings[0]?.points ?? 0;
+    for (const standing of driverStandings) {
+      standing.theoreticalMaxPoints = standing.points + maxPointsAvailable;
+      standing.canWinTitle = canStillWinChampionship(
+        standing.points,
+        driverLeaderPoints,
+        maxPointsAvailable
+      );
+    }
+    const constructorLeaderPoints = constructorStandings[0]?.points ?? 0;
+    for (const standing of constructorStandings) {
+      standing.theoreticalMaxPoints = standing.points + maxConstructorPointsAvailable;
+      standing.canWinTitle = canStillWinChampionship(
+        standing.points,
+        constructorLeaderPoints,
+        maxConstructorPointsAvailable
+      );
+    }
 
     // Analyze driver championship
     const driverLeader = driverStandings[0];
+    const constructorLeader = constructorStandings[0];
+    if (!driverLeader || !constructorLeader) {
+      throw new Error(`F1 championship standings are unavailable for ${targetSeason}`);
+    }
     const driverChallengers = driverStandings.filter((d) => d.canWinTitle && d.position !== 1);
     const driverEliminated = driverStandings.filter((d) => !d.canWinTitle);
     const driverGap = driverStandings.length > 1 ? driverLeader.points - driverStandings[1].points : 0;
 
     // Analyze constructor championship
-    const constructorLeader = constructorStandings[0];
     const constructorChallengers = constructorStandings.filter((c) => c.canWinTitle && c.position !== 1);
     const constructorEliminated = constructorStandings.filter((c) => !c.canWinTitle);
     const constructorGap = constructorStandings.length > 1
@@ -252,26 +289,29 @@ export class F1Service {
     const startDate = new Date(raw.sessions[0]?.date || raw.date);
     const endDate = raceDate;
 
-    let status: 'upcoming' | 'in_progress' | 'completed' = 'upcoming';
-    if (now > endDate) {
+    let status: 'upcoming' | 'in_progress' | 'completed' | 'cancelled' = 'upcoming';
+    if (raw.status) {
+      status = raw.status;
+    } else if (now > endDate) {
       status = 'completed';
     } else if (now >= startDate && now <= endDate) {
       status = 'in_progress';
     }
 
     const sessions: Session[] = raw.sessions.map((s) => ({
-      id: `${raw.season}_${raw.round}_${s.type}`,
+      id: s.providerId ?? `${raw.season}_${raw.round}_${s.type}`,
       grandPrixId: `${raw.season}_${raw.round}`,
       type: s.type as SessionType,
       name: this.formatSessionName(s.type),
       date: new Date(s.date),
       startTime: s.time,
       startTimeUTC: s.time,
-      status: new Date(s.date) < now ? 'completed' : 'scheduled',
+      status: s.status ?? (new Date(s.date) < now ? 'completed' : 'scheduled'),
     }));
 
     return {
       id: `${raw.season}_${raw.round}`,
+      providerId: raw.providerId,
       name: raw.raceName,
       officialName: raw.raceName,
       slug: this.slugify(raw.raceName),
@@ -299,6 +339,9 @@ export class F1Service {
       endDate,
       status,
       sessions,
+      source: raw.provenance.source,
+      fetchedAt: raw.provenance.fetchedAt,
+      isStale: raw.provenance.isStale,
     };
   }
 
@@ -313,8 +356,8 @@ export class F1Service {
     const leaderPoints = allStandings[0]?.points || 0;
     const nextPoints = allStandings[raw.position]?.points || 0;
 
-    // Calculate theoretical max (assumes 24 races, 6 sprints remaining at season start)
-    const theoreticalMax = raw.points + calculateMaxPoints(24, 6);
+    // Populated by championship analysis, where actual remaining events are known.
+    const theoreticalMax = raw.points;
 
     return {
       position: raw.position,
@@ -339,7 +382,7 @@ export class F1Service {
       pointsToLeader: leaderPoints - raw.points,
       pointsToNext: raw.position > 1 ? raw.points - nextPoints : 0,
       theoreticalMaxPoints: theoreticalMax,
-      canWinTitle: canStillWinChampionship(raw.points, leaderPoints, calculateMaxPoints(24, 6)),
+      canWinTitle: true,
     };
   }
 
@@ -354,8 +397,7 @@ export class F1Service {
     const leaderPoints = allStandings[0]?.points || 0;
     const nextPoints = allStandings[raw.position]?.points || 0;
 
-    // Constructor max is 2x driver max (2 drivers per team)
-    const theoreticalMax = raw.points + calculateMaxPoints(24, 6) * 2;
+    const theoreticalMax = raw.points;
 
     return {
       position: raw.position,
@@ -377,7 +419,7 @@ export class F1Service {
       pointsToLeader: leaderPoints - raw.points,
       pointsToNext: raw.position > 1 ? raw.points - nextPoints : 0,
       theoreticalMaxPoints: theoreticalMax,
-      canWinTitle: canStillWinChampionship(raw.points, leaderPoints, calculateMaxPoints(24, 6) * 2),
+      canWinTitle: true,
     };
   }
 
