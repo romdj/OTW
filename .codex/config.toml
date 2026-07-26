@@ -1,0 +1,114 @@
+[agents]
+max_threads = 12
+
+[agents.american_football_data]
+description = "Owns NFL and NCAA football data-source evaluation, ingestion, normalization, and contract testing."
+config_file = "agents/american-football-data.toml"
+
+[agents.association_football_data]
+description = "Owns soccer competition, club, fixture, event, and standings integrations."
+config_file = "agents/association-football-data.toml"
+
+[agents.basketball_data]
+description = "Owns basketball league, team, game, play-by-play, and standings integrations."
+config_file = "agents/basketball-data.toml"
+
+[agents.handball_data]
+description = "Owns handball competition, fixture, event, team, and standings integrations."
+config_file = "agents/handball-data.toml"
+
+[agents.ice_hockey_data]
+description = "Owns NHL, PWHL, and IIHF data integrations and shared ice-hockey normalization."
+config_file = "agents/ice-hockey-data.toml"
+
+[agents.tennis_data]
+description = "Owns ATP, WTA, and ITF player, ranking, tournament, and match integrations."
+config_file = "agents/tennis-data.toml"
+
+[agents.volleyball_data]
+description = "Owns indoor and beach volleyball competition, match, team, and standings integrations."
+config_file = "agents/volleyball-data.toml"
+
+[agents.cycling_data]
+description = "Owns road and cyclocross race, stage, rider, team, and classification integrations."
+config_file = "agents/cycling-data.toml"
+
+[agents.formula1_data]
+description = "Owns Formula 1 calendar, session, timing, driver, constructor, and result integrations."
+config_file = "agents/formula1-data.toml"
+
+[agents.motogp_data]
+description = "Owns MotoGP calendar, session, timing, rider, constructor, and result integrations."
+config_file = "agents/motogp-data.toml"
+
+[agents.rally_data]
+description = "Owns rally championship, event, stage, crew, timing, and classification integrations."
+config_file = "agents/rally-data.toml"
+
+[agents.superbike_data]
+description = "Owns superbike calendar, session, timing, rider, constructor, and result integrations."
+config_file = "agents/superbike-data.toml"
+
+[agents.infrastructure_cicd]
+description = "Owns CI/CD, containerization, deployment automation, environments, observability, and operational reliability."
+config_file = "agents/infrastructure-cicd.toml"
+
+[agents.ui_engineer]
+description = "Owns implementation quality for the SvelteKit and Flutter visual interfaces and shared design-system components."
+config_file = "agents/ui-engineer.toml"
+
+[agents.frontend_engineer]
+description = "Owns SvelteKit frontend architecture, GraphQL integration, state management, performance, accessibility, and automated verification."
+config_file = "agents/frontend-engineer.toml"
+
+[agents.ux_designer]
+description = "Owns user journeys, information architecture, interaction design, accessibility, usability validation, and UX specifications."
+config_file = "agents/ux-designer.toml"
+
+[agents.american_football_analyst]
+description = "Analyzes NFL and NCAA football data, competitive context, and spoiler-safe watchability signals."
+config_file = "agents/american-football-analyst.toml"
+
+[agents.association_football_analyst]
+description = "Analyzes soccer match, competition, and contextual data for trustworthy insights and watchability."
+config_file = "agents/association-football-analyst.toml"
+
+[agents.basketball_analyst]
+description = "Analyzes basketball games, possessions, standings context, and excitement signals."
+config_file = "agents/basketball-analyst.toml"
+
+[agents.handball_analyst]
+description = "Analyzes handball matches, competitions, and sport-specific excitement signals."
+config_file = "agents/handball-analyst.toml"
+
+[agents.ice_hockey_analyst]
+description = "Analyzes NHL, PWHL, and IIHF games, standings context, and hockey watchability signals."
+config_file = "agents/ice-hockey-analyst.toml"
+
+[agents.tennis_analyst]
+description = "Analyzes ATP, WTA, and ITF matches, tournaments, and tennis watchability signals."
+config_file = "agents/tennis-analyst.toml"
+
+[agents.volleyball_analyst]
+description = "Analyzes indoor and beach volleyball matches, tournaments, and excitement signals."
+config_file = "agents/volleyball-analyst.toml"
+
+[agents.cycling_analyst]
+description = "Analyzes road and cyclocross races, stages, classifications, and race excitement."
+config_file = "agents/cycling-analyst.toml"
+
+[agents.formula1_analyst]
+description = "Analyzes Formula 1 sessions, races, championships, and race watchability."
+config_file = "agents/formula1-analyst.toml"
+
+[agents.motogp_analyst]
+description = "Analyzes MotoGP sessions, races, championships, and race watchability."
+config_file = "agents/motogp-analyst.toml"
+
+[agents.rally_analyst]
+description = "Analyzes rally stages, events, championships, and event watchability."
+config_file = "agents/rally-analyst.toml"
+
+[agents.superbike_analyst]
+description = "Analyzes superbike sessions, races, championships, and race watchability."
+config_file = "agents/superbike-analyst.toml"
