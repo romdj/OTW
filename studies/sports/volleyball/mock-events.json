@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "MOCK",
+  "events": [
+    {
+      "source": "MOCK", "eventId": "mock-volley-001", "discipline": "INDOOR", "competition": "Mock Nations Series", "season": "2028", "stage": "POOL", "state": "PRE_EVENT", "scheduledStartUtc": "2028-06-10T17:00:00Z",
+      "participants": { "home": { "type": "TEAM", "id": "mock-azure", "name": "Azure" }, "away": { "type": "TEAM", "id": "mock-coral", "name": "Coral" } },
+      "ruleProfile": { "bestOf": 5, "regularSetTarget": 25, "decidingSetTarget": 15, "winBy": 2 },
+      "safe": { "pool": "B", "officialStakes": "Both teams remain in contention for a knockout seed." }, "reveal": null, "sealedOutcome": null,
+      "model": { "importance": 61, "watchability": null, "confidence": 0.8, "coverage": ["schedule", "official_pool_table"], "format": null }
+    },
+    {
+      "source": "MOCK", "eventId": "mock-volley-002", "discipline": "BEACH", "competition": "Mock Beach Elite", "season": "2028", "stage": "ROUND_OF_16", "state": "LIVE_SAFE", "scheduledStartUtc": "2028-07-02T10:30:00Z",
+      "participants": { "home": { "type": "PAIR", "id": "mock-pair-sun", "players": ["Ari Vale", "Noa Reef"] }, "away": { "type": "PAIR", "id": "mock-pair-dune", "players": ["Mira Sand", "Eli Coast"] } },
+      "ruleProfile": { "bestOf": 3, "regularSetTarget": 21, "decidingSetTarget": 15, "winBy": 2 },
+      "safe": { "liveStatus": "IN_PROGRESS", "setHidden": true, "scoreHidden": true, "weatherKnownPregame": "moderate wind" }, "reveal": null, "sealedOutcome": null,
+      "model": { "importance": 68, "watchability": null, "confidence": 0.7, "coverage": ["schedule", "live_status", "weather"], "format": null }
+    },
+    {
+      "source": "MOCK", "eventId": "mock-volley-003", "discipline": "INDOOR", "competition": "Mock Continental Cup", "season": "2028-29", "stage": "SECOND_LEG", "state": "COMPLETED_PROTECTED", "scheduledStartUtc": "2029-02-18T19:00:00Z",
+      "participants": { "home": { "type": "TEAM", "id": "mock-north", "name": "North VC" }, "away": { "type": "TEAM", "id": "mock-port", "name": "Port Volley" } },
+      "ruleProfile": { "bestOf": 5, "regularSetTarget": 25, "decidingSetTarget": 15, "winBy": 2, "tieFormat": "TWO_MATCH", "goldenSetTrigger": "MATCH_WINS_LEVEL", "goldenSetTarget": 15 },
+      "safe": { "completed": true, "firstLegWinnerTeamId": "mock-port", "scoreHidden": true, "goldenSetOccurredHidden": true, "qualifiedTeamHidden": true },
+      "reveal": null, "sealedOutcome": { "matchWinnerTeamId": "mock-north", "setScores": [{ "home": 25, "away": 20 }, { "home": 23, "away": 25 }, { "home": 25, "away": 19 }, { "home": 25, "away": 22 }], "goldenSet": { "home": 17, "away": 15 }, "qualifiedTeamId": "mock-north" },
+      "model": { "importance": 88, "watchability": null, "confidence": 0.9, "coverage": ["rally_scores", "tie_context"], "format": null }
+    },
+    {
+      "source": "MOCK", "eventId": "mock-volley-004", "discipline": "INDOOR", "competition": "Mock World Final", "season": "2028", "stage": "FINAL", "state": "REVEALED", "scheduledStartUtc": "2028-09-15T18:00:00Z",
+      "participants": { "home": { "type": "TEAM", "id": "mock-ember", "name": "Ember" }, "away": { "type": "TEAM", "id": "mock-indigo", "name": "Indigo" } },
+      "ruleProfile": { "bestOf": 5, "regularSetTarget": 25, "decidingSetTarget": 15, "winBy": 2 }, "safe": { "officialStakes": "Championship final." },
+      "reveal": { "winnerTeamId": "mock-indigo", "setScores": [{ "home": 25, "away": 22 }, { "home": 24, "away": 26 }, { "home": 25, "away": 18 }, { "home": 21, "away": 25 }, { "home": 14, "away": 16 }], "derived": { "tiesReached": 31, "leadChanges": 12, "longestRun": 6, "deuceRallies": 8, "matchPointsSaved": 2 }, "actions": { "homeAces": 7, "awayAces": 9, "homeBlockPoints": 11, "awayBlockPoints": 10, "definition": "MOCK_STAT_MANUAL_V1" } },
+      "sealedOutcome": null, "model": { "importance": 96, "watchability": 94, "confidence": 0.91, "coverage": ["rally_scores", "actions", "final_context"], "format": "FULL_REPLAY" }
+    },
+    {
+      "source": "MOCK", "eventId": "mock-volley-005", "discipline": "BEACH", "competition": "Mock Beach Open", "season": "2028", "stage": "POOL", "state": "REVEALED", "scheduledStartUtc": "2028-08-04T08:00:00Z",
+      "participants": { "home": { "type": "PAIR", "id": "mock-pair-wave", "players": ["Lina Wave", "Tess Bay"] }, "away": { "type": "PAIR", "id": "mock-pair-palm", "players": ["Ivo Palm", "Ren Shore"] } },
+      "ruleProfile": { "bestOf": 3, "regularSetTarget": 21, "decidingSetTarget": 15, "winBy": 2 }, "safe": { "pool": "D" },
+      "reveal": { "winnerTeamId": "mock-pair-wave", "setScores": [{ "home": 21, "away": 12 }, { "home": 21, "away": 14 }], "derived": { "tiesReached": 4, "leadChanges": 1, "longestRun": 7 }, "weather": { "windKph": 19, "temperatureC": 31 } },
+      "sealedOutcome": null, "model": { "importance": 39, "watchability": 46, "confidence": 0.68, "coverage": ["rally_scores", "weather"], "format": "HIGHLIGHTS" }
+    },
+    {
+      "source": "MOCK", "eventId": "mock-volley-006", "discipline": "INDOOR", "competition": "Mock National League", "season": "2028-29", "stage": "LEAGUE", "state": "FORFEIT_FINAL", "scheduledStartUtc": "2029-01-12T18:30:00Z",
+      "participants": { "home": { "type": "TEAM", "id": "mock-lake", "name": "Lake Six" }, "away": { "type": "TEAM", "id": "mock-hill", "name": "Hill United" } },
+      "ruleProfile": { "bestOf": 5, "forfeitDisposition": "COMPETITION_AUTHORITY" },
+      "safe": { "completed": true, "forfeitHidden": true, "resultHidden": true },
+      "reveal": { "officialDisposition": "FORFEIT", "awardedWinnerTeamId": "mock-lake", "awardedSetScore": { "home": 3, "away": 0 }, "rallies": null },
+      "sealedOutcome": null, "model": { "importance": 44, "watchability": null, "confidence": 1, "coverage": ["official_disposition"], "format": "SKIP" }
+    }
+  ]
+}

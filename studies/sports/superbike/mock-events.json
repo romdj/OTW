@@ -1,0 +1,35 @@
+{
+  "schemaVersion":"1.0.0","source":"MOCK","isSynthetic":true,"warning":"Fictional UX fixtures only. Not provider or production data.",
+  "sessions":[
+    {
+      "id":"mock:worldsbk:001","source":"MOCK","isSynthetic":true,"variant":"PRACTICE_PRE",
+      "safe":{"championship":"FIM Superbike World Championship","class":"WORLDSBK","season":2027,"round":3,"event":"Iberian Round","circuit":"Sierra Circuit","sessionType":"FREE_PRACTICE_1","ruleset":"FIM_WSBK_2027","scheduledAt":"2027-04-09T09:30:00Z","entrants":[{"id":"mock:rider:marco-silva","name":"Marco Silva","team":"Rosso Corse","manufacturer":"Rosso"},{"id":"mock:rider:liam-ward","name":"Liam Ward","team":"Crown Racing","manufacturer":"Crown"}],"context":{"weekendConsequenceBand":"LOW","championshipLeverageBand":"LOW"},"importance":{"band":"MEDIUM","confidence":"HIGH","reasons":["First representative weekend pace","You follow Crown Racing"]},"recommendation":{"format":"HIGHLIGHTS","estimatedMinutes":10,"blind":true}},
+      "provenance":{"provider":"MOCK","providerId":"wsbk-001","generatedAt":"2026-07-26T10:00:00Z","completeness":"PRE_SESSION_ONLY"}
+    },
+    {
+      "id":"mock:worldsbk:002","source":"MOCK","isSynthetic":true,"variant":"SUPERPOLE_LIVE_SAFE",
+      "safe":{"championship":"FIM Superbike World Championship","class":"WORLDSBK","season":2027,"round":5,"event":"Lowlands Round","circuit":"Lowlands TT Circuit","sessionType":"SUPERPOLE","ruleset":"FIM_WSBK_2027","scheduledAt":"2027-05-15T09:00:00Z","entrants":[{"id":"mock:rider:aya-nakamura","name":"Aya Nakamura","team":"Hikari Works","manufacturer":"Hikari"},{"id":"mock:rider:tom-valent","name":"Tom Valent","team":"Alpine Independent","manufacturer":"Crown"}],"context":{"setsRace1AndSuperpoleRaceGrid":true,"weekendConsequenceBand":"VERY_HIGH"},"importance":{"band":"HIGH","confidence":"HIGH","reasons":["Sets two starting grids","Closely matched front row"]},"recommendation":{"format":"FULL","blind":true}},
+      "liveSafe":{"stateLabel":"In progress","protectedFieldsAvailable":true},
+      "protected":{"remaining":"01:42","classification":[{"riderId":"mock:rider:aya-nakamura","position":1,"bestLap":"1:34.221"},{"riderId":"mock:rider:tom-valent","position":2,"bestLap":"1:34.249"}],"flag":"GREEN"},
+      "provenance":{"provider":"MOCK","providerId":"wsbk-002","generatedAt":"2027-05-15T09:12:00Z","completeness":"LIVE_LAP_TIMING"}
+    },
+    {
+      "id":"mock:worldsbk:003","source":"MOCK","isSynthetic":true,"variant":"RACE1_COMPLETED_HIDDEN",
+      "safe":{"championship":"FIM Superbike World Championship","class":"WORLDSBK","season":2027,"round":7,"event":"Adriatic Round","circuit":"Circuito del Mare","sessionType":"RACE_1","ruleset":"FIM_WSBK_2027","scheduledAt":"2027-06-12T12:00:00Z","entrants":[{"id":"mock:rider:ines-rocha","name":"Inês Rocha","team":"Lusitania Factory","manufacturer":"Lusitania"},{"id":"mock:rider:liam-ward","name":"Liam Ward","team":"Crown Racing","manufacturer":"Crown"}],"context":{"championshipLeverageBand":"HIGH","fullPoints":true},"importance":{"band":"HIGH","confidence":"HIGH","reasons":["Championship-leading riders","You follow Inês Rocha"]},"recommendation":{"format":"FULL","estimatedMinutes":45,"blind":true}},
+      "protected":{"winnerRiderId":"mock:rider:liam-ward","laps":19,"redFlag":true,"restart":true,"finishGapSeconds":0.091,"watchabilityBand":"VERY_HIGH","tags":["restart","late lead change"]},
+      "provenance":{"provider":"MOCK","providerId":"wsbk-003","generatedAt":"2027-06-12T13:00:00Z","completeness":"OFFICIAL_FINAL_LAP_TIMING"}
+    },
+    {
+      "id":"mock:worldsbk:004","source":"MOCK","isSynthetic":true,"variant":"SUPERPOLE_RACE_REVEALED",
+      "safe":{"championship":"FIM Superbike World Championship","class":"WORLDSBK","season":2027,"round":9,"event":"Bohemian Round","circuit":"Morava Circuit","sessionType":"SUPERPOLE_RACE","ruleset":"FIM_WSBK_2027","scheduledAt":"2027-07-18T09:00:00Z","entrants":[{"id":"mock:rider:marco-silva","name":"Marco Silva","team":"Rosso Corse","manufacturer":"Rosso"},{"id":"mock:rider:aya-nakamura","name":"Aya Nakamura","team":"Hikari Works","manufacturer":"Hikari"}],"context":{"championshipLeverageBand":"HIGH","setsRace2FrontThreeRows":true},"importance":{"band":"VERY_HIGH","confidence":"HIGH","reasons":["Awards points and sets Race 2 front rows","Title contenders"]},"recommendation":{"format":"FULL","estimatedMinutes":22,"blind":false}},
+      "revealed":{"winnerRiderId":"mock:rider:aya-nakamura","podium":["mock:rider:aya-nakamura","mock:rider:marco-silva","mock:rider:ines-rocha"],"laps":10,"finishGapSeconds":0.126,"race2FrontRows":["mock:rider:aya-nakamura","mock:rider:marco-silva","mock:rider:ines-rocha"],"watchability":{"band":"VERY_HIGH","confidence":"HIGH","method":"LAP_INTERVALS","factors":{"battleTension":0.95,"leadUncertainty":0.9,"positionVolatility":0.79,"stakes":0.84,"strategyDivergence":0.42,"execution":0.81}},"leadChanges":6,"persistentOnTrackPositionGainEstimate":21,"officialOvertakes":null,"reasons":["Persistent multi-rider lead battle","Direct Race 2 grid consequences"]},
+      "provenance":{"provider":"MOCK","providerId":"wsbk-004","generatedAt":"2027-07-18T09:30:00Z","completeness":"OFFICIAL_FINAL_HIGH_FREQUENCY_TIMING"}
+    },
+    {
+      "id":"mock:worldsbk:005","source":"MOCK","isSynthetic":true,"variant":"RACE2_REPLACEMENT_MISSING_TIMING",
+      "safe":{"championship":"FIM Superbike World Championship","class":"WORLDSBK","season":2027,"round":11,"event":"Atlantic Round","circuit":"Estoril Coast Circuit","sessionType":"RACE_2","ruleset":"FIM_WSBK_2027","scheduledAt":"2027-09-05T13:00:00Z","entrants":[{"id":"mock:rider:eva-kovac","name":"Eva Kovač","team":"Adria Independent","manufacturer":"Rosso","entryRole":"REPLACEMENT"},{"id":"mock:rider:tom-valent","name":"Tom Valent","team":"Alpine Independent","manufacturer":"Crown","entryRole":"REGULAR"}],"context":{"championshipLeverageBand":"MEDIUM","replacementRider":true,"gridSource":"SUPERPOLE_RACE"},"importance":{"band":"MEDIUM","confidence":"LOW","reasons":["Replacement rider appearance","Incomplete strength baseline"]},"recommendation":{"format":"RECAP","blind":true}},
+      "protected":{"classificationStatus":"PROVISIONAL","winnerRiderId":"mock:rider:tom-valent","replacementFinishPosition":13,"timingAvailable":false,"watchabilityBand":null,"uncertaintyReason":"Classification only; timing unavailable"},
+      "provenance":{"provider":"MOCK","providerId":"wsbk-005","generatedAt":"2027-09-05T14:00:00Z","completeness":"PROVISIONAL_CLASSIFICATION_ONLY"}
+    }
+  ]
+}

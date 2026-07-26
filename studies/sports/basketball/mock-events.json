@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Fictional basketball fixtures for OTW UI/UX research; never production data.",
+  "records": [
+    {
+      "schemaVersion": "1.0.0", "id": "mock-nba-2028-harbor-comets", "source": "MOCK", "fictional": true,
+      "variant": "PRE_EVENT", "knowledgeAsOf": "2028-02-12T22:00:00Z", "spoilerLevel": "NO_HINTS",
+      "event": { "competition": "NBA", "season": "2027-28", "phase": "REGULAR_SEASON", "rulesetRevision": "MOCK_NBA_2028_A", "homeTeam": "Harbor Comets", "awayTeam": "Mesa Arrows", "scheduledStart": "2028-02-13T00:30:00Z", "status": "SCHEDULED", "venue": "Harbor Forum", "neutralSite": false, "periodStructure": { "regulationPeriods": 4, "periodMinutes": 12, "overtimeMinutes": 5 } },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "HIGH", "watchabilityBand": null, "format": "FULL", "approxMinutes": 120, "minutesEstimated": true, "reasonCodes": ["FOLLOWED_TEAM", "STANDINGS_STAKES"], "reasons": ["Features a team you follow", "Important pre-game standings context"], "traits": [{ "key": "stakes", "level": "HIGH" }], "confidence": 0.81, "missingInputs": ["final_active_rosters"] },
+      "safeContext": { "followedParticipants": ["Harbor Comets"], "preGameRecords": [{ "team": "Harbor Comets", "wins": 34, "losses": 18 }, { "team": "Mesa Arrows", "wins": 33, "losses": 19 }] }, "protectedOutcome": null
+    },
+    {
+      "schemaVersion": "1.0.0", "id": "mock-nba-2028-harbor-comets", "source": "MOCK", "fictional": true,
+      "variant": "LIVE_SAFE", "knowledgeAsOf": "2028-02-13T01:24:00Z", "spoilerLevel": "NO_HINTS",
+      "event": { "competition": "NBA", "season": "2027-28", "phase": "REGULAR_SEASON", "rulesetRevision": "MOCK_NBA_2028_A", "homeTeam": "Harbor Comets", "awayTeam": "Mesa Arrows", "scheduledStart": "2028-02-13T00:30:00Z", "status": "LIVE", "venue": "Harbor Forum", "neutralSite": false, "periodStructure": { "regulationPeriods": 4, "periodMinutes": 12, "overtimeMinutes": 5 } },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "HIGH", "watchabilityBand": null, "format": "QUEUE", "approxMinutes": null, "minutesEstimated": true, "reasonCodes": ["FOLLOWED_TEAM", "DETAILS_PROTECTED"], "reasons": ["Features a team you follow", "The game is in progress; details are protected"], "traits": [{ "key": "stakes", "level": "HIGH" }], "confidence": 0.81, "missingInputs": ["completed_game_analysis"] },
+      "safeContext": { "followedParticipants": ["Harbor Comets"], "lifecycleMessage": "In progress; game details protected" }, "protectedOutcome": null
+    },
+    {
+      "schemaVersion": "1.0.0", "id": "mock-nba-2028-harbor-comets", "source": "MOCK", "fictional": true,
+      "variant": "COMPLETED_HIDDEN", "knowledgeAsOf": "2028-02-13T04:00:00Z", "spoilerLevel": "LIGHT_CONTEXT",
+      "event": { "competition": "NBA", "season": "2027-28", "phase": "REGULAR_SEASON", "rulesetRevision": "MOCK_NBA_2028_A", "homeTeam": "Harbor Comets", "awayTeam": "Mesa Arrows", "scheduledStart": "2028-02-13T00:30:00Z", "status": "COMPLETED", "venue": "Harbor Forum", "neutralSite": false, "periodStructure": { "regulationPeriods": 4, "periodMinutes": 12, "overtimeMinutes": 5 } },
+      "recommendation": { "basis": "POST_EVENT_PROTECTED", "importanceBand": "HIGH", "watchabilityBand": "STRONG", "format": "CONDENSED", "approxMinutes": 42, "minutesEstimated": true, "reasonCodes": ["TASTE_MATCH", "FOLLOWED_TEAM"], "reasons": ["Strong match for your saved basketball preferences", "Features a team you follow"], "traits": [], "confidence": 0.89, "missingInputs": ["verified_replay_duration"] },
+      "safeContext": { "followedParticipants": ["Harbor Comets"], "revealPrompt": "Reveal result and game character" }, "protectedOutcome": null
+    },
+    {
+      "schemaVersion": "1.0.0", "id": "mock-nba-2028-harbor-comets", "source": "MOCK", "fictional": true,
+      "variant": "REVEALED", "knowledgeAsOf": "2028-02-13T05:00:00Z", "spoilerLevel": "RESULTS_ALLOWED",
+      "event": { "competition": "NBA", "season": "2027-28", "phase": "REGULAR_SEASON", "rulesetRevision": "MOCK_NBA_2028_A", "homeTeam": "Harbor Comets", "awayTeam": "Mesa Arrows", "scheduledStart": "2028-02-13T00:30:00Z", "status": "COMPLETED", "venue": "Harbor Forum", "neutralSite": false, "periodStructure": { "regulationPeriods": 4, "periodMinutes": 12, "overtimeMinutes": 5 } },
+      "recommendation": { "basis": "POST_EVENT_REVEALED", "importanceBand": "HIGH", "watchabilityBand": "STRONG", "format": "CONDENSED", "approxMinutes": 42, "minutesEstimated": true, "reasonCodes": ["SUSTAINED_TENSION", "HIGH_LEVERAGE_EXECUTION"], "reasons": ["Competitive uncertainty persisted into the final possessions", "Both teams executed difficult high-leverage possessions"], "traits": [{ "key": "tension", "level": "VERY_HIGH" }, { "key": "execution", "level": "HIGH" }, { "key": "flow", "level": "MEDIUM" }], "confidence": 0.89, "missingInputs": ["verified_replay_duration"] },
+      "safeContext": { "followedParticipants": ["Harbor Comets"] },
+      "protectedOutcome": { "winner": "Harbor Comets", "finalScore": { "home": 111, "away": 108 }, "overtimePeriods": 0, "actualDurationMinutes": 132, "classificationStatus": "FINAL", "scorePath": [{ "period": 1, "clock": "00:00", "home": 25, "away": 29 }, { "period": 2, "clock": "00:00", "home": 54, "away": 55 }, { "period": 3, "clock": "00:00", "home": 81, "away": 84 }, { "period": 4, "clock": "00:00", "home": 111, "away": 108 }], "features": { "tension": { "value": 0.91, "confidence": 0.94, "coverage": 0.98 }, "gameFlow": { "value": 0.58, "confidence": 0.88, "coverage": 0.96 }, "execution": { "value": 0.79, "confidence": 0.84, "coverage": 0.91 }, "climax": { "value": 0.88, "confidence": 0.92, "coverage": 0.97 }, "garbageTimeShare": { "value": 0.01, "confidence": 0.86, "coverage": 0.95 }, "endGameFoulDrag": { "value": 0.43, "confidence": 0.76, "coverage": 0.88 } }, "notablePerformances": [{ "player": "Ari Cole", "team": "Harbor Comets", "points": 31, "assists": 9, "rarityConfidence": 0.72 }], "chapters": [{ "label": "Late third-quarter response", "startMinute": 67 }, { "label": "Final competitive phase", "startMinute": 102 }] }
+    },
+    {
+      "schemaVersion": "1.0.0", "id": "mock-wnba-2028-lakeside-orbit", "source": "MOCK", "fictional": true,
+      "variant": "REVEALED", "knowledgeAsOf": "2028-07-22T04:00:00Z", "spoilerLevel": "RESULTS_ALLOWED",
+      "event": { "competition": "WNBA", "season": "2028", "phase": "PLAYOFFS", "rulesetRevision": "MOCK_WNBA_2028_A", "homeTeam": "Lakeside Current", "awayTeam": "Orchard Orbit", "scheduledStart": "2028-07-22T00:00:00Z", "status": "COMPLETED", "venue": "Current Pavilion", "neutralSite": false, "periodStructure": { "regulationPeriods": 4, "periodMinutes": 10, "overtimeMinutes": 5 } },
+      "recommendation": { "basis": "POST_EVENT_REVEALED", "importanceBand": "VERY_HIGH", "watchabilityBand": "EXCEPTIONAL", "format": "FULL", "approxMinutes": 110, "minutesEstimated": true, "reasonCodes": ["ELIMINATION_STAKES", "COMEBACK", "INDIVIDUAL_EXECUTION"], "reasons": ["The game carried elimination stakes", "A deep recovery produced sustained late uncertainty"], "traits": [{ "key": "stakes", "level": "VERY_HIGH" }, { "key": "recovery", "level": "VERY_HIGH" }, { "key": "execution", "level": "HIGH" }], "confidence": 0.93, "missingInputs": [] },
+      "safeContext": { "followedParticipants": [] },
+      "protectedOutcome": { "winner": "Orchard Orbit", "finalScore": { "home": 87, "away": 90 }, "overtimePeriods": 1, "actualDurationMinutes": 148, "classificationStatus": "FINAL", "scorePath": [{ "period": 1, "clock": "00:00", "home": 24, "away": 15 }, { "period": 2, "clock": "00:00", "home": 43, "away": 31 }, { "period": 3, "clock": "00:00", "home": 61, "away": 56 }, { "period": 4, "clock": "00:00", "home": 78, "away": 78 }, { "period": 5, "clock": "00:00", "home": 87, "away": 90 }], "features": { "tension": { "value": 0.95, "confidence": 0.96, "coverage": 0.99 }, "recovery": { "value": 0.92, "confidence": 0.94, "coverage": 0.98 }, "climax": { "value": 0.96, "confidence": 0.95, "coverage": 0.99 }, "consequence": { "value": 0.90, "confidence": 0.98, "coverage": 1.0 } }, "notablePerformances": [{ "player": "Nia Bell", "team": "Orchard Orbit", "points": 28, "rebounds": 11, "rarityConfidence": 0.80 }], "chapters": [{ "label": "Recovery begins", "startMinute": 51 }, { "label": "Final regulation phase", "startMinute": 92 }, { "label": "Extra period", "startMinute": 118 }] }
+    },
+    {
+      "schemaVersion": "1.0.0", "id": "mock-ncaam-2028-northbridge-redwood", "source": "MOCK", "fictional": true,
+      "variant": "COMPLETED_HIDDEN", "knowledgeAsOf": "2028-03-18T22:30:00Z", "spoilerLevel": "NO_HINTS",
+      "event": { "competition": "NCAA_MEN", "season": "2027-28", "phase": "NATIONAL_TOURNAMENT", "rulesetRevision": "MOCK_NCAAM_2028_A", "homeTeam": "Northbridge University", "awayTeam": "Redwood State", "scheduledStart": "2028-03-18T19:10:00Z", "status": "COMPLETED", "venue": "Central Regional Arena", "neutralSite": true, "periodStructure": { "regulationPeriods": 2, "periodMinutes": 20, "overtimeMinutes": 5 } },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "VERY_HIGH", "watchabilityBand": null, "format": "QUEUE", "approxMinutes": null, "minutesEstimated": true, "reasonCodes": ["SINGLE_ELIMINATION", "DETAILS_PROTECTED"], "reasons": ["Single-elimination tournament context", "Completed; recommendation details are protected"], "traits": [{ "key": "stakes", "level": "VERY_HIGH" }], "confidence": 0.77, "missingInputs": ["user_reveal_permission", "complete_play_by_play"] },
+      "safeContext": { "preGameSeeds": [{ "team": "Northbridge University", "seed": 4 }, { "team": "Redwood State", "seed": 13 }], "revealPrompt": "Show recommendation hints" }, "protectedOutcome": null
+    },
+    {
+      "schemaVersion": "1.0.0", "id": "mock-ncaaw-2028-bay-tech-prairie", "source": "MOCK", "fictional": true,
+      "variant": "PRE_EVENT", "knowledgeAsOf": "2028-01-15T16:00:00Z", "spoilerLevel": "LIGHT_CONTEXT",
+      "event": { "competition": "NCAA_WOMEN", "season": "2027-28", "phase": "REGULAR_SEASON", "rulesetRevision": "MOCK_NCAAW_2028_A", "homeTeam": "Bay Tech", "awayTeam": "Prairie College", "scheduledStart": "2028-01-15T20:00:00Z", "status": "SCHEDULED", "venue": "Bay Fieldhouse", "neutralSite": false, "periodStructure": { "regulationPeriods": 4, "periodMinutes": 10, "overtimeMinutes": 5 } },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "MEDIUM", "watchabilityBand": null, "format": "HIGHLIGHTS", "approxMinutes": 15, "minutesEstimated": true, "reasonCodes": ["FOLLOWED_PLAYER", "RANKED_MATCHUP"], "reasons": ["Features a player you follow", "Both teams enter with strong pre-game rankings"], "traits": [{ "key": "personalRelevance", "level": "HIGH" }], "confidence": 0.73, "missingInputs": ["confirmed_player_availability"] },
+      "safeContext": { "followedParticipants": ["Lena Moss"], "preGameRankings": [{ "team": "Bay Tech", "rank": 11 }, { "team": "Prairie College", "rank": 16 }] }, "protectedOutcome": null
+    }
+  ]
+}

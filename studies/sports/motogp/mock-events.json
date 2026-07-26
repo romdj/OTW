@@ -1,0 +1,35 @@
+{
+  "schemaVersion":"1.0.0","source":"MOCK","isSynthetic":true,"warning":"Fictional UX fixtures only. Not provider or production data.",
+  "sessions":[
+    {
+      "id":"mock:motogp:001","source":"MOCK","isSynthetic":true,"variant":"PRACTICE_PRE",
+      "safe":{"championship":"FIM MotoGP World Championship","class":"MOTOGP","season":2027,"round":4,"event":"Adriatic Grand Prix","circuit":"Circuito del Mare","sessionType":"PRACTICE","ruleset":"FIM_GP_2027","scheduledAt":"2027-04-16T13:00:00Z","entrants":[{"id":"mock:rider:elias-navarro","name":"Elias Navarro","team":"Orion Factory Racing","manufacturer":"Orion"},{"id":"mock:rider:kenji-mori","name":"Kenji Mori","team":"Sakura GP","manufacturer":"Sakura"}],"context":{"determinesDirectQ2":true,"championshipLeverageBand":"LOW"},"importance":{"band":"MEDIUM","confidence":"HIGH","reasons":["Determines direct Q2 entry","You follow Kenji Mori"]},"recommendation":{"format":"HIGHLIGHTS","estimatedMinutes":12,"blind":true}},
+      "provenance":{"provider":"MOCK","providerId":"mgp-001","generatedAt":"2026-07-26T10:00:00Z","completeness":"PRE_SESSION_ONLY"}
+    },
+    {
+      "id":"mock:motogp:002","source":"MOCK","isSynthetic":true,"variant":"QUALIFYING_LIVE_SAFE",
+      "safe":{"championship":"FIM MotoGP World Championship","class":"MOTOGP","season":2027,"round":7,"event":"Lowlands Grand Prix","circuit":"Lowlands TT Circuit","sessionType":"Q1","ruleset":"FIM_GP_2027","scheduledAt":"2027-05-29T08:50:00Z","entrants":[{"id":"mock:rider:ana-ribeiro","name":"Ana Ribeiro","team":"Lusitania Independent","manufacturer":"Veloce"},{"id":"mock:rider:mika-lind","name":"Mika Lind","team":"Nordic Works","manufacturer":"Nordic"}],"context":{"q2PlacesAvailable":2,"championshipLeverageBand":"MEDIUM"},"importance":{"band":"HIGH","confidence":"HIGH","reasons":["Q2 advancement session","Followed rider participating"]},"recommendation":{"format":"FULL","blind":true}},
+      "liveSafe":{"stateLabel":"In progress","protectedFieldsAvailable":true},
+      "protected":{"remaining":"02:14","classification":[{"riderId":"mock:rider:ana-ribeiro","position":2,"bestLap":"1:31.442"},{"riderId":"mock:rider:mika-lind","position":3,"bestLap":"1:31.479"}],"flag":"GREEN","q2CutGapSeconds":0.037},
+      "provenance":{"provider":"MOCK","providerId":"mgp-002","generatedAt":"2027-05-29T09:03:00Z","completeness":"LIVE_LAP_TIMING"}
+    },
+    {
+      "id":"mock:motogp:003","source":"MOCK","isSynthetic":true,"variant":"SPRINT_COMPLETED_HIDDEN",
+      "safe":{"championship":"FIM MotoGP World Championship","class":"MOTOGP","season":2027,"round":10,"event":"Alpine Grand Prix","circuit":"Alpenring","sessionType":"SPRINT","ruleset":"FIM_GP_2027","scheduledAt":"2027-07-10T13:00:00Z","entrants":[{"id":"mock:rider:luc-morel","name":"Luc Morel","team":"Bleu Factory","manufacturer":"Bleu"},{"id":"mock:rider:samir-haddad","name":"Samir Haddad","team":"Desert Star Racing","manufacturer":"Orion"}],"context":{"championshipLeverageBand":"HIGH","sprintPoints":true},"importance":{"band":"HIGH","confidence":"HIGH","reasons":["Close championship contest","You follow Bleu Factory"]},"recommendation":{"format":"FULL","estimatedMinutes":25,"blind":true}},
+      "protected":{"winnerRiderId":"mock:rider:samir-haddad","classification":["mock:rider:samir-haddad","mock:rider:luc-morel"],"laps":13,"redFlag":true,"restart":true,"watchabilityBand":"VERY_HIGH","tags":["late lead change","restart"]},
+      "provenance":{"provider":"MOCK","providerId":"mgp-003","generatedAt":"2027-07-10T13:45:00Z","completeness":"OFFICIAL_FINAL_LAP_TIMING"}
+    },
+    {
+      "id":"mock:motogp:004","source":"MOCK","isSynthetic":true,"variant":"RACE_REVEALED",
+      "safe":{"championship":"FIM MotoGP World Championship","class":"MOTOGP","season":2027,"round":16,"event":"Pacific Grand Prix","circuit":"Harbor Mobility Resort","sessionType":"RACE","ruleset":"FIM_GP_2027","scheduledAt":"2027-09-26T05:00:00Z","entrants":[{"id":"mock:rider:kenji-mori","name":"Kenji Mori","team":"Sakura GP","manufacturer":"Sakura"},{"id":"mock:rider:elias-navarro","name":"Elias Navarro","team":"Orion Factory Racing","manufacturer":"Orion"}],"context":{"championshipLeverageBand":"VERY_HIGH","titleContenders":true},"importance":{"band":"VERY_HIGH","confidence":"HIGH","reasons":["Late-season title leverage","Two title contenders"]},"recommendation":{"format":"FULL","estimatedMinutes":48,"blind":false}},
+      "revealed":{"winnerRiderId":"mock:rider:kenji-mori","podium":["mock:rider:kenji-mori","mock:rider:elias-navarro","mock:rider:ana-ribeiro"],"laps":24,"duration":"41:18.220","finishGapSeconds":0.184,"watchability":{"band":"VERY_HIGH","confidence":"HIGH","method":"LAP_INTERVALS","factors":{"battleTension":0.94,"leadUncertainty":0.88,"positionVolatility":0.71,"stakes":0.91,"strategyDivergence":0.63,"execution":0.82}},"leadChanges":4,"persistentOnTrackPositionGainEstimate":17,"officialOvertakes":null,"reasons":["Persistent lead battle","Championship-relevant finish"]},
+      "provenance":{"provider":"MOCK","providerId":"mgp-004","generatedAt":"2027-09-26T06:00:00Z","completeness":"OFFICIAL_FINAL_HIGH_FREQUENCY_TIMING"}
+    },
+    {
+      "id":"mock:motogp:005","source":"MOCK","isSynthetic":true,"variant":"SUBSTITUTE_MISSING_TIMING",
+      "safe":{"championship":"FIM MotoGP World Championship","class":"MOTOGP","season":2027,"round":12,"event":"Bohemian Grand Prix","circuit":"Morava Circuit","sessionType":"RACE","ruleset":"FIM_GP_2027","scheduledAt":"2027-08-08T12:00:00Z","entrants":[{"id":"mock:rider:noah-petrov","name":"Noah Petrov","team":"Nova Independent","manufacturer":"Veloce","entryRole":"REPLACEMENT"},{"id":"mock:rider:ines-costa","name":"Inês Costa","team":"Atlantic Works","manufacturer":"Atlantic","entryRole":"REGULAR"}],"context":{"championshipLeverageBand":"MEDIUM","replacementRider":true},"importance":{"band":"MEDIUM","confidence":"LOW","reasons":["Replacement rider debut","Incomplete baseline data"]},"recommendation":{"format":"RECAP","blind":true}},
+      "protected":{"classificationStatus":"PROVISIONAL","winnerRiderId":"mock:rider:ines-costa","replacementFinishPosition":14,"timingAvailable":false,"watchabilityBand":null,"uncertaintyReason":"Lap timing unavailable; classification only"},
+      "provenance":{"provider":"MOCK","providerId":"mgp-005","generatedAt":"2027-08-08T13:00:00Z","completeness":"PROVISIONAL_CLASSIFICATION_ONLY"}
+    }
+  ]
+}

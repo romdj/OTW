@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "MOCK",
+  "isSynthetic": true,
+  "warning": "Fictional UX fixtures only. Not provider or production data.",
+  "events": [
+    {
+      "id": "mock:tennis:atp:001",
+      "source": "MOCK",
+      "isSynthetic": true,
+      "variant": "PRE_EVENT",
+      "safe": {
+        "tour": "ATP",
+        "tournament": "North Sea Masters",
+        "category": "ATP_500",
+        "round": "QUARTER_FINAL",
+        "discipline": "SINGLES",
+        "surface": "HARD",
+        "format": { "bestOf": 3, "advantage": true, "finalSetRule": "TIEBREAK_AT_6_ALL" },
+        "competitors": [
+          { "id": "mock:player:lucas-varga", "displayName": "Lucas Varga", "ranking": 8 },
+          { "id": "mock:player:emil-sato", "displayName": "Emil Sato", "ranking": 14 }
+        ],
+        "scheduledAt": "2026-08-07T18:30:00Z",
+        "importance": { "band": "HIGH", "confidence": "HIGH", "reasons": ["Late tournament round", "Closely matched surface strength"] },
+        "recommendation": { "format": "FULL", "estimatedMinutes": 110, "blind": true }
+      },
+      "provenance": { "provider": "MOCK", "providerId": "atp-001", "generatedAt": "2026-07-26T10:00:00Z", "completeness": "PRE_EVENT_ONLY" }
+    },
+    {
+      "id": "mock:tennis:wta:002",
+      "source": "MOCK",
+      "isSynthetic": true,
+      "variant": "LIVE_SAFE",
+      "safe": {
+        "tour": "WTA",
+        "tournament": "Brussels Clay Open",
+        "category": "WTA_250",
+        "round": "SEMI_FINAL",
+        "discipline": "SINGLES",
+        "surface": "CLAY",
+        "format": { "bestOf": 3, "advantage": true, "finalSetRule": "TIEBREAK_AT_6_ALL" },
+        "competitors": [
+          { "id": "mock:player:amara-nkosi", "displayName": "Amara Nkosi", "ranking": 27 },
+          { "id": "mock:player:ines-moreau", "displayName": "Inès Moreau", "ranking": 41 }
+        ],
+        "scheduledAt": "2026-07-26T12:00:00Z",
+        "importance": { "band": "HIGH", "confidence": "MEDIUM", "reasons": ["Semifinal", "You follow Amara Nkosi"] },
+        "recommendation": { "format": "FULL", "blind": true }
+      },
+      "liveSafe": { "stateLabel": "In progress", "started": true, "protectedFieldsAvailable": true },
+      "protected": { "currentScore": "6-4 2-3", "serverId": "mock:player:ines-moreau", "elapsedMinutes": 73, "inPlayWinProbability": [0.68, 0.32] },
+      "provenance": { "provider": "MOCK", "providerId": "wta-002", "generatedAt": "2026-07-26T13:13:00Z", "completeness": "LIVE_POINT_STREAM" }
+    },
+    {
+      "id": "mock:tennis:atp:003",
+      "source": "MOCK",
+      "isSynthetic": true,
+      "variant": "COMPLETED_HIDDEN",
+      "safe": {
+        "tour": "ATP",
+        "tournament": "Alpine Grass Invitational",
+        "category": "ATP_250",
+        "round": "FINAL",
+        "discipline": "DOUBLES",
+        "surface": "GRASS",
+        "format": { "bestOf": 3, "advantage": false, "finalSetRule": "MATCH_TIEBREAK_TO_10" },
+        "competitors": [
+          { "id": "mock:team:hale-owusu", "displayName": "Hale / Owusu", "ranking": 5 },
+          { "id": "mock:team:kral-fernandez", "displayName": "Král / Fernández", "ranking": 12 }
+        ],
+        "scheduledAt": "2026-07-25T15:00:00Z",
+        "importance": { "band": "VERY_HIGH", "confidence": "HIGH", "reasons": ["Championship match", "You follow doubles"] },
+        "recommendation": { "format": "FULL", "estimatedMinutes": 95, "blind": true }
+      },
+      "protected": { "winnerId": "mock:team:kral-fernandez", "score": ["6-7(5)", "7-5", "[10-8]"], "durationMinutes": 104, "watchabilityBand": "VERY_HIGH", "tags": ["deciding match tiebreak", "upset"] },
+      "provenance": { "provider": "MOCK", "providerId": "atp-003", "generatedAt": "2026-07-25T17:10:00Z", "completeness": "COMPLETE_AGGREGATES" }
+    },
+    {
+      "id": "mock:tennis:wta:004",
+      "source": "MOCK",
+      "isSynthetic": true,
+      "variant": "REVEALED",
+      "safe": {
+        "tour": "WTA",
+        "tournament": "Baltic Indoor Championship",
+        "category": "WTA_500",
+        "round": "ROUND_OF_16",
+        "discipline": "SINGLES",
+        "surface": "HARD",
+        "format": { "bestOf": 3, "advantage": true, "finalSetRule": "TIEBREAK_AT_6_ALL" },
+        "competitors": [
+          { "id": "mock:player:sofia-marin", "displayName": "Sofia Marin", "ranking": 9 },
+          { "id": "mock:player:mei-lin-tan", "displayName": "Mei-Lin Tan", "ranking": 52 }
+        ],
+        "scheduledAt": "2026-10-14T16:00:00Z",
+        "importance": { "band": "MEDIUM", "confidence": "HIGH", "reasons": ["Tour-level knockout match", "Large pre-match strength gap"] },
+        "recommendation": { "format": "HIGHLIGHTS", "estimatedMinutes": 12, "blind": false }
+      },
+      "revealed": {
+        "winnerId": "mock:player:mei-lin-tan",
+        "score": ["3-6", "7-6(8)", "6-4"],
+        "durationMinutes": 157,
+        "watchability": { "band": "VERY_HIGH", "confidence": "HIGH", "method": "POINT_LEVERAGE", "factors": { "tension": 0.91, "balance": 0.84, "stakes": 0.52, "performance": 0.76, "turningPoints": 0.88 } },
+        "stats": { "aces": [5, 7], "doubleFaults": [3, 4], "firstServePoints": [{ "won": 43, "total": 67 }, { "won": 47, "total": 72 }], "breakPoints": [{ "converted": 4, "chances": 11 }, { "converted": 5, "chances": 13 }] },
+        "reasons": ["Sustained high-leverage pressure", "Major reversal versus pre-match expectation"]
+      },
+      "provenance": { "provider": "MOCK", "providerId": "wta-004", "generatedAt": "2026-10-14T19:00:00Z", "completeness": "COMPLETE_POINT_STREAM" }
+    },
+    {
+      "id": "mock:tennis:itf:005",
+      "source": "MOCK",
+      "isSynthetic": true,
+      "variant": "DAVIS_CUP",
+      "safe": {
+        "tour": "ITF",
+        "tournament": "Davis Cup World Group I",
+        "category": "DAVIS_CUP",
+        "round": "FIRST_ROUND",
+        "discipline": "DOUBLES",
+        "surface": "HARD",
+        "format": { "bestOf": 3, "advantage": true, "finalSetRule": "TIEBREAK_AT_6_ALL" },
+        "competitors": [
+          { "id": "mock:team:bel-doubles", "displayName": "Mertens / Claes" },
+          { "id": "mock:team:fin-doubles", "displayName": "Laine / Koski" }
+        ],
+        "scheduledAt": "2026-09-13T11:00:00Z",
+        "importance": { "band": "VERY_HIGH", "confidence": "HIGH", "reasons": ["High tie leverage", "You follow Belgium"] },
+        "recommendation": { "format": "FULL", "estimatedMinutes": 105, "blind": true }
+      },
+      "davisCup": { "eventId": "mock:dc:2026", "tieId": "mock:dc:bel-fin", "tieFormat": "BEST_OF_FIVE_MATCHES", "matchOrder": 3, "tieLeverageBand": "VERY_HIGH" },
+      "protected": { "tieScoreBefore": [1, 1], "homeNation": "BEL", "awayNation": "FIN", "winnerSide": "HOME", "score": ["7-6(4)", "4-6", "6-3"], "tieScoreAfter": [2, 1], "isDeadMatch": false, "watchabilityBand": "HIGH" },
+      "provenance": { "provider": "MOCK", "providerId": "itf-005", "generatedAt": "2026-09-13T13:12:00Z", "completeness": "COMPLETE_AGGREGATES" }
+    }
+  ]
+}

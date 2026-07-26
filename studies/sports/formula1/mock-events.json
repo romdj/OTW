@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0.0",
+  "description": "Fictional Formula 1 fixtures for OTW UI/UX research; never production data.",
+  "records": [
+    {
+      "schemaVersion": "1.0.0",
+      "id": "mock-f1-2027-aurora-race",
+      "source": "MOCK",
+      "fictional": true,
+      "variant": "PRE_EVENT",
+      "knowledgeAsOf": "2027-06-20T11:00:00Z",
+      "spoilerLevel": "NO_HINTS",
+      "event": {
+        "season": 2027,
+        "round": 9,
+        "rulesetRevision": "MOCK_2027_A",
+        "weekendName": "Aurora Grand Prix",
+        "sessionType": "RACE",
+        "weekendFormat": "STANDARD",
+        "scheduledStart": "2027-06-20T13:00:00Z",
+        "status": "SCHEDULED",
+        "circuit": { "id": "mock-northlight", "name": "Northlight Circuit", "type": "PERMANENT", "scheduledLaps": 61 }
+      },
+      "recommendation": {
+        "basis": "PRE_EVENT_ONLY",
+        "importanceBand": "HIGH",
+        "watchabilityBand": null,
+        "format": "FULL",
+        "approxMinutes": 120,
+        "minutesEstimated": true,
+        "reasonCodes": ["FOLLOWED_DRIVER", "CHAMPIONSHIP_LEVERAGE"],
+        "reasons": ["Features a driver you follow", "Important championship context before the start"],
+        "traits": [{ "key": "stakes", "level": "HIGH" }, { "key": "uncertainty", "level": "MEDIUM" }],
+        "confidence": 0.78,
+        "missingInputs": ["confirmed_grid_penalties"]
+      },
+      "safeContext": {
+        "followedParticipants": ["Mira Vale"],
+        "preSessionStandings": [{ "driver": "Mira Vale", "position": 2, "points": 141 }, { "driver": "Jonas North", "position": 1, "points": 149 }],
+        "forecastBand": "CHANGEABLE"
+      },
+      "protectedOutcome": null
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "mock-f1-2027-aurora-race",
+      "source": "MOCK",
+      "fictional": true,
+      "variant": "LIVE_SAFE",
+      "knowledgeAsOf": "2027-06-20T13:42:00Z",
+      "spoilerLevel": "NO_HINTS",
+      "event": {
+        "season": 2027,
+        "round": 9,
+        "rulesetRevision": "MOCK_2027_A",
+        "weekendName": "Aurora Grand Prix",
+        "sessionType": "RACE",
+        "weekendFormat": "STANDARD",
+        "scheduledStart": "2027-06-20T13:00:00Z",
+        "status": "LIVE",
+        "circuit": { "id": "mock-northlight", "name": "Northlight Circuit", "type": "PERMANENT", "scheduledLaps": 61 }
+      },
+      "recommendation": {
+        "basis": "PRE_EVENT_ONLY",
+        "importanceBand": "HIGH",
+        "watchabilityBand": null,
+        "format": "QUEUE",
+        "approxMinutes": null,
+        "minutesEstimated": true,
+        "reasonCodes": ["FOLLOWED_DRIVER", "DETAILS_PROTECTED"],
+        "reasons": ["Features a driver you follow", "The session is in progress; details are protected"],
+        "traits": [{ "key": "stakes", "level": "HIGH" }],
+        "confidence": 0.78,
+        "missingInputs": ["completed_session_analysis"]
+      },
+      "safeContext": { "followedParticipants": ["Mira Vale"], "lifecycleMessage": "In progress; session details protected" },
+      "protectedOutcome": null
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "mock-f1-2027-aurora-race",
+      "source": "MOCK",
+      "fictional": true,
+      "variant": "COMPLETED_HIDDEN",
+      "knowledgeAsOf": "2027-06-20T16:30:00Z",
+      "spoilerLevel": "LIGHT_CONTEXT",
+      "event": {
+        "season": 2027,
+        "round": 9,
+        "rulesetRevision": "MOCK_2027_A",
+        "weekendName": "Aurora Grand Prix",
+        "sessionType": "RACE",
+        "weekendFormat": "STANDARD",
+        "scheduledStart": "2027-06-20T13:00:00Z",
+        "status": "COMPLETED",
+        "circuit": { "id": "mock-northlight", "name": "Northlight Circuit", "type": "PERMANENT", "scheduledLaps": 61 }
+      },
+      "recommendation": {
+        "basis": "POST_EVENT_PROTECTED",
+        "importanceBand": "HIGH",
+        "watchabilityBand": "STRONG",
+        "format": "CONDENSED",
+        "approxMinutes": 48,
+        "minutesEstimated": true,
+        "reasonCodes": ["TASTE_MATCH", "FOLLOWED_DRIVER"],
+        "reasons": ["Strong match for your saved F1 preferences", "Features a driver you follow"],
+        "traits": [],
+        "confidence": 0.87,
+        "missingInputs": ["verified_broadcast_duration"]
+      },
+      "safeContext": { "followedParticipants": ["Mira Vale"], "revealPrompt": "Reveal result and session character" },
+      "protectedOutcome": null
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "mock-f1-2027-aurora-race",
+      "source": "MOCK",
+      "fictional": true,
+      "variant": "REVEALED",
+      "knowledgeAsOf": "2027-06-20T18:00:00Z",
+      "spoilerLevel": "RESULTS_ALLOWED",
+      "event": {
+        "season": 2027,
+        "round": 9,
+        "rulesetRevision": "MOCK_2027_A",
+        "weekendName": "Aurora Grand Prix",
+        "sessionType": "RACE",
+        "weekendFormat": "STANDARD",
+        "scheduledStart": "2027-06-20T13:00:00Z",
+        "status": "COMPLETED",
+        "circuit": { "id": "mock-northlight", "name": "Northlight Circuit", "type": "PERMANENT", "scheduledLaps": 61 }
+      },
+      "recommendation": {
+        "basis": "POST_EVENT_REVEALED",
+        "importanceBand": "HIGH",
+        "watchabilityBand": "STRONG",
+        "format": "CONDENSED",
+        "approxMinutes": 48,
+        "minutesEstimated": true,
+        "reasonCodes": ["SUSTAINED_TENSION", "STRATEGY_CONVERGENCE"],
+        "reasons": ["The lead contest remained close through the final phase", "Different tyre plans converged on track"],
+        "traits": [{ "key": "tension", "level": "HIGH" }, { "key": "strategy", "level": "VERY_HIGH" }, { "key": "volatility", "level": "MEDIUM" }],
+        "confidence": 0.87,
+        "missingInputs": ["verified_broadcast_duration"]
+      },
+      "safeContext": { "followedParticipants": ["Mira Vale"] },
+      "protectedOutcome": {
+        "winner": "Mira Vale",
+        "constructor": "Aster Racing",
+        "actualDurationMinutes": 101,
+        "classificationStatus": "PROVISIONAL",
+        "classification": [{ "position": 1, "driver": "Mira Vale", "status": "FINISHED" }, { "position": 2, "driver": "Jonas North", "status": "FINISHED" }, { "position": 3, "driver": "Emil Sato", "status": "FINISHED" }],
+        "eventShape": { "leadChanges": 3, "safetyCarPeriods": 1, "redFlagPeriods": 0, "weatherObserved": "MIXED", "classifiedFinishers": 18 },
+        "features": {
+          "tension": { "value": 0.84, "confidence": 0.92, "coverage": 0.96 },
+          "volatility": { "value": 0.55, "confidence": 0.81, "coverage": 0.90 },
+          "strategy": { "value": 0.91, "confidence": 0.88, "coverage": 0.94 },
+          "jeopardy": { "value": 0.73, "confidence": 0.86, "coverage": 0.93 },
+          "dramaImpact": { "value": 0.62, "confidence": 0.79, "coverage": 0.88 }
+        },
+        "chapters": [{ "label": "Opening phase", "startMinute": 0 }, { "label": "Strategy convergence", "startMinute": 54 }, { "label": "Final phase", "startMinute": 82 }]
+      }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "mock-f1-2027-aurora-qualifying",
+      "source": "MOCK",
+      "fictional": true,
+      "variant": "REVEALED",
+      "knowledgeAsOf": "2027-06-19T17:00:00Z",
+      "spoilerLevel": "RESULTS_ALLOWED",
+      "event": { "season": 2027, "round": 9, "rulesetRevision": "MOCK_2027_A", "weekendName": "Aurora Grand Prix", "sessionType": "QUALIFYING", "weekendFormat": "STANDARD", "scheduledStart": "2027-06-19T14:00:00Z", "status": "COMPLETED", "circuit": { "id": "mock-northlight", "name": "Northlight Circuit", "type": "PERMANENT", "scheduledLaps": null } },
+      "recommendation": { "basis": "POST_EVENT_REVEALED", "importanceBand": "MEDIUM", "watchabilityBand": "EXCEPTIONAL", "format": "FULL", "approxMinutes": 72, "minutesEstimated": true, "reasonCodes": ["CUTLINE_JEOPARDY", "LATE_IMPROVEMENTS"], "reasons": ["Multiple cut-line places remained uncertain late", "The final attempts materially changed the grid"], "traits": [{ "key": "jeopardy", "level": "VERY_HIGH" }, { "key": "execution", "level": "HIGH" }], "confidence": 0.91, "missingInputs": [] },
+      "safeContext": { "followedParticipants": [] },
+      "protectedOutcome": { "winner": "Jonas North", "constructor": "Polar Works", "actualDurationMinutes": 74, "classificationStatus": "FINAL", "classification": [{ "position": 1, "driver": "Jonas North", "status": "CLASSIFIED" }, { "position": 2, "driver": "Mira Vale", "status": "CLASSIFIED" }], "eventShape": { "deletedLaps": 4, "redFlagPeriods": 1 }, "features": { "qualifyingJeopardy": { "value": 0.94, "confidence": 0.93, "coverage": 0.98 }, "execution": { "value": 0.80, "confidence": 0.88, "coverage": 0.96 } }, "chapters": [] }
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "mock-f1-2027-solstice-sprint",
+      "source": "MOCK",
+      "fictional": true,
+      "variant": "COMPLETED_HIDDEN",
+      "knowledgeAsOf": "2027-08-07T13:00:00Z",
+      "spoilerLevel": "NO_HINTS",
+      "event": { "season": 2027, "round": 14, "rulesetRevision": "MOCK_2027_A", "weekendName": "Solstice Grand Prix", "sessionType": "SPRINT", "weekendFormat": "SPRINT", "scheduledStart": "2027-08-07T10:00:00Z", "status": "COMPLETED", "circuit": { "id": "mock-sunharbor", "name": "Sunharbor Street Circuit", "type": "STREET", "scheduledLaps": 19 } },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "MEDIUM", "watchabilityBand": null, "format": "QUEUE", "approxMinutes": null, "minutesEstimated": true, "reasonCodes": ["DETAILS_PROTECTED"], "reasons": ["Completed; recommendation details are protected"], "traits": [], "confidence": 0.74, "missingInputs": ["user_reveal_permission"] },
+      "safeContext": { "followedParticipants": [], "revealPrompt": "Show recommendation hints" },
+      "protectedOutcome": null
+    },
+    {
+      "schemaVersion": "1.0.0",
+      "id": "mock-f1-2027-solstice-fp1",
+      "source": "MOCK",
+      "fictional": true,
+      "variant": "PRE_EVENT",
+      "knowledgeAsOf": "2027-08-06T07:00:00Z",
+      "spoilerLevel": "LIGHT_CONTEXT",
+      "event": { "season": 2027, "round": 14, "rulesetRevision": "MOCK_2027_A", "weekendName": "Solstice Grand Prix", "sessionType": "FP1", "weekendFormat": "SPRINT", "scheduledStart": "2027-08-06T09:00:00Z", "status": "SCHEDULED", "circuit": { "id": "mock-sunharbor", "name": "Sunharbor Street Circuit", "type": "STREET", "scheduledLaps": null } },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "MEDIUM", "watchabilityBand": null, "format": "HIGHLIGHTS", "approxMinutes": 12, "minutesEstimated": true, "reasonCodes": ["ONLY_PRACTICE", "TECHNICAL_TASTE"], "reasons": ["The weekend has only one practice session", "Matches your interest in setup and long-run clues"], "traits": [{ "key": "information", "level": "HIGH" }], "confidence": 0.69, "missingInputs": ["confirmed_driver_entries"] },
+      "safeContext": { "followedParticipants": [], "forecastBand": "DRY" },
+      "protectedOutcome": null
+    }
+  ]
+}

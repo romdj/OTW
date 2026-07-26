@@ -1,0 +1,36 @@
+{
+  "schemaVersion":"1.0.0","source":"MOCK","isSynthetic":true,
+  "warning":"Fictional UX fixtures only. Not provider or production data.",
+  "events":[
+    {
+      "id":"mock:handball:001","source":"MOCK","isSynthetic":true,"variant":"PRE_MATCH",
+      "safe":{"competition":"North League Women","category":"DOMESTIC_LEAGUE","season":"2026-27","phase":"REGULAR","round":"ROUND_8","ruleset":"IHF_2025_FEDERATION_VARIANT","scheduledAt":"2026-10-17T17:00:00Z","venue":"Aurora Hall","neutralSite":false,"teams":[{"id":"mock:team:oslo-comets","name":"Oslo Comets","record":"6-1"},{"id":"mock:team:bergen-waves","name":"Bergen Waves","record":"5-2"}],"context":{"tableLeverageBand":"HIGH","rivalry":true},"importance":{"band":"HIGH","confidence":"MEDIUM","reasons":["Top-of-table match","Regional rivalry"]},"recommendation":{"format":"FULL","estimatedMinutes":95,"blind":true}},
+      "provenance":{"provider":"MOCK","providerId":"hb-001","generatedAt":"2026-07-26T10:00:00Z","completeness":"PRE_MATCH_ONLY"}
+    },
+    {
+      "id":"mock:handball:002","source":"MOCK","isSynthetic":true,"variant":"LIVE_SAFE",
+      "safe":{"competition":"Continental Champions League Men","category":"INTERNATIONAL_CLUB","season":"2026-27","phase":"GROUP","round":"MATCHDAY_4","ruleset":"IHF_2025_EHF_VARIANT","scheduledAt":"2026-10-22T18:45:00Z","venue":"Danube Arena","neutralSite":false,"teams":[{"id":"mock:team:danube-1898","name":"Danube 1898"},{"id":"mock:team:lisbon-atletico","name":"Lisbon Atlético"}],"context":{"qualificationLeverageBand":"MEDIUM","rivalry":false},"importance":{"band":"HIGH","confidence":"HIGH","reasons":["Champions League group match","You follow Lisbon Atlético"]},"recommendation":{"format":"FULL","blind":true}},
+      "liveSafe":{"stateLabel":"In progress","protectedFieldsAvailable":true},
+      "protected":{"period":2,"clock":"52:18","score":[27,27],"possessionTeamId":"mock:team:lisbon-atletico","activeSuspensions":[{"teamId":"mock:team:danube-1898","expiresAt":"53:02"}],"advanceProbability":[0.49,0.51]},
+      "provenance":{"provider":"MOCK","providerId":"hb-002","generatedAt":"2026-10-22T20:04:00Z","completeness":"LIVE_EVENT_STREAM"}
+    },
+    {
+      "id":"mock:handball:003","source":"MOCK","isSynthetic":true,"variant":"COMPLETED_HIDDEN",
+      "safe":{"competition":"World Championship Women","category":"INTERNATIONAL_NATIONAL","season":"2027","phase":"KNOCKOUT","round":"QUARTER_FINAL","ruleset":"IHF_2025_CHAMPIONSHIP","scheduledAt":"2027-12-14T19:30:00Z","venue":"Unity Arena","neutralSite":true,"teams":[{"id":"mock:nation:bel","name":"Belgium"},{"id":"mock:nation:swe","name":"Sweden"}],"context":{"eliminationMatch":true,"advancementLeverageBand":"VERY_HIGH"},"importance":{"band":"VERY_HIGH","confidence":"HIGH","reasons":["World Championship quarterfinal","You follow Belgium"]},"recommendation":{"format":"FULL","estimatedMinutes":100,"blind":true}},
+      "protected":{"winnerTeamId":"mock:nation:bel","finalScore":[36,35],"extraTime":true,"sevenMetreShootout":false,"durationMinutes":128,"watchabilityBand":"VERY_HIGH","tags":["comeback","extra time"]},
+      "provenance":{"provider":"MOCK","providerId":"hb-003","generatedAt":"2027-12-14T22:00:00Z","completeness":"OFFICIAL_FINAL_EVENTS"}
+    },
+    {
+      "id":"mock:handball:004","source":"MOCK","isSynthetic":true,"variant":"REVEALED",
+      "safe":{"competition":"Baltic Premier Men","category":"DOMESTIC_LEAGUE","season":"2026-27","phase":"REGULAR","round":"ROUND_19","ruleset":"IHF_2025_FEDERATION_VARIANT","scheduledAt":"2027-02-06T16:00:00Z","venue":"Harbor Hall","neutralSite":false,"teams":[{"id":"mock:team:tallinn-harbor","name":"Tallinn Harbor"},{"id":"mock:team:riga-oaks","name":"Riga Oaks"}],"context":{"tableLeverageBand":"MEDIUM","rivalry":false},"importance":{"band":"MEDIUM","confidence":"HIGH","reasons":["Domestic league fixture","Closely rated teams"]},"recommendation":{"format":"CONDENSED","estimatedMinutes":28,"blind":false}},
+      "revealed":{"winnerTeamId":"mock:team:riga-oaks","finalScore":[30,32],"extraTime":false,"durationMinutes":101,"watchability":{"band":"HIGH","confidence":"HIGH","method":"EVENT_LEVERAGE","factors":{"tension":0.84,"balance":0.79,"turningPoints":0.72,"stakes":0.48,"execution":0.67,"paceFit":0.75}},"summary":{"leadChanges":7,"ties":9,"sevenMetres":[{"scored":4,"attempted":5},{"scored":3,"attempted":4}],"exclusions":[4,3],"goalkeeper":{"teamIds":["mock:team:tallinn-harbor","mock:team:riga-oaks"],"saves":[12,15],"shotsFaced":[44,45]}},"reasons":["High-leverage closing possessions","Seven lead changes"]},
+      "provenance":{"provider":"MOCK","providerId":"hb-004","generatedAt":"2027-02-06T18:00:00Z","completeness":"OFFICIAL_FINAL_SHOTS"}
+    },
+    {
+      "id":"mock:handball:005","source":"MOCK","isSynthetic":true,"variant":"AGGREGATE_TIE",
+      "safe":{"competition":"Continental Cup Women","category":"INTERNATIONAL_CLUB","season":"2026-27","phase":"KNOCKOUT","round":"QUARTER_FINAL_SECOND_LEG","leg":2,"ruleset":"IHF_2025_TWO_LEG_VARIANT","scheduledAt":"2027-03-21T18:00:00Z","venue":"Rhine Forum","neutralSite":false,"teams":[{"id":"mock:team:rhine-stars","name":"Rhine Stars"},{"id":"mock:team:prague-lions","name":"Prague Lions"}],"context":{"aggregateBefore":[27,30],"advancementLeverageBand":"VERY_HIGH","awayGoalsRule":false},"importance":{"band":"VERY_HIGH","confidence":"HIGH","reasons":["Quarterfinal second leg","Three-goal aggregate margin"]},"recommendation":{"format":"FULL","estimatedMinutes":100,"blind":true}},
+      "protected":{"matchWinnerTeamId":"mock:team:rhine-stars","matchScore":[31,28],"aggregateAfter":[58,58],"qualifiedTeamId":"mock:team:prague-lions","tieBreakMethod":"SEVEN_METRE_SHOOTOUT","shootoutScore":[3,4],"watchabilityBand":"VERY_HIGH"},
+      "provenance":{"provider":"MOCK","providerId":"hb-005","generatedAt":"2027-03-21T20:05:00Z","completeness":"OFFICIAL_FINAL_EVENTS"}
+    }
+  ]
+}

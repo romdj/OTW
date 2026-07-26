@@ -1,0 +1,70 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "MOCK",
+  "events": [
+    {
+      "source": "MOCK", "eventId": "mock-football-001", "competition": "Mock Premier Division", "season": "2027-28", "stage": "LEAGUE", "state": "PRE_EVENT", "scheduledStartUtc": "2027-09-18T14:00:00Z",
+      "teams": { "home": { "id": "mock-riverside", "name": "Riverside Athletic" }, "away": { "id": "mock-foundry", "name": "Foundry Town" } },
+      "ruleProfile": { "format": "LEAGUE", "points": "3_1_0", "tiebreakers": ["GOAL_DIFFERENCE", "GOALS_SCORED"], "extraTime": false, "penalties": false },
+      "safe": { "derbyReason": "same-city league fixture", "officialStakes": "Both clubs enter within three points of the final continental place." }, "reveal": null, "sealedOutcome": null,
+      "model": { "importance": 67, "watchability": null, "confidence": 0.8, "coverage": ["schedule", "official_table"], "format": null }
+    },
+    {
+      "source": "MOCK", "eventId": "mock-football-002", "competition": "Mock Continental League", "season": "2027-28", "stage": "GROUP", "state": "LIVE_SAFE", "scheduledStartUtc": "2027-10-21T19:00:00Z",
+      "teams": { "home": { "id": "mock-orbit", "name": "Orbit FC" }, "away": { "id": "mock-alpine", "name": "Alpine Union" } },
+      "ruleProfile": { "format": "GROUP", "points": "3_1_0", "tiebreakers": ["HEAD_TO_HEAD", "GOAL_DIFFERENCE"], "extraTime": false, "penalties": false },
+      "safe": { "liveStatus": "IN_PROGRESS", "clockHidden": true, "scoreHidden": true, "group": "C" }, "reveal": null, "sealedOutcome": null,
+      "model": { "importance": 58, "watchability": null, "confidence": 0.76, "coverage": ["schedule", "group_table", "live_status"], "format": null }
+    },
+    {
+      "source": "MOCK", "eventId": "mock-football-003", "competition": "Mock Champions Cup", "season": "2027-28", "stage": "QUARTERFINAL_SECOND_LEG", "state": "COMPLETED_PROTECTED", "scheduledStartUtc": "2028-04-12T19:00:00Z",
+      "teams": { "home": { "id": "mock-citadel", "name": "Citadel 04" }, "away": { "id": "mock-marina", "name": "Marina Sporting" } },
+      "ruleProfile": { "format": "TWO_LEG", "leg": 2, "awayGoals": false, "extraTimeMinutes": 30, "penalties": true },
+      "safe": { "completed": true, "firstLegScore": { "homeTeamPerspective": 1, "awayTeamPerspective": 2 }, "scoreHidden": true, "qualifiedTeamHidden": true, "extraTimeHidden": true },
+      "reveal": null, "sealedOutcome": { "score90": { "home": 2, "away": 1 }, "aggregateAfter90": { "home": 3, "away": 3 }, "scoreAfterExtraTime": { "home": 2, "away": 1 }, "shootout": { "home": 4, "away": 5 }, "qualifiedTeamId": "mock-marina" },
+      "model": { "importance": 89, "watchability": null, "confidence": 0.93, "coverage": ["timeline", "shots", "aggregate_context"], "format": null }
+    },
+    {
+      "source": "MOCK", "eventId": "mock-football-004", "competition": "Mock National Cup", "season": "2027-28", "stage": "SEMIFINAL", "state": "REVEALED", "scheduledStartUtc": "2028-03-03T19:45:00Z",
+      "teams": { "home": { "id": "mock-meadow", "name": "Meadow Rovers" }, "away": { "id": "mock-capital", "name": "Capital Stars" } },
+      "ruleProfile": { "format": "SINGLE_KNOCKOUT", "extraTimeMinutes": 30, "penalties": true }, "safe": { "officialStakes": "Winner advances to the final." },
+      "reveal": { "winnerTeamId": "mock-meadow", "score90": { "home": 2, "away": 1 }, "events": [{ "sequence": 1, "type": "GOAL", "teamId": "mock-capital", "period": 1, "minute": 31, "added": 0 }, { "sequence": 2, "type": "RED_CARD", "teamId": "mock-capital", "period": 2, "minute": 58, "added": 0 }, { "sequence": 3, "type": "GOAL", "teamId": "mock-meadow", "period": 2, "minute": 90, "added": 2 }, { "sequence": 4, "type": "GOAL", "teamId": "mock-meadow", "period": 2, "minute": 90, "added": 8 }], "shots": { "home": 18, "away": 7, "homeOnTarget": 6, "awayOnTarget": 3 }, "xg": { "home": 2.05, "away": 0.74, "provider": "MOCK_XG", "modelVersion": "fictional-1" }, "equalizers": 1, "leadChanges": 1, "maxComebackDeficit": 1 },
+      "sealedOutcome": null, "model": { "importance": 82, "watchability": 91, "confidence": 0.9, "coverage": ["timeline", "shots", "compatible_xg", "knockout_context"], "format": "FULL_REPLAY" }
+    },
+    {
+      "source": "MOCK", "eventId": "mock-football-005", "competition": "Mock Coastal League", "season": "2027-28", "stage": "LEAGUE", "state": "REVEALED", "scheduledStartUtc": "2027-12-05T16:30:00Z",
+      "teams": { "home": { "id": "mock-harbor", "name": "Harbor Eleven" }, "away": { "id": "mock-vale", "name": "Vale City" } },
+      "ruleProfile": { "format": "LEAGUE", "points": "3_1_0", "extraTime": false, "penalties": false }, "safe": { "officialStakes": "Mid-table league fixture." },
+      "reveal": { "winnerTeamId": null, "score90": { "home": 0, "away": 0 }, "shots": { "home": 9, "away": 8, "homeOnTarget": 2, "awayOnTarget": 2 }, "xg": { "home": 0.62, "away": 0.55, "provider": "MOCK_XG", "modelVersion": "fictional-1" }, "tacticalSignals": { "highPressRegains": { "home": 11, "away": 10 }, "analystLabel": "well-organized-low-threat" } },
+      "sealedOutcome": null, "model": { "importance": 31, "watchability": 43, "confidence": 0.72, "coverage": ["timeline", "shots", "compatible_xg", "analyst_label"], "format": "CONDENSED" }
+    },
+    {
+      "source": "MOCK", "eventId": "mock-football-006", "competition": "Mock Federation Cup", "season": "2027-28", "stage": "ROUND_OF_32", "state": "ABANDONED_PENDING", "scheduledStartUtc": "2028-01-14T18:00:00Z",
+      "teams": { "home": { "id": "mock-eastgate", "name": "Eastgate" }, "away": { "id": "mock-oaks", "name": "Royal Oaks" } },
+      "ruleProfile": { "format": "SINGLE_KNOCKOUT", "abandonmentDisposition": "COMPETITION_AUTHORITY_DECIDES" },
+      "safe": { "status": "ABANDONED", "disposition": "PENDING", "resultHidden": true }, "reveal": null, "sealedOutcome": null,
+      "officialStandingsEffect": null, "model": { "importance": 55, "watchability": null, "confidence": 0.2, "coverage": ["schedule", "status"], "format": null }
+    },
+    {
+      "source": "MOCK", "eventId": "mock-football-007", "competition": "Mock Meridian League", "season": "2027-28", "stage": "LEAGUE", "state": "REVEALED", "scheduledStartUtc": "2028-02-06T15:00:00Z",
+      "teams": { "home": { "id": "mock-ivory", "name": "Ivory Borough" }, "away": { "id": "mock-pines", "name": "Pines Athletic" } },
+      "ruleProfile": { "format": "LEAGUE", "points": "3_1_0", "extraTime": false, "penalties": false }, "safe": { "officialStakes": "Mid-table league fixture." },
+      "reveal": { "winnerTeamId": "mock-ivory", "score90": { "home": 1, "away": 0 }, "possessionPct": { "home": 72, "away": 28 }, "shots": { "home": 8, "away": 5, "homeOnTarget": 2, "awayOnTarget": 1 }, "xg": { "home": 0.79, "away": 0.38, "provider": "MOCK_XG", "modelVersion": "fictional-1" } },
+      "sealedOutcome": null, "model": { "importance": 29, "watchability": 34, "confidence": 0.73, "coverage": ["event_stream", "compatible_xg"], "format": "HIGHLIGHTS", "qualitativeProfile": { "dataGrade": "EVENT_STREAM", "dimensions": { "attackingIntent": 0.28, "progressionChanceDevelopment": 0.25, "transitionsTurnovers": 0.31, "pressCounterpress": 0.46, "tempoRhythm": 0.27, "tacticalTension": 0.35, "defensiveQuality": 0.61, "skillExpression": 0.32 }, "dimensionConfidence": 0.7, "evidenceCodes": ["HIGH_POSSESSION_LOW_VALUE_GAIN", "LOW_MUTUAL_THREAT"], "caveats": ["NO_TRACKING_OFF_BALL_OPTIONS"] } }
+    },
+    {
+      "source": "MOCK", "eventId": "mock-football-008", "competition": "Mock Aurora League", "season": "2027-28", "stage": "LEAGUE", "state": "REVEALED", "scheduledStartUtc": "2028-02-13T17:30:00Z",
+      "teams": { "home": { "id": "mock-comet", "name": "Comet Wanderers" }, "away": { "id": "mock-forest", "name": "Forest United" } },
+      "ruleProfile": { "format": "LEAGUE", "points": "3_1_0", "extraTime": false, "penalties": false }, "safe": { "officialStakes": "Both clubs remain in contention for promotion." },
+      "reveal": { "winnerTeamId": null, "score90": { "home": 1, "away": 1 }, "possessionPct": { "home": 43, "away": 57 }, "shots": { "home": 10, "away": 9, "homeOnTarget": 4, "awayOnTarget": 3 }, "xg": { "home": 1.12, "away": 0.96, "provider": "MOCK_XG", "modelVersion": "fictional-1" } },
+      "sealedOutcome": null, "model": { "importance": 68, "watchability": 88, "confidence": 0.86, "coverage": ["event_stream", "tracking", "compatible_xg", "table_context"], "format": "FULL_REPLAY", "qualitativeProfile": { "dataGrade": "TRACKING_EVENT", "dimensions": { "attackingIntent": 0.88, "progressionChanceDevelopment": 0.82, "transitionsTurnovers": 0.94, "pressCounterpress": 0.86, "tempoRhythm": 0.9, "tacticalTension": 0.81, "defensiveQuality": 0.7, "skillExpression": 0.76 }, "dimensionConfidence": 0.87, "evidenceCodes": ["RAPID_VALUE_SWINGS", "COORDINATED_COUNTERPRESS", "REPEATED_LINE_BREAKS"], "caveats": [] } }
+    },
+    {
+      "source": "MOCK", "eventId": "mock-football-009", "competition": "Mock Founders Cup", "season": "2027-28", "stage": "SEMIFINAL", "state": "REVEALED", "scheduledStartUtc": "2028-03-18T20:00:00Z",
+      "teams": { "home": { "id": "mock-lantern", "name": "Lantern FC" }, "away": { "id": "mock-slate", "name": "Slate County" } },
+      "ruleProfile": { "format": "SINGLE_KNOCKOUT", "extraTimeMinutes": 30, "penalties": true }, "safe": { "officialStakes": "Winner advances to the final." },
+      "reveal": { "winnerTeamId": "mock-lantern", "score90": { "home": 0, "away": 0 }, "scoreAfterExtraTime": { "home": 1, "away": 0 }, "shots": { "home": 7, "away": 6, "homeOnTarget": 2, "awayOnTarget": 2 }, "xg": { "home": 0.71, "away": 0.66, "provider": "MOCK_XG", "modelVersion": "fictional-1" } },
+      "sealedOutcome": null, "model": { "importance": 84, "watchability": 81, "confidence": 0.88, "coverage": ["event_stream", "tracking", "compatible_xg", "knockout_context"], "format": "FULL_REPLAY", "qualitativeProfile": { "dataGrade": "TRACKING_EVENT", "dimensions": { "attackingIntent": 0.63, "progressionChanceDevelopment": 0.67, "transitionsTurnovers": 0.55, "pressCounterpress": 0.79, "tempoRhythm": 0.69, "tacticalTension": 0.93, "defensiveQuality": 0.95, "skillExpression": 0.78 }, "dimensionConfidence": 0.89, "evidenceCodes": ["COMPACT_BLOCK_ADAPTATION", "HIGH_VALUE_OPTIONS_DENIED", "RECOVERY_DEFENDING"], "caveats": ["LOW_EVENT_VOLUME_IS_CONTEXT_DEPENDENT"] } }
+    }
+  ]
+}

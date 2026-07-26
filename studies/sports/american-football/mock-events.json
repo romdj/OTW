@@ -1,0 +1,79 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "MOCK",
+  "isSynthetic": true,
+  "warning": "Fictional UX fixtures only. Not provider or production data.",
+  "events": [
+    {
+      "id": "mock:football:nfl:001", "source": "MOCK", "isSynthetic": true, "variant": "PRE_GAME",
+      "safe": {
+        "competition": "NFL", "season": 2026, "week": "WEEK_7", "seasonType": "REGULAR", "ruleset": "NFL_2026",
+        "teams": [{"id":"mock:team:portland-pines","name":"Portland Pines","record":"5-1"},{"id":"mock:team:austin-orbits","name":"Austin Orbits","record":"4-2"}],
+        "kickoff": "2026-10-25T20:25:00Z", "venue": "Cascade Field", "neutralSite": false,
+        "context": {"divisionGame":false,"playoffLeverageBand":"MEDIUM","rivalry":false},
+        "importance": {"band":"HIGH","confidence":"HIGH","reasons":["Two strong conference teams","You follow Portland"]},
+        "recommendation": {"format":"FULL","estimatedMinutes":145,"blind":true}
+      },
+      "provenance": {"provider":"MOCK","providerId":"nfl-001","generatedAt":"2026-07-26T10:00:00Z","completeness":"PRE_GAME_ONLY"}
+    },
+    {
+      "id": "mock:football:nfl:002", "source": "MOCK", "isSynthetic": true, "variant": "LIVE_SAFE",
+      "safe": {
+        "competition":"NFL","season":2026,"week":"WEEK_12","seasonType":"REGULAR","ruleset":"NFL_2026",
+        "teams":[{"id":"mock:team:brooklyn-bolts","name":"Brooklyn Bolts","record":"7-3"},{"id":"mock:team:omaha-owls","name":"Omaha Owls","record":"6-4"}],
+        "kickoff":"2026-11-22T18:00:00Z","venue":"Liberty Park","neutralSite":false,
+        "context":{"divisionGame":false,"playoffLeverageBand":"HIGH","rivalry":false},
+        "importance":{"band":"HIGH","confidence":"HIGH","reasons":["Strong playoff implications","Closely matched teams"]},
+        "recommendation":{"format":"FULL","blind":true}
+      },
+      "liveSafe":{"stateLabel":"In progress","protectedFieldsAvailable":true},
+      "protected":{"period":4,"clock":"02:14","score":[24,23],"possessionTeamId":"mock:team:omaha-owls","down":3,"distance":7,"yardLine":"BRO 38","winProbability":[0.46,0.54]},
+      "provenance":{"provider":"MOCK","providerId":"nfl-002","generatedAt":"2026-11-22T20:41:00Z","completeness":"LIVE_PLAY_BY_PLAY"}
+    },
+    {
+      "id":"mock:football:nfl:003","source":"MOCK","isSynthetic":true,"variant":"COMPLETED_HIDDEN",
+      "safe":{
+        "competition":"NFL","season":2026,"week":"WILD_CARD","seasonType":"POSTSEASON","ruleset":"NFL_2026_POSTSEASON",
+        "teams":[{"id":"mock:team:miami-mariners","name":"Miami Mariners","seed":4},{"id":"mock:team:denver-peaks","name":"Denver Peaks","seed":5}],
+        "kickoff":"2027-01-10T21:30:00Z","venue":"Harbor Stadium","neutralSite":false,
+        "context":{"playoffRound":"WILD_CARD","eliminationGame":true,"playoffLeverageBand":"VERY_HIGH"},
+        "importance":{"band":"VERY_HIGH","confidence":"HIGH","reasons":["Playoff elimination game","You follow Denver"]},
+        "recommendation":{"format":"FULL","estimatedMinutes":150,"blind":true}
+      },
+      "protected":{"winnerTeamId":"mock:team:denver-peaks","finalScore":[27,30],"overtime":true,"durationMinutes":196,"watchabilityBand":"VERY_HIGH","tags":["late comeback","overtime"]},
+      "provenance":{"provider":"MOCK","providerId":"nfl-003","generatedAt":"2027-01-11T01:00:00Z","completeness":"OFFICIAL_FINAL_PLAY_BY_PLAY"}
+    },
+    {
+      "id":"mock:football:nfl:004","source":"MOCK","isSynthetic":true,"variant":"REVEALED",
+      "safe":{
+        "competition":"NFL","season":2026,"week":"WEEK_15","seasonType":"REGULAR","ruleset":"NFL_2026",
+        "teams":[{"id":"mock:team:seattle-surge","name":"Seattle Surge","record":"8-5"},{"id":"mock:team:chicago-foundry","name":"Chicago Foundry","record":"10-3"}],
+        "kickoff":"2026-12-13T01:20:00Z","venue":"Foundry Field","neutralSite":false,
+        "context":{"divisionGame":false,"playoffLeverageBand":"HIGH","rivalry":false},
+        "importance":{"band":"HIGH","confidence":"HIGH","reasons":["Late-season playoff implications","Top conference opponent"]},
+        "recommendation":{"format":"CONDENSED","estimatedMinutes":42,"blind":false}
+      },
+      "revealed":{
+        "winnerTeamId":"mock:team:seattle-surge","finalScore":[31,28],"overtime":false,"durationMinutes":188,
+        "watchability":{"band":"VERY_HIGH","confidence":"HIGH","method":"PLAY_LEVERAGE","factors":{"tension":0.92,"competitiveBalance":0.86,"turningPoints":0.81,"stakes":0.78,"execution":0.69}},
+        "summaryStats":{"leadChanges":5,"ties":2,"turnovers":[1,2],"totalYards":[402,389],"garbageTimeShare":0.02},
+        "keyDrive":{"offenseTeamId":"mock:team:seattle-surge","startClock":"01:47","plays":9,"yards":74,"result":"TOUCHDOWN","winProbabilitySwing":0.63},
+        "reasons":["Decided by a high-leverage final drive","Competitive throughout"]
+      },
+      "provenance":{"provider":"MOCK","providerId":"nfl-004","generatedAt":"2026-12-13T04:35:00Z","completeness":"OFFICIAL_FINAL_PLAY_BY_PLAY"}
+    },
+    {
+      "id":"mock:football:ncaa:005","source":"MOCK","isSynthetic":true,"variant":"NCAA_POSTSEASON",
+      "safe":{
+        "competition":"NCAA_FBS","season":2026,"week":"CFP_QUARTERFINAL","seasonType":"POSTSEASON","ruleset":"NCAA_2026",
+        "teams":[{"id":"mock:team:redwood-state","name":"Redwood State","ranking":{"authority":"CFP","position":3}},{"id":"mock:team:gulf-tech","name":"Gulf Tech","ranking":{"authority":"CFP","position":6}}],
+        "kickoff":"2027-01-01T17:00:00Z","venue":"Sun Coast Bowl","neutralSite":true,
+        "context":{"playoffRound":"QUARTERFINAL","eliminationGame":true,"conferenceMatchup":"PACIFIC_V_GULF","rivalry":false},
+        "importance":{"band":"VERY_HIGH","confidence":"HIGH","reasons":["College Football Playoff quarterfinal","Two CFP top-six teams"]},
+        "recommendation":{"format":"FULL","estimatedMinutes":165,"blind":true}
+      },
+      "protected":{"winnerTeamId":"mock:team:redwood-state","finalScore":[35,17],"overtime":false,"watchabilityBand":"MEDIUM","garbageTimeShare":0.31,"dataCompleteness":"SCORING_DRIVES_ONLY"},
+      "provenance":{"provider":"MOCK","providerId":"ncaa-005","generatedAt":"2027-01-01T20:45:00Z","completeness":"OFFICIAL_FINAL_SCORING_DRIVES"}
+    }
+  ]
+}

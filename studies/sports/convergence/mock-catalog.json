@@ -1,0 +1,128 @@
+{
+  "schemaVersion": "1.0.0",
+  "source": "MOCK",
+  "fictional": true,
+  "description": "Normalized card fixtures adapted from all 12 sport studies; not production data.",
+  "records": [
+    {
+      "id": "mock-catalog-american-football-001", "sport": "AMERICAN_FOOTBALL", "source": "MOCK", "fictional": true,
+      "sourceStudy": "studies/sports/american-football/mock-events.json", "sourceMockId": "mock:football:nfl:001", "knowledgeAsOf": "2028-09-01T10:00:00Z", "lifecycle": "SCHEDULED", "disclosure": "PRE_EVENT", "spoilerMode": "NO_HINTS",
+      "identity": { "title": "Bay City Foxes at Alpine Owls", "competition": "NFL", "contextLabel": "Regular season · Week 4", "scheduledStartUtc": "2028-09-03T17:00:00Z" },
+      "hierarchy": { "kind": "CHILD", "parentId": "mock-nfl-2028-week-4", "parentKind": "WEEK" }, "rules": { "profileId": "MOCK_NFL_2028_A" },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "HIGH", "format": "FULL", "estimatedMinutes": 120, "reasonCodes": ["FOLLOWED_TEAM", "DIVISION_CONTEXT"], "safeReasons": ["Features a team you follow", "Relevant pre-game division context"], "confidence": { "value": 0.81, "band": "HIGH", "missingInputs": ["final_active_rosters"] } },
+      "affinity": [{ "entityId": "mock-team-alpine-owls", "entityType": "TEAM", "label": "Alpine Owls" }],
+      "sportDetails": { "kind": "AMERICAN_FOOTBALL", "competition": "NFL", "home": { "id": "mock-team-alpine-owls", "label": "Alpine Owls" }, "away": { "id": "mock-team-bay-foxes", "label": "Bay City Foxes" }, "seasonPhase": "REGULAR_SEASON", "weekLabel": "Week 4" },
+      "provenance": { "provider": "MOCK", "generatedAt": "2028-08-20T00:00:00Z", "isSynthetic": true }
+    },
+    {
+      "id": "mock-catalog-association-football-001", "sport": "ASSOCIATION_FOOTBALL", "source": "MOCK", "fictional": true,
+      "sourceStudy": "studies/sports/association-football/mock-events.json", "sourceMockId": "mock-football-001", "knowledgeAsOf": "2028-10-04T12:00:00Z", "lifecycle": "SCHEDULED", "disclosure": "PRE_EVENT", "spoilerMode": "NO_HINTS",
+      "identity": { "title": "Northport FC — Rivermouth Athletic", "competition": "Continental Cup", "contextLabel": "Quarter-final · First leg", "scheduledStartUtc": "2028-10-05T19:00:00Z" },
+      "hierarchy": { "kind": "CHILD", "parentId": "mock-cup-tie-qf1", "parentKind": "TIE" }, "rules": { "profileId": "MOCK_UFA_2028_KO" },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "VERY_HIGH", "format": "FULL", "estimatedMinutes": 105, "reasonCodes": ["KNOCKOUT_STAKES", "FOLLOWED_CLUB"], "safeReasons": ["Knockout-stage context", "Features a club you follow"], "confidence": { "value": 0.86, "band": "HIGH", "missingInputs": [] } },
+      "affinity": [{ "entityId": "mock-northport", "entityType": "TEAM", "label": "Northport FC" }],
+      "sportDetails": { "kind": "ASSOCIATION_FOOTBALL", "home": { "id": "mock-northport", "label": "Northport FC" }, "away": { "id": "mock-rivermouth", "label": "Rivermouth Athletic" }, "stage": "QUARTER_FINAL", "tie": { "tieId": "mock-cup-tie-qf1", "leg": 1, "legs": 2 } },
+      "provenance": { "provider": "MOCK", "generatedAt": "2028-09-20T00:00:00Z", "isSynthetic": true }
+    },
+    {
+      "id": "mock-catalog-basketball-001", "sport": "BASKETBALL", "source": "MOCK", "fictional": true,
+      "sourceStudy": "studies/sports/basketball/mock-events.json", "sourceMockId": "mock-nba-2028-harbor-comets", "knowledgeAsOf": "2028-02-12T22:00:00Z", "lifecycle": "SCHEDULED", "disclosure": "PRE_EVENT", "spoilerMode": "NO_HINTS",
+      "identity": { "title": "Mesa Arrows at Harbor Comets", "competition": "NBA", "contextLabel": "Regular season", "scheduledStartUtc": "2028-02-13T00:30:00Z" },
+      "hierarchy": { "kind": "STANDALONE" }, "rules": { "profileId": "MOCK_NBA_2028_A" },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "HIGH", "format": "FULL", "estimatedMinutes": 120, "reasonCodes": ["FOLLOWED_TEAM", "STANDINGS_STAKES"], "safeReasons": ["Features a team you follow", "Important pre-game standings context"], "confidence": { "value": 0.81, "band": "HIGH", "missingInputs": ["final_active_rosters"] } },
+      "affinity": [{ "entityId": "mock-harbor-comets", "entityType": "TEAM", "label": "Harbor Comets" }],
+      "sportDetails": { "kind": "BASKETBALL", "competition": "NBA", "home": { "id": "mock-harbor-comets", "label": "Harbor Comets" }, "away": { "id": "mock-mesa-arrows", "label": "Mesa Arrows" }, "phase": "REGULAR_SEASON", "neutralSite": false },
+      "provenance": { "provider": "MOCK", "generatedAt": "2028-02-01T00:00:00Z", "isSynthetic": true }
+    },
+    {
+      "id": "mock-catalog-cycling-001", "sport": "CYCLING", "source": "MOCK", "fictional": true,
+      "sourceStudy": "studies/sports/cycling/mock-events.json", "sourceMockId": "mock-road-2028-north-sea-s2", "knowledgeAsOf": "2028-05-10T07:00:00Z", "lifecycle": "SCHEDULED", "disclosure": "PRE_EVENT", "spoilerMode": "NO_HINTS",
+      "identity": { "title": "Alder Bay to High Tor", "competition": "North Sea Tour", "contextLabel": "Stage 2 · Mountain", "scheduledStartUtc": "2028-05-10T10:00:00Z" },
+      "hierarchy": { "kind": "CHILD", "parentId": "mock-road-2028-north-sea-tour", "parentKind": "STAGE_RACE" }, "rules": { "profileId": "MOCK_ROAD_2028_A" },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "HIGH", "format": "FINAL_PHASE", "estimatedMinutes": 90, "reasonCodes": ["FOLLOWED_RIDER", "GC_LEVERAGE"], "safeReasons": ["Features a rider you follow", "Important pre-stage classification context"], "confidence": { "value": 0.80, "band": "HIGH", "missingInputs": ["confirmed_start_list"] } },
+      "affinity": [{ "entityId": "mock-elin-maris", "entityType": "RIDER", "label": "Elin Maris" }],
+      "sportDetails": { "kind": "CYCLING", "discipline": "ROAD", "format": "MOUNTAIN_STAGE", "category": "WOMEN_ELITE", "eventName": "North Sea Tour", "stageName": "Stage 2 — Alder Bay to High Tor", "publishedRoute": { "distanceKm": 142.5, "terrain": "MOUNTAIN" } },
+      "provenance": { "provider": "MOCK", "generatedAt": "2028-04-01T00:00:00Z", "isSynthetic": true }
+    },
+    {
+      "id": "mock-catalog-formula1-001", "sport": "FORMULA_1", "source": "MOCK", "fictional": true,
+      "sourceStudy": "studies/sports/formula1/mock-events.json", "sourceMockId": "mock-f1-2027-aurora-race", "knowledgeAsOf": "2027-06-20T11:00:00Z", "lifecycle": "SCHEDULED", "disclosure": "PRE_EVENT", "spoilerMode": "NO_HINTS",
+      "identity": { "title": "Aurora Grand Prix", "competition": "Formula 1", "contextLabel": "Race", "scheduledStartUtc": "2027-06-20T13:00:00Z" },
+      "hierarchy": { "kind": "CHILD", "parentId": "mock-f1-2027-aurora-weekend", "parentKind": "RACE_WEEKEND" }, "rules": { "profileId": "MOCK_2027_A" },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "HIGH", "format": "FULL", "estimatedMinutes": 120, "reasonCodes": ["FOLLOWED_DRIVER", "CHAMPIONSHIP_LEVERAGE"], "safeReasons": ["Features a driver you follow", "Important championship context before the start"], "confidence": { "value": 0.78, "band": "HIGH", "missingInputs": ["confirmed_grid_penalties"] } },
+      "affinity": [{ "entityId": "mock-mira-vale", "entityType": "DRIVER", "label": "Mira Vale" }],
+      "sportDetails": { "kind": "FORMULA_1", "weekendName": "Aurora Grand Prix", "sessionType": "RACE", "weekendFormat": "STANDARD", "circuit": "Northlight Circuit" },
+      "provenance": { "provider": "MOCK", "generatedAt": "2027-06-01T00:00:00Z", "isSynthetic": true }
+    },
+    {
+      "id": "mock-catalog-handball-001", "sport": "HANDBALL", "source": "MOCK", "fictional": true,
+      "sourceStudy": "studies/sports/handball/mock-events.json", "sourceMockId": "mock:handball:001", "knowledgeAsOf": "2028-11-02T10:00:00Z", "lifecycle": "SCHEDULED", "disclosure": "PRE_EVENT", "spoilerMode": "NO_HINTS",
+      "identity": { "title": "Fjord HC — Amberstadt", "competition": "North League Women", "contextLabel": "Regular season", "scheduledStartUtc": "2028-11-03T18:30:00Z" },
+      "hierarchy": { "kind": "STANDALONE" }, "rules": { "profileId": "MOCK_IHF_CLUB_2028" },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "MEDIUM", "format": "CONDENSED", "estimatedMinutes": 45, "reasonCodes": ["FOLLOWED_TEAM", "TABLE_CONTEXT"], "safeReasons": ["Features a team you follow", "Relevant pre-match table context"], "confidence": { "value": 0.75, "band": "MEDIUM", "missingInputs": ["confirmed_squads"] } },
+      "affinity": [{ "entityId": "mock-fjord-hc", "entityType": "TEAM", "label": "Fjord HC" }],
+      "sportDetails": { "kind": "HANDBALL", "home": { "id": "mock-fjord-hc", "label": "Fjord HC" }, "away": { "id": "mock-amberstadt", "label": "Amberstadt" }, "category": "WOMEN", "stage": "REGULAR_SEASON" },
+      "provenance": { "provider": "MOCK", "generatedAt": "2028-10-20T00:00:00Z", "isSynthetic": true }
+    },
+    {
+      "id": "mock-catalog-ice-hockey-001", "sport": "ICE_HOCKEY", "source": "MOCK", "fictional": true,
+      "sourceStudy": "studies/sports/ice-hockey/mock-events.json", "sourceMockId": "mock-nhl-001", "knowledgeAsOf": "2028-01-08T12:00:00Z", "lifecycle": "SCHEDULED", "disclosure": "PRE_EVENT", "spoilerMode": "NO_HINTS",
+      "identity": { "title": "Lake Wolves at Metro Forge", "competition": "NHL", "contextLabel": "Regular season", "scheduledStartUtc": "2028-01-09T00:00:00Z" },
+      "hierarchy": { "kind": "STANDALONE" }, "rules": { "profileId": "MOCK_NHL_2028_A" },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "MEDIUM", "format": "FULL", "estimatedMinutes": 105, "reasonCodes": ["FOLLOWED_TEAM", "PLAYOFF_RACE_CONTEXT"], "safeReasons": ["Features a team you follow", "Relevant pre-game playoff-race context"], "confidence": { "value": 0.82, "band": "HIGH", "missingInputs": ["confirmed_goalies"] } },
+      "affinity": [{ "entityId": "mock-lake-wolves", "entityType": "TEAM", "label": "Lake Wolves" }],
+      "sportDetails": { "kind": "ICE_HOCKEY", "league": "NHL", "home": { "id": "mock-metro-forge", "label": "Metro Forge" }, "away": { "id": "mock-lake-wolves", "label": "Lake Wolves" }, "stage": "REGULAR_SEASON" },
+      "provenance": { "provider": "MOCK", "generatedAt": "2027-12-20T00:00:00Z", "isSynthetic": true }
+    },
+    {
+      "id": "mock-catalog-motogp-001", "sport": "MOTOGP", "source": "MOCK", "fictional": true,
+      "sourceStudy": "studies/sports/motogp/mock-events.json", "sourceMockId": "mock:motogp:001", "knowledgeAsOf": "2028-04-14T08:00:00Z", "lifecycle": "SCHEDULED", "disclosure": "PRE_EVENT", "spoilerMode": "NO_HINTS",
+      "identity": { "title": "Azure Coast Grand Prix", "competition": "MotoGP", "contextLabel": "Practice", "scheduledStartUtc": "2028-04-14T09:45:00Z" },
+      "hierarchy": { "kind": "CHILD", "parentId": "mock-motogp-azure-weekend", "parentKind": "RACE_WEEKEND" }, "rules": { "profileId": "MOCK_MOTOGP_2028_A" },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "MEDIUM", "format": "HIGHLIGHTS", "estimatedMinutes": 15, "reasonCodes": ["FOLLOWED_RIDER", "SESSION_PROGRESSION"], "safeReasons": ["Features a rider you follow", "Relevant to weekend progression"], "confidence": { "value": 0.70, "band": "MEDIUM", "missingInputs": ["confirmed_entries"] } },
+      "affinity": [{ "entityId": "mock-rider-ines-aro", "entityType": "RIDER", "label": "Ines Aro" }],
+      "sportDetails": { "kind": "MOTOGP", "weekendName": "Azure Coast Grand Prix", "sessionType": "PRACTICE", "circuit": "Azure Coast Circuit" },
+      "provenance": { "provider": "MOCK", "generatedAt": "2028-04-01T00:00:00Z", "isSynthetic": true }
+    },
+    {
+      "id": "mock-catalog-rally-001", "sport": "RALLY", "source": "MOCK", "fictional": true,
+      "sourceStudy": "studies/sports/rally/mock-events.json", "sourceMockId": "mock-rally-001", "knowledgeAsOf": "2028-01-18T10:00:00Z", "lifecycle": "SCHEDULED", "disclosure": "PRE_EVENT", "spoilerMode": "NO_HINTS",
+      "identity": { "title": "Mock Alpine Rally", "competition": "World Rally Championship", "contextLabel": "Rally · Round 1", "scheduledStartUtc": "2028-01-20T07:00:00Z" },
+      "hierarchy": { "kind": "CHILD", "parentId": "mock-wrc-2028", "parentKind": "CHAMPIONSHIP" }, "rules": { "profileId": "MOCK_WRC_2028_A" },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "HIGH", "format": "RECAP", "estimatedMinutes": 30, "reasonCodes": ["FOLLOWED_CREW", "CHAMPIONSHIP_OPENER"], "safeReasons": ["Features a crew you follow", "Championship-opening context"], "confidence": { "value": 0.76, "band": "MEDIUM", "missingInputs": ["final_stage_itinerary"] } },
+      "affinity": [{ "entityId": "mock-crew-vale-rey", "entityType": "CREW", "label": "Vale / Rey" }],
+      "sportDetails": { "kind": "RALLY", "rallyId": "mock-rally-001", "unit": "RALLY", "surface": "SNOW_ICE" },
+      "provenance": { "provider": "MOCK", "generatedAt": "2028-01-01T00:00:00Z", "isSynthetic": true }
+    },
+    {
+      "id": "mock-catalog-superbike-001", "sport": "SUPERBIKE", "source": "MOCK", "fictional": true,
+      "sourceStudy": "studies/sports/superbike/mock-events.json", "sourceMockId": "mock:worldsbk:001", "knowledgeAsOf": "2028-05-05T07:00:00Z", "lifecycle": "SCHEDULED", "disclosure": "PRE_EVENT", "spoilerMode": "NO_HINTS",
+      "identity": { "title": "Highland WorldSBK", "competition": "WorldSBK", "contextLabel": "Practice", "scheduledStartUtc": "2028-05-05T09:00:00Z" },
+      "hierarchy": { "kind": "CHILD", "parentId": "mock-worldsbk-highland-weekend", "parentKind": "RACE_WEEKEND" }, "rules": { "profileId": "MOCK_WORLDSBK_2028_A" },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "MEDIUM", "format": "HIGHLIGHTS", "estimatedMinutes": 15, "reasonCodes": ["FOLLOWED_RIDER", "WEEKEND_DEPENDENCY"], "safeReasons": ["Features a rider you follow", "Relevant to the weekend sequence"], "confidence": { "value": 0.70, "band": "MEDIUM", "missingInputs": ["confirmed_entries"] } },
+      "affinity": [{ "entityId": "mock-rider-leo-arden", "entityType": "RIDER", "label": "Leo Arden" }],
+      "sportDetails": { "kind": "SUPERBIKE", "weekendName": "Highland WorldSBK", "sessionType": "PRACTICE", "circuit": "Highland Ring" },
+      "provenance": { "provider": "MOCK", "generatedAt": "2028-04-20T00:00:00Z", "isSynthetic": true }
+    },
+    {
+      "id": "mock-catalog-tennis-001", "sport": "TENNIS", "source": "MOCK", "fictional": true,
+      "sourceStudy": "studies/sports/tennis/mock-events.json", "sourceMockId": "mock:tennis:atp:001", "knowledgeAsOf": "2028-06-11T09:00:00Z", "lifecycle": "SCHEDULED", "disclosure": "PRE_EVENT", "spoilerMode": "NO_HINTS",
+      "identity": { "title": "Milo Arden — Kenji Vale", "competition": "North Sea Masters", "contextLabel": "ATP · Quarter-final · Hard", "scheduledStartUtc": "2028-06-11T13:00:00Z" },
+      "hierarchy": { "kind": "CHILD", "parentId": "mock-north-sea-masters-2028", "parentKind": "TOURNAMENT" }, "rules": { "profileId": "MOCK_ATP_BO3_2028" },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "HIGH", "format": "FULL", "estimatedMinutes": 105, "reasonCodes": ["FOLLOWED_PLAYER", "LATE_ROUND"], "safeReasons": ["Features a player you follow", "Late-round tournament context"], "confidence": { "value": 0.84, "band": "HIGH", "missingInputs": [] } },
+      "affinity": [{ "entityId": "mock-milo-arden", "entityType": "PLAYER", "label": "Milo Arden" }],
+      "sportDetails": { "kind": "TENNIS", "tour": "ATP", "discipline": "SINGLES", "sideA": { "id": "mock-side-milo", "players": [{ "id": "mock-milo-arden", "label": "Milo Arden" }] }, "sideB": { "id": "mock-side-kenji", "players": [{ "id": "mock-kenji-vale", "label": "Kenji Vale" }] }, "round": "QUARTER_FINAL", "surface": "HARD" },
+      "provenance": { "provider": "MOCK", "generatedAt": "2028-06-01T00:00:00Z", "isSynthetic": true }
+    },
+    {
+      "id": "mock-catalog-volleyball-001", "sport": "VOLLEYBALL", "source": "MOCK", "fictional": true,
+      "sourceStudy": "studies/sports/volleyball/mock-events.json", "sourceMockId": "mock-volley-001", "knowledgeAsOf": "2028-09-14T10:00:00Z", "lifecycle": "SCHEDULED", "disclosure": "PRE_EVENT", "spoilerMode": "NO_HINTS",
+      "identity": { "title": "Silver Coast — Pine Valley", "competition": "Continental Volleyball Cup", "contextLabel": "Indoor · Semi-final", "scheduledStartUtc": "2028-09-15T18:00:00Z" },
+      "hierarchy": { "kind": "CHILD", "parentId": "mock-volley-sf-tie", "parentKind": "TIE" }, "rules": { "profileId": "MOCK_FIVB_2028_INDOOR" },
+      "recommendation": { "basis": "PRE_EVENT_ONLY", "importanceBand": "VERY_HIGH", "format": "FULL", "estimatedMinutes": 100, "reasonCodes": ["FOLLOWED_TEAM", "KNOCKOUT_STAKES"], "safeReasons": ["Features a team you follow", "Knockout-stage context"], "confidence": { "value": 0.83, "band": "HIGH", "missingInputs": ["confirmed_rosters"] } },
+      "affinity": [{ "entityId": "mock-silver-coast", "entityType": "TEAM", "label": "Silver Coast" }],
+      "sportDetails": { "kind": "VOLLEYBALL", "discipline": "INDOOR", "sideA": { "id": "mock-silver-coast", "label": "Silver Coast" }, "sideB": { "id": "mock-pine-valley", "label": "Pine Valley" }, "stage": "SEMI_FINAL", "tie": { "tieId": "mock-volley-sf-tie", "leg": 1, "goldenSetPossible": true } },
+      "provenance": { "provider": "MOCK", "generatedAt": "2028-09-01T00:00:00Z", "isSynthetic": true }
+    }
+  ]
+}

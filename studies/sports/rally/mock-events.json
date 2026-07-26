@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "1.0.0", "source": "MOCK",
+  "events": [
+    {
+      "source": "MOCK", "championshipId": "mock-wrc", "rallyId": "mock-rally-001", "season": 2028, "round": 1, "state": "PRE_EVENT", "name": "Mock Alpine Rally", "scheduledStartUtc": "2028-01-20T18:00:00Z",
+      "ruleProfile": { "id": "MOCK_WRC_2028", "overallPoints": [25,17,15,12,10,8,6,4,2,1], "superSundayPoints": [5,4,3,2,1], "powerStagePoints": [5,4,3,2,1], "restart": true },
+      "safe": { "surface": ["TARMAC", "SNOW", "ICE"], "competitiveKmPlanned": 312.4, "stagesPlanned": 18, "officialStakes": "Season opener." }, "reveal": null, "sealedOutcome": null,
+      "model": { "importance": 76, "watchability": null, "confidence": 0.82, "coverage": ["entry", "route", "championship_context"], "format": null }
+    },
+    {
+      "source": "MOCK", "championshipId": "mock-wrc", "rallyId": "mock-rally-002", "stageId": "mock-stage-ss7", "season": 2028, "state": "LIVE_SAFE", "name": "Mock Forest Rally", "scheduledStartUtc": "2028-05-12T06:00:00Z",
+      "ruleProfile": { "id": "MOCK_WRC_2028" }, "safe": { "liveStatus": "RUNNING", "stageNumberHidden": true, "classificationHidden": true, "incidentsHidden": true }, "reveal": null, "sealedOutcome": null,
+      "model": { "importance": 68, "watchability": null, "confidence": 0.7, "coverage": ["schedule", "live_status"], "format": null }
+    },
+    {
+      "source": "MOCK", "championshipId": "mock-wrc", "rallyId": "mock-rally-003", "season": 2028, "round": 9, "state": "COMPLETED_PROTECTED", "name": "Mock Coast Rally", "scheduledStartUtc": "2028-09-07T07:00:00Z",
+      "ruleProfile": { "id": "MOCK_WRC_2028", "overallPoints": [25,17,15,12,10,8,6,4,2,1], "superSundayPoints": [5,4,3,2,1], "powerStagePoints": [5,4,3,2,1] },
+      "safe": { "completed": true, "surface": ["GRAVEL"], "classificationHidden": true, "stagesCompletedHidden": true, "bonusPointsHidden": true },
+      "reveal": null, "sealedOutcome": { "winnerCrewId": "mock-crew-c", "winningTimeMs": 10824500, "leadChanges": 3, "retirements": 4, "powerStageWinnerCrewId": "mock-crew-a" },
+      "model": { "importance": 83, "watchability": null, "confidence": 0.92, "coverage": ["stages", "splits", "statuses", "championship_context"], "format": null }
+    },
+    {
+      "source": "MOCK", "championshipId": "mock-wrc", "rallyId": "mock-rally-004", "stageId": "mock-stage-ss12", "season": 2028, "state": "STAGE_REVEALED", "name": "Mock Lakes Rally", "scheduledStartUtc": "2028-08-05T10:10:00Z",
+      "ruleProfile": { "id": "MOCK_WRC_2028" },
+      "safe": { "surface": ["GRAVEL"], "stageNumber": 12, "competitiveKm": 28.6 },
+      "reveal": { "stageWinnerCrewId": "mock-crew-a", "classificationStatus": "OFFICIAL", "times": [{ "crewId": "mock-crew-a", "measuredMs": 842210, "penaltyMs": 0, "notionalMs": null }, { "crewId": "mock-crew-b", "measuredMs": 843090, "penaltyMs": 0, "notionalMs": null }], "splits": [{ "km": 8.2, "crewAGapMs": 1200 }, { "km": 17.4, "crewAGapMs": -300 }, { "km": 24.8, "crewAGapMs": -700 }], "overallGapAfterMs": 2400, "roadOrder": [{ "crewId": "mock-crew-a", "position": 2 }, { "crewId": "mock-crew-b", "position": 5 }], "conditions": { "surface": "DAMP_GRAVEL", "rain": true } },
+      "sealedOutcome": null, "model": { "importance": 71, "watchability": 87, "confidence": 0.9, "coverage": ["official_times", "splits", "road_order", "conditions"], "format": "STAGE_ONBOARD" }
+    },
+    {
+      "source": "MOCK", "championshipId": "mock-wrc", "rallyId": "mock-rally-005", "stageId": "mock-stage-ss9", "season": 2028, "state": "CANCELLED_STAGE", "name": "Mock Highland Rally", "scheduledStartUtc": "2028-06-16T13:00:00Z",
+      "ruleProfile": { "id": "MOCK_WRC_2028" }, "safe": { "stageNumber": 9, "status": "CANCELLED", "reason": "spectator safety", "result": null }, "reveal": { "officialDisposition": "NO_COMPETITIVE_TIME", "notionalTimes": false }, "sealedOutcome": null,
+      "model": { "importance": 60, "watchability": null, "confidence": 1, "coverage": ["official_stage_status"], "format": "SKIP" }
+    },
+    {
+      "source": "MOCK", "championshipId": "mock-wrc", "rallyId": "mock-rally-006", "stageId": "mock-stage-ss15", "season": 2028, "state": "PROVISIONAL_CORRECTION", "name": "Mock Desert Rally", "scheduledStartUtc": "2028-11-18T09:30:00Z",
+      "ruleProfile": { "id": "MOCK_WRC_2028" }, "safe": { "status": "CORRECTED_AFTER_REVEAL" },
+      "reveal": { "crewId": "mock-crew-d", "measuredMs": 701400, "penalty": { "previousMs": 10000, "revisedMs": 0, "reason": "stewards decision", "authority": "MOCK_STEWARDS", "decidedAt": "2028-11-18T18:15:00Z" }, "classificationVersion": 3, "classificationStatus": "PROVISIONAL" },
+      "sealedOutcome": null, "model": { "importance": 57, "watchability": 62, "confidence": 0.73, "coverage": ["official_time", "stewards_correction"], "format": "CONDENSED" }
+    }
+  ]
+}
